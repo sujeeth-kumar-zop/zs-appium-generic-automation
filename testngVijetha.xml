@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Appium Test Suite">
+
+    <test name="TestsVijetha">
+        <parameter name="appName" value="Vijetha"/>
+        <classes>
+            <class name="test.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>

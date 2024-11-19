@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Appium Test Suite">
+
+    <test name="TestsEkam">
+        <parameter name="appName" value="Ekam"/>
+        <classes>
+            <class name="test.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>
