@@ -1,0 +1,7 @@
+2024-11-20 12:38:01,297 [main] INFO test.LoginTest - App name: Ekam
+2024-11-20 12:38:12,886 [main] INFO com.zs.utils.LoggerUtil - Clicked on the profile icon for Ekam
+2024-11-20 12:38:14,525 [main] INFO com.zs.utils.LoggerUtil - Entered email in the login text box for Ekam
+2024-11-20 12:38:15,633 [main] INFO com.zs.utils.LoggerUtil - Entered password in the password text box for Ekam
+2024-11-20 12:38:16,316 [main] INFO com.zs.utils.LoggerUtil - Clicked on the Login Button for Ekam
+2024-11-20 12:38:19,569 [main] INFO com.zs.utils.LoggerUtil - Clicked on the profile icon for Ekam
+2024-11-20 12:38:19,642 [main] INFO test.LoginTest - Closing driver
