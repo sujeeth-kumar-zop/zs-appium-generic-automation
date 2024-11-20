@@ -8,6 +8,7 @@ import com.zs.locators.VijethaLocators;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.constant.ConstantDescs;
@@ -112,6 +113,9 @@ public class CommonUtils{
         };
     }
 
+    public static void goToHome(String appName, AndroidDriver driver, WebDriverWait wait){
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getMenuLocators(appName, "homeBtn"))).click();
+    }
 
 
 

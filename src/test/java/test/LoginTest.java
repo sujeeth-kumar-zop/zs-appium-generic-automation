@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest {
         String username = credentials[0];
         String password = credentials[1];
 
-        CommonUtils.callAppSpecificLoginMethod(appName, username, password);
+        LoginPage.loginFlow(driver, wait, password, username, appName);
 
         assertTrue(ProfilePage.isUsernameVisible(driver, wait, appName));
     }
