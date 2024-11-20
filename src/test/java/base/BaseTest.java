@@ -16,9 +16,9 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    public static AndroidDriver driver;
-    public static WebDriverWait wait;
-    public static Logger logger;
+    public AndroidDriver driver;
+    public WebDriverWait wait;
+    public Logger logger;
 
     @BeforeTest
     @Parameters("appName")
@@ -31,7 +31,7 @@ public class BaseTest {
             logger.info("App name null. Defaulting to Tamimi");
             appName = Constants.TAMIMI;
         }
-        logger.info("App name: "+appName);
+        logger.info("App name: {}",appName);
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("platformName", "Android");
         cap.setCapability("appium:automationName", "uiautomator2");

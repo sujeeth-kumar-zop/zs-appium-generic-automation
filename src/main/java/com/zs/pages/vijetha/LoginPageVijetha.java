@@ -12,15 +12,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginPageVijetha {
 
     public static Logger logger= LoggerUtil.getLogger();
+    public static AndroidDriver driver;
+    public static WebDriverWait wait;
 
-    public static void clickOnLoginWPass(AndroidDriver driver, WebDriverWait wait, String appName){
+    public LoginPageVijetha(AndroidDriver driver, WebDriverWait wait){
+        LoginPageVijetha.driver =driver;
+        LoginPageVijetha.wait=wait;
+    }
+
+    public static void clickOnLoginWPass(String appName){
         By logInWPassLoc= VijethaLocators.getLoginLocator("logInWithPasswordLinkText");
         WebElement logInWPass= wait.until(ExpectedConditions.elementToBeClickable(logInWPassLoc));
         logInWPass.click();
         logger.info("Clicked on login with password for {}", appName);
     }
 
-    public static void clickOnAllowAccess(AndroidDriver driver, WebDriverWait wait, String appName){
+    public static void clickOnAllowAccess(String appName){
         By allowLocationAccessBtnLoc= VijethaLocators.getHomePageLocator("allowLocationAccessBtn");
         WebElement allowBtn=wait.until(ExpectedConditions.elementToBeClickable(allowLocationAccessBtnLoc));
         allowBtn.click();

@@ -1,24 +1,25 @@
-package com.zs.pages;
+package com.zs.pages.common;
 
-import com.zs.locators.BrimbaryLocators;
-import com.zs.locators.EkamLocators;
-import com.zs.locators.TamimiLocators;
-import com.zs.locators.VijethaLocators;
+import com.zs.utils.CommonUtils;
+import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProfilePage {
-    public static boolean isUsernameVisible(AndroidDriver driver, WebDriverWait wait, String appName){
-        By usernameLoc = switch (appName) {
-            case "Vijetha" -> VijethaLocators.getProfileLocators("username");
-            case "Tamimi" -> TamimiLocators.getProfileLocators("username");
-            case "Brimbary" -> BrimbaryLocators.getProfileLocators("username");
-            case "Ekam" -> EkamLocators.getProfileLocators("username");
-            default -> throw new IllegalArgumentException("Invalid app name: " + appName);
-        };
 
+    private static Logger logger= LoggerUtil.getLogger();
+    private final AndroidDriver driver;
+    private final WebDriverWait wait;
+
+    public ProfilePage(AndroidDriver driver, WebDriverWait wait){
+        this.driver =driver;
+        this.wait=wait;
+    }
+    public boolean isUsernameVisible(String appName){
+        By usernameLoc = CommonUtils.getProfileLocator(appName, "username");
         WebElement username = driver.findElement(usernameLoc);
         return username.isDisplayed();
     }
