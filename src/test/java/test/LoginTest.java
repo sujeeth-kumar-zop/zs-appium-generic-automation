@@ -1,11 +1,8 @@
 package test;
 
 import com.zs.constants.Constants;
-import com.zs.pages.common.HomePage;
 import com.zs.pages.common.LoginPage;
 import com.zs.pages.common.ProfilePage;
-import com.zs.pages.vijetha.LoginPageVijetha;
-import com.zs.utils.CommonUtils;
 import com.zs.utils.ExcelUtils;
 import base.BaseTest;
 import org.testng.annotations.*;
@@ -24,8 +21,10 @@ public class LoginTest extends BaseTest {
         String username = credentials[0];
         String password = credentials[1];
 
-        LoginPage.loginFlow(driver, wait, password, username, appName);
+        LoginPage loginPage=new LoginPage(driver, wait);
+        loginPage.loginFlow(password, username, appName);
 
-        assertTrue(ProfilePage.isUsernameVisible(driver, wait, appName));
+        ProfilePage profilePage=new ProfilePage(driver,wait);
+        assertTrue(profilePage.isUsernameVisible(appName));
     }
 }

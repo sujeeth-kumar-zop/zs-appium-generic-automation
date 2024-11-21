@@ -1,7 +1,6 @@
 package com.zs.pages.common;
 
 import com.zs.constants.Constants;
-import com.zs.locators.*;
 import com.zs.pages.vijetha.LoginPageVijetha;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
@@ -15,10 +14,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginPage {
 
     //get logger
-    public static Logger logger=LoggerUtil.getLogger();
+    private static final Logger logger=LoggerUtil.getLogger();
+    private final AndroidDriver driver;
+    private final WebDriverWait wait;
 
-
-    public static void clickLoginBtn(AndroidDriver driver, WebDriverWait wait,String appName){
+    public LoginPage(AndroidDriver driver, WebDriverWait wait){
+        this.driver =driver;
+        this.wait=wait;
+    }
+    public void clickLoginBtn(String appName){
 
         By loginBtnLoc = CommonUtils.getLoginLocator(appName, "loginBtn");
         WebElement loginBtn = driver.findElement(loginBtnLoc);
@@ -26,7 +30,7 @@ public class LoginPage {
         logger.info("Clicked on the Login Button for {}", appName);
     }
 
-    public static void clickOnProfileIcon(AndroidDriver driver, WebDriverWait wait,String appName){
+    public void clickOnProfileIcon(String appName){
 
         By profileIconLoc = CommonUtils.getLoginLocator(appName, "profileIcon");
         WebElement profileIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(profileIconLoc));
@@ -34,7 +38,7 @@ public class LoginPage {
         logger.info("Clicked on the profile icon for {}", appName);
     }
 
-    public static void enterPhNo(AndroidDriver driver, WebDriverWait wait, String username, String appName){
+    public void enterPhNo(String username, String appName){
 
         By phnoTextBoxLoc = CommonUtils.getLoginLocator(appName, "enterEmailOrPhoneTextBox");
         WebElement phnoTextBox= driver.findElement(phnoTextBoxLoc);
@@ -42,7 +46,7 @@ public class LoginPage {
         logger.info("Entered email in the login text box for {}", appName);
     }
 
-    public static void enterPass(AndroidDriver driver, WebDriverWait wait, String password, String appName){
+    public void enterPass(String password, String appName){
 
         By passTextBoxLoc = CommonUtils.getLoginLocator(appName, "enterPassTextBox");
         WebElement passTextBox= driver.findElement(passTextBoxLoc);
@@ -50,38 +54,41 @@ public class LoginPage {
         logger.info("Entered password in the password text box for {}", appName);
     }
 
-    public static void loginFlow(AndroidDriver driver, WebDriverWait wait, String password, String username, String appName){
+    public void loginFlow(String password, String username, String appName){
+        HomePage homePage=new HomePage(driver, wait);
+        LoginPage loginPage=new LoginPage(driver, wait);
         switch(appName){
             case Constants.BRIMBARY :
-                HomePage.clickOnDrawer(driver, wait, Constants.BRIMBARY);
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.BRIMBARY);
-                LoginPage.enterPhNo(driver, wait, username, Constants.BRIMBARY);
-                LoginPage.enterPass(driver, wait, password, Constants.BRIMBARY);
-                LoginPage.clickLoginBtn(driver, wait, Constants.BRIMBARY);
-                HomePage.clickOnDrawer(driver, wait, Constants.BRIMBARY);
+                homePage.clickOnDrawer(Constants.BRIMBARY);
+                loginPage.clickOnProfileIcon(Constants.BRIMBARY);
+                loginPage.enterPhNo(username, Constants.BRIMBARY);
+                loginPage.enterPass(password, Constants.BRIMBARY);
+                loginPage.clickLoginBtn(Constants.BRIMBARY);
+                homePage.clickOnDrawer(Constants.BRIMBARY);
                 break;
             case Constants.TAMIMI:
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.TAMIMI);
-                LoginPage.enterPhNo(driver, wait, username, Constants.TAMIMI);
-                LoginPage.enterPass(driver, wait, password, Constants.TAMIMI);
-                LoginPage.clickLoginBtn(driver, wait, Constants.TAMIMI);
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.TAMIMI);
+                loginPage.clickOnProfileIcon(Constants.TAMIMI);
+                loginPage.enterPhNo(username, Constants.TAMIMI);
+                loginPage.enterPass(password, Constants.TAMIMI);
+                loginPage.clickLoginBtn(Constants.TAMIMI);
+                loginPage.clickOnProfileIcon(Constants.TAMIMI);
                 break;
             case Constants.VIJETHA:
-                LoginPageVijetha.clickOnAllowAccess(driver, wait, Constants.VIJETHA);
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.VIJETHA);
-                LoginPageVijetha.clickOnLoginWPass(driver, wait, Constants.VIJETHA);
-                LoginPage.enterPhNo(driver, wait, username, Constants.VIJETHA);
-                LoginPage.enterPass(driver, wait, password, Constants.VIJETHA);
-                LoginPage.clickLoginBtn(driver, wait, Constants.VIJETHA);
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.VIJETHA);
+                LoginPageVijetha loginPageVijetha=new LoginPageVijetha(driver, wait);
+                loginPageVijetha.clickOnAllowAccess(Constants.VIJETHA);
+                loginPage.clickOnProfileIcon(Constants.VIJETHA);
+                loginPageVijetha.clickOnLoginWPass(Constants.VIJETHA);
+                loginPage.enterPhNo(username, Constants.VIJETHA);
+                loginPage.enterPass(password, Constants.VIJETHA);
+                loginPage.clickLoginBtn(Constants.VIJETHA);
+                loginPage.clickOnProfileIcon(Constants.VIJETHA);
                 break;
             case Constants.EKAM:
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.EKAM);
-                LoginPage.enterPhNo(driver, wait, username, Constants.EKAM);
-                LoginPage.enterPass(driver, wait, password, Constants.EKAM);
-                LoginPage.clickLoginBtn(driver, wait, Constants.EKAM);
-                LoginPage.clickOnProfileIcon(driver, wait, Constants.EKAM);
+                loginPage.clickOnProfileIcon(Constants.EKAM);
+                loginPage.enterPhNo(username, Constants.EKAM);
+                loginPage.enterPass(password, Constants.EKAM);
+                loginPage.clickLoginBtn(Constants.EKAM);
+                loginPage.clickOnProfileIcon(Constants.EKAM);
                 break;
         }
     }

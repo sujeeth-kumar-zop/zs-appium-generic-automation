@@ -6,16 +6,25 @@ import com.zs.locators.EkamLocators;
 import com.zs.locators.TamimiLocators;
 import com.zs.locators.VijethaLocators;
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.lang.constant.ConstantDescs;
 import java.lang.reflect.Method;
 
 public class CommonUtils{
-    public static boolean isTextPresent(String text, AndroidDriver driver, WebDriverWait wait){
+
+    private static final Logger logger=LoggerUtil.getLogger();
+    private final AndroidDriver driver;
+    private final WebDriverWait wait;
+
+    public CommonUtils(AndroidDriver driver, WebDriverWait wait){
+        this.driver =driver;
+        this.wait=wait;
+    }
+    public boolean isTextPresent(String text){
         try {
             WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
             return element.isDisplayed();
