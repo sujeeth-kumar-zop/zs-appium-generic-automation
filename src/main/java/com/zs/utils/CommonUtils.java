@@ -14,16 +14,41 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Method;
 
+/**
+ * Utility class containing common methods used across different test scenarios.
+ * Provides helper methods for locator retrieval, app-specific actions, and navigation.
+ */
 public class CommonUtils{
 
+    /**
+     * Logger instance for logging activities within this utility class.
+     */
     private static final Logger logger=LoggerUtil.getLogger();
+    /**
+     * Driver instance to interact with the application.
+     */
     private final AndroidDriver driver;
+    /**
+     * Wait instance for implementing explicit waits.
+     */
     private final WebDriverWait wait;
 
+    /**
+     * Constructor to initialize the CommonUtils instance with driver and wait.
+     *
+     * @param driver AndroidDriver instance for interacting with the app.
+     * @param wait   WebDriverWait instance for explicit waits.
+     */
     public CommonUtils(AndroidDriver driver, WebDriverWait wait){
         this.driver =driver;
         this.wait=wait;
     }
+
+    /**
+     * Checks if text is present on the current screen
+     * @param text The text to search for.
+     * @return true if text is present, false otherwise.
+     */
     public boolean isTextPresent(String text){
         try {
             WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
@@ -33,29 +58,12 @@ public class CommonUtils{
         }
     }
 
-    public static void callAppSpecificLoginMethod(String appName, String username, String password) {
-        try {
-
-            String className = "test" + appName + ".LoginTest" + appName; // example: testVijetha.LoginTestVijetha or testTamimi.LoginTestTamimi
-
-            Class<?> clazz = Class.forName(className); //load the class
-
-            Method loginMethod = clazz.getMethod("login" + appName, String.class, String.class); //store the loginmethod of the class in a variable
-
-            loginMethod.invoke(null, username, password); //call the stored method
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("No test class found for app: " + appName, e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException("No login method found for app: " + appName, e);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to invoke login method for app: " + appName, e);
-        }
-    }
-
-
-
-
+    /**
+     * Fetches a profile locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getProfileLocator(String appName, String key){
         return switch (appName){
             case Constants.VIJETHA -> VijethaLocators.getProfileLocators(key);
@@ -65,7 +73,12 @@ public class CommonUtils{
             default -> throw new IllegalArgumentException("Invalid app name: " + appName);
         };
     }
-
+    /**
+     * Fetches a login locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getLoginLocator(String appName, String key){
         return switch (appName){
             case Constants.VIJETHA -> VijethaLocators.getLoginLocator(key);
@@ -75,7 +88,12 @@ public class CommonUtils{
             default -> throw new IllegalArgumentException("Invalid app name: " + appName);
         };
     }
-
+    /**
+     * Fetches a home page locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getHomePageLocator(String appName, String key){
         return switch (appName){
             case Constants.VIJETHA -> VijethaLocators.getHomePageLocator(key);
@@ -86,6 +104,12 @@ public class CommonUtils{
         };
     }
 
+    /**
+     * Fetches a product page locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getProductPageLocator(String appName, String key){
         return switch (appName){
             case Constants.VIJETHA -> VijethaLocators.getProductPageLocators(key);
@@ -96,6 +120,12 @@ public class CommonUtils{
         };
     }
 
+    /**
+     * Fetches a drawer menu locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getDrawerLocators(String appName, String key){
         return switch (appName){
             case Constants.TAMIMI -> TamimiLocators.getDrawerLocators(key);
@@ -104,6 +134,12 @@ public class CommonUtils{
         };
     }
 
+    /**
+     * Fetches a menu locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getMenuLocators(String appName, String key){
         return switch (appName){
             case Constants.TAMIMI -> TamimiLocators.getMenuLocators(key);
@@ -113,6 +149,12 @@ public class CommonUtils{
         };
     }
 
+    /**
+     * Fetches a cart page locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
     public static By getCartLocators(String appName, String key){
         return switch (appName){
             case Constants.TAMIMI -> TamimiLocators.getCartLocators(key);
@@ -121,6 +163,7 @@ public class CommonUtils{
             default -> throw new IllegalArgumentException("Invalid app name: " + appName);
         };
     }
+
 
     public static void goToHome(String appName, AndroidDriver driver, WebDriverWait wait){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getMenuLocators(appName, "homeBtn"))).click();
