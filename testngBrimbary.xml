@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Appium Test Suite">
-
-    <test name="TestsBrimbary">
-        <parameter name="appName" value="Brimbary"/>
+<suite name="Brimbary Test Suite" parallel="false">
+    <parameter name="appName" value="Brimbary"/>
+    <listeners>
+        <listener class-name="com.zs.utils.ExtentReport"/>
+    </listeners>
+    <test name="Test">
         <classes>
             <class name="test.LoginTest"/>
+            <class name="test.AddProductToCartTest"/>
         </classes>
     </test>
-
 </suite>
