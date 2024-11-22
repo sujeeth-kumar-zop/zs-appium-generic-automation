@@ -145,6 +145,7 @@ public class CommonUtils{
             case Constants.TAMIMI -> TamimiLocators.getMenuLocators(key);
             case Constants.EKAM -> EkamLocators.getMenuLocators(key);
             case Constants.VIJETHA -> VijethaLocators.getMenuLocators(key);
+            case Constants.BRIMBARY -> BrimbaryLocators.getMenuLocators(key);
             default -> throw new IllegalArgumentException("Invalid app name: " + appName);
         };
     }
@@ -159,14 +160,15 @@ public class CommonUtils{
         return switch (appName){
             case Constants.TAMIMI -> TamimiLocators.getCartLocators(key);
             case Constants.EKAM -> EkamLocators.getCartLocators(key);
-            case Constants.VIJETHA -> VijethaLocators.getMenuLocators(key);
+            case Constants.VIJETHA -> VijethaLocators.getCartLocators(key);
+            case Constants.BRIMBARY -> BrimbaryLocators.getCartLocators(key);
             default -> throw new IllegalArgumentException("Invalid app name: " + appName);
         };
     }
 
-
-    public static void goToHome(String appName, AndroidDriver driver, WebDriverWait wait){
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getMenuLocators(appName, "homeBtn"))).click();
+    public boolean isElementVisible(By locator){
+        WebElement webElement=wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return webElement.isDisplayed();
     }
 
 
