@@ -31,5 +31,8 @@ jobs:
             restore-keys: |
               ${{ runner.os }}-maven-
 
+      - name: Install dependencies
+        run: mvn install -DskipTests
+
       - name: Build project with Maven
         run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
