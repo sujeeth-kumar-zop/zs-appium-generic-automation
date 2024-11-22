@@ -35,4 +35,4 @@ jobs:
         run: mvn install -DskipTests
 
       - name: Build project with Maven
-        run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
+        run: mvn clean install
