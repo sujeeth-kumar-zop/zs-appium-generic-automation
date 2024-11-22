@@ -60,8 +60,11 @@ public class EkamLocators {
         productPageLocators.put("addToCartBtn", By.id("com.zopping.ekam:id/add_to_cart_cl"));
 
         //bottom menu locators
-        menuLocators.put("cartBtn", By.xpath("//android.widget.FrameLayout[@content-desc='Cart']/android.widget.FrameLayout[37]"));
+        menuLocators.put("cartBtn", By.xpath("//android.widget.FrameLayout[@content-desc=\"Cart\"]/android.widget.FrameLayout[4]"));
         menuLocators.put("homeBtn", By.id("com.zopping.ekam:id/home"));
+
+        //cart locators
+        cartLocators.put("checkOutBtn", By.id("com.zopping.ekam:id/checkout_btn_for_gift"));
     }
 
 

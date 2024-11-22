@@ -45,9 +45,9 @@ public class TamimiLocators {
         profileLocators.put("username", By.id("com.zopsmart.stg.scarlet:id/tv_name"));
 
         //products page locators
-        productPageLocators.put("product", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.stg.scarlet:id/iv_item_image'])[1]"));
+        productPageLocators.put("product", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
         productPageLocators.put("productLabel", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
-        productPageLocators.put("addToCartBtn", By.id("com.zopsmart.stg.scarlet:id/ib_add"));
+        productPageLocators.put("addToCartBtn", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.stg.scarlet:id/ib_add'])[1]"));
 
         //bottom menu locators
         menuLocators.put("cartBtn", By.xpath("//android.widget.FrameLayout[@content-desc='Cart']/android.widget.FrameLayout[4]"));
@@ -55,11 +55,12 @@ public class TamimiLocators {
 
         //cart locators
         cartLocators.put("productInCartLabel", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
+        cartLocators.put("checkOutBtn", By.id("com.zopsmart.stg.scarlet:id/button_checkout"));
 
         //delivery-type drawer locators
-        deliveryTypeDrawerLocators.put("clickAndCollect", By.xpath("//androidx.viewpager.widget.ViewPager[@resource-id='com.zopsmart.stg.scarlet:id/containerViewPager']/android.widget.ImageView"));
+        deliveryTypeDrawerLocators.put("clickAndCollect", By.id("com.zopsmart.stg.scarlet:id/cv_click_and_collect"));
         deliveryTypeDrawerLocators.put("city", By.xpath("(//android.widget.FrameLayout[@resource-id='com.zopsmart.stg.scarlet:id/cv_city'])[1]"));
-        deliveryTypeDrawerLocators.put("store", By.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id='com.zopsmart.stg.scarlet:id/epoxy_stores']") );
+        deliveryTypeDrawerLocators.put("store", By.id("com.zopsmart.stg.scarlet:id/epoxy_stores") );
     }
 
 

@@ -38,6 +38,11 @@ public class BrimbaryLocators {
      * Locators for the menu elements.
      */
     public static final Map<String, By> menuLocators=new HashMap<>();
+    /**
+     * Locators for the cart elements.
+     */
+    public static final Map<String, By> cartLocators=new HashMap<>();
+
 
     static {
         //login locators
@@ -64,6 +69,9 @@ public class BrimbaryLocators {
 
         //menu locators
         menuLocators.put("cartBtn", By.id("com.zopsmart.brimbary:id/cart_icon_trendsetter"));
+
+        //cart locators
+        cartLocators.put("checkOutBtn", By.id("com.zopsmart.brimbary:id/checkout_btn_for_trendsetter"));
     }
 
     /**
@@ -121,5 +129,13 @@ public class BrimbaryLocators {
     public static By getMenuLocators(String locatorName){
         return menuLocators.get(locatorName);
     }
+    /**
+     * Retrieves a locator for a given element on the menu.
+     *
+     * @param locatorName the name of the locator to retrieve.
+     * @return the {@link By} locator for the specified element.
+     */
+    public static By getCartLocators(String locatorName){
+        return cartLocators.get(locatorName);
+    }
 }
-

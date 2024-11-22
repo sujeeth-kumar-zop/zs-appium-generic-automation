@@ -56,13 +56,14 @@ public class VijethaLocators {
         profileLocators.put("backBtn", By.id("in.vijetha.live:id/iv_navigation_icon"));
 
         //products page locators
-        productPageLocators.put("product", By.xpath("(//android.widget.ImageView[@resource-id='in.vijetha.live:id/iv_item_image'])[1]"));
+        productPageLocators.put("product", By.xpath("//android.widget.GridView[@resource-id='in.vijetha.live:id/epoxy_view']/android.view.ViewGroup[1]"));
         productPageLocators.put("productLabel", By.id("in.vijetha.live:id/tv_item_name"));
         productPageLocators.put("addToCartBtn", By.xpath("//android.widget.Button[@text='Add']"));
         productPageLocators.put("cartBtn", By.id("in.vijetha.live:id/tv_view_cart"));
 
         //cart locators
         cartLocators.put("addedProductLabel", By.xpath("//android.widget.TextView[@resource-id='in.vijetha.live:id/tv_item_name' and @text='Tomato Local - Tamatar - 2 kg']"));
+        cartLocators.put("checkOutBtn", By.xpath("//android.widget.Button[@resource-id='in.vijetha.live:id/btn_place_order']"));
     }
 
     /**
