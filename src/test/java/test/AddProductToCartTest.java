@@ -11,10 +11,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,9 +28,9 @@ public class AddProductToCartTest extends BaseTest {
      * Test to add a single product to the cart.
      * @param appName The name of the Application Under Test.
      */
-    @Test
+    @Test(dependsOnGroups = {"login"})
     @Parameters("appName")
-    public void addSingleProductToCart(String appName){
+    public void addSingleProductToCart(@Optional String appName){
 
         //get the driver and wait instances
         AndroidDriver driver = BaseTest.getDriver();
