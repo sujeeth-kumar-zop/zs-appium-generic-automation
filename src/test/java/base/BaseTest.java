@@ -21,6 +21,14 @@ import java.time.Duration;
 public class BaseTest {
 
     /**
+     * ThreadLocal to store the AndroidDriver instance for each thread (test execution)
+     */
+    private static ThreadLocal<AndroidDriver> threadLocalDriver = new ThreadLocal<>();
+    /**
+     * ThreadLocal to store the WebDriverWait instance for each thread (test execution)
+     */
+    private static ThreadLocal<WebDriverWait> threadLocalWait = new ThreadLocal<>();
+    /**
      * Android driver instance to interact with the application
      */
     public AndroidDriver driver;
@@ -32,7 +40,12 @@ public class BaseTest {
     /**
      * Logger instance to logging test activities
      */
-    public Logger logger;
+    public static Logger logger;
+
+    //Define the appium url
+    public final String appiumServerUrl="http://127.0.0.1:4723";
+
+    protected DesiredCapabilities cap;
 
 
     /**
@@ -42,15 +55,12 @@ public class BaseTest {
      * @throws MalformedURLException MalformedURLException if the appiumServerUrl is invalid
      * @throws IllegalArgumentException if appName not provided or appPath is null
      */
-    @BeforeTest
+    @BeforeSuite
     @Parameters("appName")
     public void setup(@Optional String appName) throws MalformedURLException {
 
         //initialize the logger
         logger= LogManager.getLogger(this.getClass());
-
-        //Define the appium url
-        String appiumServerUrl="http://127.0.0.1:4723";
 
         //validate that the app name is provided
         if (appName == null || appName.isEmpty()) {
@@ -59,7 +69,7 @@ public class BaseTest {
         logger.info("App name: {}",appName);
 
         //set up desired capabilities
-        DesiredCapabilities cap = new DesiredCapabilities();
+        cap = new DesiredCapabilities();
         cap.setCapability("platformName", "Android");
         cap.setCapability("appium:automationName", "uiautomator2");
 
@@ -76,9 +86,25 @@ public class BaseTest {
         cap.setCapability("appium:app", System.getProperty("user.dir") + "/" + appPath);
 
         //initialize android driver with appium url and the capabilities
-        driver = new AndroidDriver(new URL(appiumServerUrl), cap);
+        threadLocalDriver.set(new AndroidDriver(new URL(appiumServerUrl), cap));
         //initialize web driver wait with a timeout duration of 10 seconds
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        threadLocalWait.set(new WebDriverWait(threadLocalDriver.get(), Duration.ofSeconds(30)));
+    }
+
+    /**
+     * Getter for the thread-local Driver
+     * @return AndroidDriver instance
+     */
+    public static AndroidDriver getDriver() {
+        return threadLocalDriver.get();  // Retrieve the driver for the current thread
+    }
+
+    /**
+     * Getter for the thread-local WebDriverWait
+     * @return WebDriverWait instance
+     */
+    public static WebDriverWait getWait() {
+        return threadLocalWait.get();
     }
 
 
@@ -86,11 +112,12 @@ public class BaseTest {
      * Tears down test environment after test execution
      * closes android driver if it was initialized
      */
-    @AfterTest
+    @AfterSuite
     public void close() {
+        AndroidDriver driver = threadLocalDriver.get();
         if (driver != null) {
-            logger.info("Closing driver");
-            driver.quit();
+            driver.quit();  // Quit the driver to end the session
         }
+        threadLocalDriver.remove();
     }
 }

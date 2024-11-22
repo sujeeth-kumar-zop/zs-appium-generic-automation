@@ -1,11 +1,16 @@
 package test;
-
-import com.zs.constants.Constants;
+import base.BaseTest;
+import com.zs.pages.common.Flows;
 import com.zs.pages.common.LoginPage;
 import com.zs.pages.common.ProfilePage;
 import com.zs.utils.ExcelUtils;
-import base.BaseTest;
-import org.testng.annotations.*;
+import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import java.net.MalformedURLException;
 
 import static org.testng.Assert.*;
 
@@ -19,14 +24,16 @@ import static org.testng.Assert.*;
  */
 public class LoginTest extends BaseTest {
 
+
     /**
      * Validates the login functionality by using credentials from an Excel file.
      * @param appName name of the application being tested
      */
-    @Test
+    @Test(groups = {"login"})
     @Parameters("appName")
-    public void login(@Optional String appName) {
-
+    public void login(@Optional String appName) throws MalformedURLException {
+        AndroidDriver driver = BaseTest.getDriver();
+        WebDriverWait wait= BaseTest.getWait();
         //fetch the credentials for the given application
         String[] credentials = ExcelUtils.getCredentialsForApp(appName);
         assert credentials != null;
@@ -35,11 +42,15 @@ public class LoginTest extends BaseTest {
         String password = credentials[1];
 
         //perform the login action
-        LoginPage loginPage=new LoginPage(driver, wait);
-        loginPage.loginFlow(password, username, appName);
+        LoginPage loginPage = new LoginPage(driver, wait);
+        Flows flows = new Flows(driver, wait);
+        flows.loginFlow(password, username, appName);
 
         //verify the username is displayed in the profile page after logging in
-        ProfilePage profilePage=new ProfilePage(driver,wait);
+        ProfilePage profilePage = new ProfilePage(driver, wait);
         assertTrue(profilePage.isUsernameVisible(appName));
+        String sessionId = driver.getSessionId().toString();
+        System.setProperty("appiumSessionId", sessionId);
+        logger.info("Storing session ID: {}", sessionId);
     }
 }
