@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Tamimi Test Suite" parallel="false">
-    <parameter name="appName" value="Tamimi"/>
+    <parameter name="appName" value="${appName}"/>
     <test name="Test">
         <classes>
             <class name="test.LoginTest"/>
