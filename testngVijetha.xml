@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Appium Test Suite">
-
-    <test name="TestsVijetha">
-        <parameter name="appName" value="Vijetha"/>
+<suite name="Vijetha Test Suite" parallel="false">
+    <parameter name="appName" value="Vijetha"/>
+    <listeners>
+        <listener class-name="com.zs.utils.ExtentReport"/>
+    </listeners>
+    <test name="Test">
         <classes>
             <class name="test.LoginTest"/>
+            <class name="test.AddProductToCartTest"/>
         </classes>
     </test>
-
 </suite>

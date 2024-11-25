@@ -63,12 +63,6 @@
             <artifactId>poi-ooxml-schemas</artifactId>
             <version>4.1.2</version>
         </dependency>
-    <!--        <dependency>-->
-    <!--            <groupId>com.browserstack</groupId>-->
-    <!--            <artifactId>browserstack-java-sdk</artifactId>-->
-    <!--            <version>LATEST</version>-->
-    <!--        </dependency>-->
-    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
 
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -82,31 +76,37 @@
 <!--            <version>2.0.16</version>-->
 <!--        </dependency>-->
 
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.20.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.20.0</version>
         </dependency>
+       
 
+        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.12</version>
-            <scope>test</scope>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.2</version>
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-            <scope>provided</scope>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
 
     </dependencies>
 
