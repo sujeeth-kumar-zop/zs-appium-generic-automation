@@ -36,4 +36,9 @@ public class CartPage {
         return wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"quantityItem1"))).getText();
     }
 
+
+    public void clickOnCheckoutBtn(String appName){
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"checkOutBtn"))).click();
+    }
+
 }

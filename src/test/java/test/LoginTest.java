@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
      * Validates the login functionality by using credentials from an Excel file.
      * @param appName name of the application being tested
      */
-    @Test(groups = {"login"})
+    @Test(groups = {"login", "regression"})
     @Parameters("appName")
     public void login(@Optional String appName) throws MalformedURLException {
         AndroidDriver driver = BaseTest.getDriver();

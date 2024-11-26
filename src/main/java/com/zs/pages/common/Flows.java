@@ -1,6 +1,7 @@
 package com.zs.pages.common;
 
 import com.zs.constants.Constants;
+import com.zs.pages.tamimi.CartPageTamimi;
 import com.zs.pages.vijetha.LoginPageVijetha;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
@@ -103,6 +104,21 @@ public class Flows {
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + appName);
+        }
+    }
+
+    public void checkOut(String appName){
+
+        CartPage cartPage=new CartPage(driver,wait);
+        CartPageTamimi cartPageTamimi=new CartPageTamimi(driver,wait);
+        CheckoutPage checkoutPage=new CheckoutPage(driver,wait);
+
+        switch (appName){
+            case Constants.TAMIMI:
+                cartPageTamimi.selectSubstitutionMethod();
+                cartPage.clickOnCheckoutBtn(appName);
+                checkoutPage.selectDebitCardForPayment(appName);
+                checkoutPage.placeOrder(appName);
         }
     }
 

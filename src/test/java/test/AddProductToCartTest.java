@@ -25,7 +25,7 @@ public class AddProductToCartTest extends BaseTest {
      * Test to add a single product to the cart.
      * @param appName The name of the Application Under Test.
      */
-    @Test(dependsOnGroups = {"login"})
+    @Test(groups = {"regression", "addToCart"}, dependsOnGroups = {"login"})
     @Parameters("appName")
     public void addSingleProductToCart(@Optional String appName){
 
@@ -42,9 +42,9 @@ public class AddProductToCartTest extends BaseTest {
         assertTrue(commonUtils.isElementVisible(checkOutBtn), "Checkout Button is not visible"); //assert by checking if the check out button is visible
     }
 
-    @Test(dependsOnMethods = {"addSingleProductToCart"})
+    @Test(groups = {"regression", "addToCart"}, dependsOnMethods = {"addSingleProductToCart"})
     @Parameters("appName")
-    public void addMultipleProductToCart(@Optional String appName){
+    public void increaseProductQuantityInCart(@Optional String appName){
         //get the driver and wait instances
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
