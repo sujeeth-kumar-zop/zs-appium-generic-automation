@@ -24,8 +24,12 @@ public class CartPageTamimi {
         this.wait=wait;
     }
 
+    /**
+     * Selects a substitution method in case the products in cart are not available.
+     */
     public void selectSubstitutionMethod(){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(Constants.TAMIMI, "substitutionDropDown"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(Constants.TAMIMI, "substitutionOption1"))).click();
+        logger.info("Selected a substitution method for items in cart");
     }
 }

@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 
-import java.util.concurrent.Flow;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -42,6 +40,10 @@ public class AddProductToCartTest extends BaseTest {
         assertTrue(commonUtils.isElementVisible(checkOutBtn), "Checkout Button is not visible"); //assert by checking if the check out button is visible
     }
 
+    /**
+     * Test to increase the quantity of the product in cart
+     * @param appName The name of the application under test
+     */
     @Test(groups = {"regression", "addToCart"}, dependsOnMethods = {"addSingleProductToCart"})
     @Parameters("appName")
     public void increaseProductQuantityInCart(@Optional String appName){

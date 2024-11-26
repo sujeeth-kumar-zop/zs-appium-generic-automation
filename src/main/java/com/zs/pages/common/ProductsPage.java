@@ -10,6 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Represents the Products Browsing Page of an Application.
+ * Contains all methods that are required to perform an action on the products page.
+ */
 public class ProductsPage {
 
     private static Logger logger= LoggerUtil.getLogger();
@@ -21,12 +25,20 @@ public class ProductsPage {
         this.wait=wait;
     }
 
+    /**
+     * Clicks on add to cart button.
+     * @param appName The name of the application under test.
+     */
     public void addToCartBtn(String appName){
         WebElement btn=wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"addToCartBtn")));
         btn.click();
         logger.info("Clicked on Add to Cart Button for {}", appName);
     }
 
+    /**
+     * Navigates to Cart.
+     * @param appName The name of the application under test.
+     */
     public void goToCart(String appName){
         WebElement cart= switch(appName){
             case Constants.TAMIMI, Constants.EKAM, Constants.BRIMBARY -> wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getMenuLocators(appName,"cartBtn")));
@@ -37,6 +49,10 @@ public class ProductsPage {
         logger.info("Clicked on Cart Icon for {}", appName);
     }
 
+    /**
+     * Clicks on a product.
+     * @param appName The name of the application under test.
+     */
     public void openProduct(String appName){
         WebElement prod= switch (appName){
             case Constants.TAMIMI, Constants.EKAM, Constants.VIJETHA -> wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"product")));
@@ -49,6 +65,10 @@ public class ProductsPage {
         logger.info("Retrieved the added product's name for {}", appName);
     }
 
+    /**
+     * Clicks on a product category (Example: Dairy, Fruits and Vegetables, Meat etc)
+     * @param appName The name of the application under test.
+     */
     public void clickProductCategory(String appName){
         WebElement btn= wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName,"productCategory1")));
         btn.click();

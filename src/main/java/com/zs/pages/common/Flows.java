@@ -96,6 +96,10 @@ public class Flows {
         }
     }
 
+    /**
+     * Increases the quantity of the product in cart
+     * @param appName The name of the application under test
+     */
     public void increaseQuantityOfProduct(String appName){
         CartPage cartPage=new CartPage(driver,wait);
         switch (appName){
@@ -107,6 +111,10 @@ public class Flows {
         }
     }
 
+    /**
+     * Checks out and handles payment
+     * @param appName The name of the application under test
+     */
     public void checkOut(String appName){
 
         CartPage cartPage=new CartPage(driver,wait);

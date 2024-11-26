@@ -26,15 +26,30 @@ public class CheckoutPage {
         this.wait=wait;
     }
 
+    /**
+     * Selects debit card as payment method.
+     * @param appName The name of the application under test.
+     */
     public void selectDebitCardForPayment(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "debitCardRadio"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "debitCard1"))).click();
+        logger.info("Selected Payment method as Debit Card");
     }
 
+    /**
+     * Clicks on the place order button
+     * @param appName The name of the application under test.
+     */
     public void placeOrder(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "placeOrderBtn"))).click();
+        logger.info("Clicked on the Place Order Button");
     }
 
+    /**
+     * Checks if the order has been placed.
+     * @param appName The name of the application under test.
+     * @return A boolean value if the label of successful order placement is visible.
+     */
     public boolean isOrderPlaced(String appName){
         WebElement orderPlacedLabel = wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName,"orderPlacedLabel")));
         return orderPlacedLabel.isDisplayed();
