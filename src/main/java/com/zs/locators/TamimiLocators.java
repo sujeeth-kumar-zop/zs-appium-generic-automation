@@ -56,6 +56,10 @@ public class TamimiLocators {
         //cart locators
         cartLocators.put("productInCartLabel", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
         cartLocators.put("checkOutBtn", By.id("com.zopsmart.stg.scarlet:id/button_checkout"));
+        cartLocators.put("quantityItem1", By.xpath("(//android.widget.TextView[@resource-id='com.zopsmart.stg.scarlet:id/tv_quantity'])[1]"));
+        cartLocators.put("quantityTextBox", By.id("com.zopsmart.stg.scarlet:id/et_value"));
+        cartLocators.put("submitQuantity", By.id("com.zopsmart.stg.scarlet:id/btn_YES"));
+        cartLocators.put("continueQuantityBox", By.id("android:id/button1"));
 
         //delivery-type drawer locators
         deliveryTypeDrawerLocators.put("clickAndCollect", By.id("com.zopsmart.stg.scarlet:id/cv_click_and_collect"));

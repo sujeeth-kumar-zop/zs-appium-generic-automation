@@ -95,5 +95,16 @@ public class Flows {
         }
     }
 
+    public void increaseQuantityOfProduct(String appName){
+        CartPage cartPage=new CartPage(driver,wait);
+        switch (appName){
+            case Constants.TAMIMI:
+                cartPage.tapAndIncreaseQuantityOfItem(appName);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + appName);
+        }
+    }
+
 
 }
