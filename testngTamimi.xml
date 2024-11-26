@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Tamimi Test Suite" parallel="false">
     <parameter name="appName" value="Tamimi"/>
+    <listeners>
+        <listener class-name="com.zs.utils.ExtentReport"/>
+    </listeners>
     <test name="Test">
         <classes>
             <class name="test.LoginTest"/>
