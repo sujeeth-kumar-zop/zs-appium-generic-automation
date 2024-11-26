@@ -72,6 +72,7 @@ public class TamimiLocators {
         //checkout locators
         checkoutLocators.put("debitCardRadio", By.id("com.zopsmart.stg.scarlet:id/radio_debit_card"));
         checkoutLocators.put("debitCard1", By.id("com.zopsmart.stg.scarlet:id/constraint_layout_card"));
+        checkoutLocators.put("cashOnDeliveryRadio", By.id("com.zopsmart.stg.scarlet:id/radio_cash_on_delivery"));
         checkoutLocators.put("placeOrderBtn", By.id("com.zopsmart.stg.scarlet:id/btn_place_order"));
         checkoutLocators.put("orderPlacedLabel", By.id("com.zopsmart.stg.scarlet:id/order_placed_label"));
     }

@@ -112,21 +112,53 @@ public class Flows {
     }
 
     /**
-     * Checks out and handles payment
+     * Checks out and handles payment using debit card
      * @param appName The name of the application under test
      */
-    public void checkOut(String appName){
+    public void checkOutUsingDebitCard(String appName){
 
+        Flows flows=new Flows(driver,wait);
         CartPage cartPage=new CartPage(driver,wait);
         CartPageTamimi cartPageTamimi=new CartPageTamimi(driver,wait);
         CheckoutPage checkoutPage=new CheckoutPage(driver,wait);
 
         switch (appName){
             case Constants.TAMIMI:
-                cartPageTamimi.selectSubstitutionMethod();
+                driver.navigate().back();
+                driver.navigate().back();
+                flows.addSingleProductToCartFlow(appName);
+                flows.increaseQuantityOfProduct(appName);
                 cartPage.clickOnCheckoutBtn(appName);
                 checkoutPage.selectDebitCardForPayment(appName);
                 checkoutPage.placeOrder(appName);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + appName);
+        }
+    }
+
+    /**
+     * Checks out and chooses payment mode as cash on delivery.
+     * @param appName The name of the application under test.
+     */
+    public void checkOutUsingCashOnDelivery(String appName){
+        CartPage cartPage=new CartPage(driver,wait);
+        CartPageTamimi cartPageTamimi=new CartPageTamimi(driver,wait);
+        ProductsPage productsPage=new ProductsPage(driver,wait);
+        HomePage homePage=new HomePage(driver,wait);
+        Flows flows=new Flows(driver,wait);
+        CheckoutPage checkoutPage=new CheckoutPage(driver,wait);
+
+        switch (appName){
+            case Constants.TAMIMI:
+
+                cartPageTamimi.selectSubstitutionMethod();
+                cartPage.clickOnCheckoutBtn(appName);
+                checkoutPage.selectCashOnDeliveryForPayment(appName);
+                checkoutPage.placeOrder(appName);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + appName);
         }
     }
 

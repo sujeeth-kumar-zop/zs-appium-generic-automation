@@ -50,8 +50,5 @@ public class LoginTest extends BaseTest {
         //verify the username is displayed in the profile page after logging in
         ProfilePage profilePage = new ProfilePage(driver, wait);
         assertTrue(profilePage.isUsernameVisible(appName));
-        String sessionId = driver.getSessionId().toString();
-        System.setProperty("appiumSessionId", sessionId);
-        logger.info("Storing session ID: {}", sessionId);
     }
 }

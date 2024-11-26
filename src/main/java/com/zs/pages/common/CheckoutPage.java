@@ -2,6 +2,7 @@ package com.zs.pages.common;
 
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -34,6 +35,11 @@ public class CheckoutPage {
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "debitCardRadio"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "debitCard1"))).click();
         logger.info("Selected Payment method as Debit Card");
+    }
+
+    public void selectCashOnDeliveryForPayment(String appName){
+        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Cash on collection\").instance(0))")).click();
+        logger.info("Selected Payment Method as Cash on Delivery");
     }
 
     /**
