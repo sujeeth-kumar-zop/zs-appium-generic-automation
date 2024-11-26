@@ -43,7 +43,7 @@ public class BaseTest {
     public static Logger logger;
 
     //Define the appium url
-    public final String appiumServerUrl="http://127.0.0.1:4723";
+    public final String appiumServerUrl=Constants.APPIUM_URL;
 
     protected DesiredCapabilities cap;
 
