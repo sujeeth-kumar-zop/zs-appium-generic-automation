@@ -25,15 +25,36 @@ public class CartPage {
         this.wait=wait;
     }
 
+    /**
+     * Increases the quantity of the item in cart.
+     * @param appName The name of the application under test.
+     */
     public void tapAndIncreaseQuantityOfItem(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityItem1"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityTextBox"))).sendKeys("20");
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "submitQuantity"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"continueQuantityBox"))).click();
+        logger.info("Increased quantity of item in cart to 20");
     }
 
+    /**
+     * Fetches the quantity of an item in cart.
+     * @param appName The name of the application under test.
+     * @return The quantity of an item in cart.
+     */
     public String verifyQuantity(String appName){
+        logger.info("Fetching the quantity of item in cart....");
         return wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"quantityItem1"))).getText();
+    }
+
+
+    /**
+     * Clicks on check out button.
+     * @param appName The name of the application under test.
+     */
+    public void clickOnCheckoutBtn(String appName){
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"checkOutBtn"))).click();
+        logger.info("Clicked on checkout button");
     }
 
 }

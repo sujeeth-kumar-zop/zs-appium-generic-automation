@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
      * Validates the login functionality by using credentials from an Excel file.
      * @param appName name of the application being tested
      */
-    @Test(groups = {"login"})
+    @Test(groups = {"login", "regression"})
     @Parameters("appName")
     public void login(@Optional String appName) throws MalformedURLException {
         AndroidDriver driver = BaseTest.getDriver();
@@ -50,8 +50,5 @@ public class LoginTest extends BaseTest {
         //verify the username is displayed in the profile page after logging in
         ProfilePage profilePage = new ProfilePage(driver, wait);
         assertTrue(profilePage.isUsernameVisible(appName));
-        String sessionId = driver.getSessionId().toString();
-        System.setProperty("appiumSessionId", sessionId);
-        logger.info("Storing session ID: {}", sessionId);
     }
 }

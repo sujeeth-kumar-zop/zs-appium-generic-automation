@@ -19,6 +19,7 @@ public class TamimiLocators {
     public static final Map<String, By> menuLocators=new HashMap<>();
     public static final Map<String, By> cartLocators= new HashMap<>();
     public static final Map<String, By> deliveryTypeDrawerLocators=new HashMap<>();
+    public static final Map<String, By> checkoutLocators=new HashMap<>();
 
     static {
 
@@ -60,11 +61,20 @@ public class TamimiLocators {
         cartLocators.put("quantityTextBox", By.id("com.zopsmart.stg.scarlet:id/et_value"));
         cartLocators.put("submitQuantity", By.id("com.zopsmart.stg.scarlet:id/btn_YES"));
         cartLocators.put("continueQuantityBox", By.id("android:id/button1"));
+        cartLocators.put("substitutionDropDown", By.id("com.zopsmart.stg.scarlet:id/select_substitution_spinner"));
+        cartLocators.put("substitutionOption1", By.xpath("//*[@text='Call for substitution']"));
 
         //delivery-type drawer locators
         deliveryTypeDrawerLocators.put("clickAndCollect", By.id("com.zopsmart.stg.scarlet:id/cv_click_and_collect"));
         deliveryTypeDrawerLocators.put("city", By.xpath("(//android.widget.FrameLayout[@resource-id='com.zopsmart.stg.scarlet:id/cv_city'])[1]"));
         deliveryTypeDrawerLocators.put("store", By.id("com.zopsmart.stg.scarlet:id/epoxy_stores") );
+
+        //checkout locators
+        checkoutLocators.put("debitCardRadio", By.id("com.zopsmart.stg.scarlet:id/radio_debit_card"));
+        checkoutLocators.put("debitCard1", By.id("com.zopsmart.stg.scarlet:id/constraint_layout_card"));
+        checkoutLocators.put("cashOnDeliveryRadio", By.id("com.zopsmart.stg.scarlet:id/radio_cash_on_delivery"));
+        checkoutLocators.put("placeOrderBtn", By.id("com.zopsmart.stg.scarlet:id/btn_place_order"));
+        checkoutLocators.put("orderPlacedLabel", By.id("com.zopsmart.stg.scarlet:id/order_placed_label"));
     }
 
 
@@ -139,6 +149,15 @@ public class TamimiLocators {
      */
     public static By getDeliveryTypeDrawerLocators(String locatorName){
         return deliveryTypeDrawerLocators.get(locatorName);
+    }
+    /**
+     * Retrieves the checkout page's locator by its name.
+     *
+     * @param locatorName The name of the locator to fetch.
+     * @return The locator corresponding to the provided name.
+     */
+    public static By getCheckoutLocators(String locatorName){
+        return checkoutLocators.get(locatorName);
     }
 
 }

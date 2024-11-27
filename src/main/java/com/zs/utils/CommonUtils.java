@@ -165,6 +165,18 @@ public class CommonUtils{
             default -> throw new IllegalArgumentException("Invalid app name: " + appName);
         };
     }
+    /**
+     * Fetches a checkout page locator based on app's name and key
+     * @param appName name of the application whose locator needs to be retrieved
+     * @param key key of that locator in hashmap
+     * @return locator for the specified key
+     */
+    public static By getCheckoutLocators(String appName, String key){
+        return switch (appName){
+            case Constants.TAMIMI -> TamimiLocators.getCheckoutLocators(key);
+            default -> throw new IllegalArgumentException("Invalid app name: " + appName);
+        };
+    }
 
     public boolean isElementVisible(By locator){
         WebElement webElement=wait.until(ExpectedConditions.visibilityOfElementLocated(locator));

@@ -30,4 +30,10 @@ public class Constants {
      * Path to the login details Excel file containing credentials.
      */
     public static final String LOGIN_DETAILS_PATH = "src/main/resources/login_details.xlsx";
+
+    /**
+     * Remote host and port
+     */
+    // ****************** URLs *******************
+    public static final String APPIUM_URL ="http://127.0.0.1:4723";
 }
