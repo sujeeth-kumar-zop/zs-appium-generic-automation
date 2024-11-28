@@ -35,6 +35,8 @@ public class TamimiLocators {
         homePageLocators.put("headerLogo", By.id("com.zopsmart.stg.scarlet:id/logo"));
         homePageLocators.put("drawerIcon", By.xpath("//android.widget.ImageButton[@content-desc='Open navigation drawer']"));
         homePageLocators.put("productCategory1", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.stg.scarlet:id/iv_category'])[3]"));
+        homePageLocators.put("searchBar", By.id("com.zopsmart.stg.scarlet:id/et_search"));
+        homePageLocators.put("searchIcon", By.id("com.zopsmart.stg.scarlet:id/ic_search"));
 
         //drawer locators
         drawerLocators.put("versionText", By.xpath("//android.widget.FrameLayout[@content-desc='Cart']/android.widget.FrameLayout[1]"));

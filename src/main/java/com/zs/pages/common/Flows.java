@@ -162,5 +162,8 @@ public class Flows {
         }
     }
 
-
+    public void checkSearch(String appName){
+        HomePage homePage=new HomePage(driver,wait);
+        homePage.enterTextInSearchBar(appName);
+    }
 }
