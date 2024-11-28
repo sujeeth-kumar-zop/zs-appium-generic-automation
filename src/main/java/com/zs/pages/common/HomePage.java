@@ -41,4 +41,17 @@ public class HomePage {
         drawerIcon.click();
         logger.info("Clicked on the drawer for {}", appName);
     }
+
+
+    public void enterTextInSearchBar(String appName) {
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName,"searchIcon"))).click();
+        logger.info("Clicked on Search Icon");
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName, "searchBar"))).sendKeys("Eggplant Big");
+        logger.info("Entered text in Search Box");
+    }
+
+    public boolean isTextVisible(String text){
+        WebElement label=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@text='"+text+"']")));
+        return label.isDisplayed();
+    }
 }
