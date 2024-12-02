@@ -9,6 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Represents the Home Page of the application.
  * Contains methods to interact with elements on the Home Page.
@@ -43,10 +46,10 @@ public class HomePage {
     }
 
 
-    public void enterTextInSearchBar(String appName) {
+    public void enterTextInSearchBar(String appName, String text) {
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName,"searchIcon"))).click();
         logger.info("Clicked on Search Icon");
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName, "searchBar"))).sendKeys("Eggplant Big");
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName, "searchBar"))).sendKeys(text);
         logger.info("Entered text in Search Box");
     }
 
@@ -54,4 +57,14 @@ public class HomePage {
         WebElement label=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@text='"+text+"']")));
         return label.isDisplayed();
     }
+
+    public String fetchRandomProduct(String appName){
+        List<WebElement> productsList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(CommonUtils.getHomePageLocator(appName,"productsInSearch")));
+        int productCount = productsList.size();
+        System.out.println(productCount);
+        int randomNumber= ThreadLocalRandom.current().nextInt(2, productCount);
+        System.out.println(randomNumber);
+        return productsList.get(randomNumber).getText();
+    }
 }
+

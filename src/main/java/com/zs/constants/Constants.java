@@ -37,5 +37,5 @@ public class Constants {
     // ****************** URLs *******************
     public static final String APPIUM_URL ="http://127.0.0.1:4723";
 
-    public static final String TEXT_TO_SEARCH ="Eggplant Big-500 g";
+    public static final String EGGPLANT_STRING="Eggplant";
 }

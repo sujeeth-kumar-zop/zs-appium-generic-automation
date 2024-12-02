@@ -3,10 +3,16 @@ package com.zs.pages.common;
 import com.zs.constants.Constants;
 import com.zs.pages.tamimi.CartPageTamimi;
 import com.zs.pages.vijetha.LoginPageVijetha;
+import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Contains flows for all the tests.
@@ -164,6 +170,7 @@ public class Flows {
 
     public void checkSearch(String appName){
         HomePage homePage=new HomePage(driver,wait);
-        homePage.enterTextInSearchBar(appName);
+        homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
     }
+
 }
