@@ -34,12 +34,12 @@ public class CheckoutPage {
     public void selectDebitCardForPayment(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "debitCardRadio"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "debitCard1"))).click();
-        logger.info("Selected Payment method as Debit Card");
+        LoggerUtil.logInfo("Selected Payment method as Debit Card");
     }
 
     public void selectCashOnDeliveryForPayment(String appName){
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Cash on collection\").instance(0))")).click();
-        logger.info("Selected Payment Method as Cash on Delivery");
+        LoggerUtil.logInfo("Selected ayment method: Cash on Delivery");
     }
 
     /**
@@ -48,7 +48,7 @@ public class CheckoutPage {
      */
     public void placeOrder(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCheckoutLocators(appName, "placeOrderBtn"))).click();
-        logger.info("Clicked on the Place Order Button");
+        LoggerUtil.logInfo("Clicked on the Place Order Button");
     }
 
     /**

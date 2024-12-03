@@ -32,7 +32,7 @@ public class ProductsPage {
     public void addToCartBtn(String appName){
         WebElement btn=wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"addToCartBtn")));
         btn.click();
-        logger.info("Clicked on Add to Cart Button for {}", appName);
+        LoggerUtil.logInfo("Clicked on Add to Cart Button for "+ appName);
     }
 
     /**
@@ -46,7 +46,7 @@ public class ProductsPage {
             default -> throw new IllegalStateException("Unexpected value: " + appName);
         };
         cart.click();
-        logger.info("Clicked on Cart Icon for {}", appName);
+        LoggerUtil.logInfo("Clicked on Cart Icon for "+ appName);
     }
 
     /**
@@ -60,9 +60,9 @@ public class ProductsPage {
             default -> throw new IllegalStateException("Unexpected value: " + appName);
         };
         prod.click();
-        logger.info("Clicked on a Product for {}", appName);
+        LoggerUtil.logInfo("Clicked on a Product for "+appName);
         wait.until(ExpectedConditions.visibilityOfElementLocated(CommonUtils.getProductPageLocator(appName,"productLabel")));
-        logger.info("Retrieved the added product's name for {}", appName);
+        LoggerUtil.logInfo("Retrieved the added product's name for "+appName);
     }
 
     /**
@@ -72,6 +72,6 @@ public class ProductsPage {
     public void clickProductCategory(String appName){
         WebElement btn= wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName,"productCategory1")));
         btn.click();
-        logger.info("Clicked on a product category for {}", appName);
+        LoggerUtil.logInfo("Clicked on a product category for "+appName);
     }
 }

@@ -30,6 +30,6 @@ public class CartPageTamimi {
     public void selectSubstitutionMethod(){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(Constants.TAMIMI, "substitutionDropDown"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(Constants.TAMIMI, "substitutionOption1"))).click();
-        logger.info("Selected a substitution method for items in cart");
+        LoggerUtil.logInfo("Selected a substitution method for items in cart");
     }
 }

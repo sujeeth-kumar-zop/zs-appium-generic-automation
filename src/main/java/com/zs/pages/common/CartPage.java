@@ -34,7 +34,7 @@ public class CartPage {
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityTextBox"))).sendKeys("20");
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "submitQuantity"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"continueQuantityBox"))).click();
-        logger.info("Increased quantity of item in cart to 20");
+        LoggerUtil.logInfo("Increased quantity of item in cart to 20");
     }
 
     /**
@@ -43,7 +43,7 @@ public class CartPage {
      * @return The quantity of an item in cart.
      */
     public String verifyQuantity(String appName){
-        logger.info("Fetching the quantity of item in cart....");
+        LoggerUtil.logInfo("Fetching the quantity of item in cart.");
         return wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"quantityItem1"))).getText();
     }
 
@@ -54,7 +54,7 @@ public class CartPage {
      */
     public void clickOnCheckoutBtn(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"checkOutBtn"))).click();
-        logger.info("Clicked on checkout button");
+        LoggerUtil.logInfo("Clicked on checkout button");
     }
 
 }

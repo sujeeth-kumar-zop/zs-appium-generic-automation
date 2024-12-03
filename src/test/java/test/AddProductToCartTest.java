@@ -4,6 +4,8 @@ import com.zs.pages.common.CartPage;
 import com.zs.pages.common.Flows;
 import com.zs.utils.CommonUtils;
 import base.BaseTest;
+import com.zs.utils.ExtentReport;
+import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,6 +29,9 @@ public class AddProductToCartTest extends BaseTest {
     @Parameters("appName")
     public void addSingleProductToCart(@Optional String appName){
 
+        // Set the ExtentTest object in LoggerUtil to log to both ExtentReport and Log4j
+        LoggerUtil.setExtentTest(ExtentReport.getTest());
+
         //get the driver and wait instances
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
@@ -37,7 +42,9 @@ public class AddProductToCartTest extends BaseTest {
         driver.navigate().back();
         flows.addSingleProductToCartFlow(appName);
         By checkOutBtn = CommonUtils.getCartLocators(appName, "checkOutBtn");
+        LoggerUtil.logInfo("Checking if checkout button is visible.");
         assertTrue(commonUtils.isElementVisible(checkOutBtn), "Checkout Button is not visible"); //assert by checking if the check out button is visible
+        LoggerUtil.logPass("Add a single product to cart test passed.");
     }
 
     /**
@@ -47,6 +54,10 @@ public class AddProductToCartTest extends BaseTest {
     @Test(groups = {"regression", "addToCart"}, dependsOnMethods = {"addSingleProductToCart"})
     @Parameters("appName")
     public void increaseProductQuantityInCart(@Optional String appName){
+
+        // Set the ExtentTest object in LoggerUtil to log to both ExtentReport and Log4j
+        LoggerUtil.setExtentTest(ExtentReport.getTest());
+
         //get the driver and wait instances
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
@@ -55,7 +66,9 @@ public class AddProductToCartTest extends BaseTest {
         CartPage cartPage=new CartPage(driver,wait);
 
         flows.increaseQuantityOfProduct(appName);
+        LoggerUtil.logInfo("Checking if quantity increased to 20.");
         assertEquals(cartPage.verifyQuantity(appName), "20");
+        LoggerUtil.logPass("Increase Product Quantity test passed.");
 
     }
 }
