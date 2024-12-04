@@ -123,13 +123,13 @@ public class Flows {
      */
     public void increaseQuantityOfProduct(String appName){
         CartPage cartPage=new CartPage(driver,wait);
-        CartPageBrimbary cartPageBrimbary=new CartPageBrimbary(driver,wait);
+        CartPageTamimi cartPageTamimi=new CartPageTamimi(driver,wait);
         switch (appName){
             case Constants.TAMIMI:
-                cartPage.tapAndIncreaseQuantityOfItem(appName);
+                cartPageTamimi.tapAndIncreaseQuantityOfItem();
                 break;
-            case Constants.BRIMBARY:
-                cartPageBrimbary.increaseQuantity();
+            case Constants.BRIMBARY, Constants.VIJETHA:
+                cartPage.tapAndIncreaseQuantityOfItem(appName);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + appName);

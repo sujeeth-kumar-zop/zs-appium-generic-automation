@@ -72,7 +72,7 @@ public class AddProductToCartTest extends BaseTest {
         String expectedQuantity;
         if (Constants.TAMIMI.equalsIgnoreCase(appName)) {
             expectedQuantity = "20";
-        } else if (Constants.BRIMBARY.equalsIgnoreCase(appName)) {
+        } else if (Constants.BRIMBARY.equalsIgnoreCase(appName) || Constants.VIJETHA.equalsIgnoreCase(appName)) {
             expectedQuantity = "2";
         } else {
             expectedQuantity = "10";

@@ -3,8 +3,12 @@ package com.zs.pages.common;
 import com.zs.constants.Constants;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,18 +35,11 @@ public class CartPage {
      * @param appName The name of the application under test.
      */
     public void tapAndIncreaseQuantityOfItem(String appName){
-        switch (appName) {
-            case Constants.TAMIMI:
-                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityItem1"))).click();
-                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityTextBox"))).sendKeys("20");
-                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "submitQuantity"))).click();
-                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "continueQuantityBox"))).click();
-                break;
-            case Constants.BRIMBARY:
-
-
-        }
-        LoggerUtil.logInfo("Increased quantity of item in cart to 20");
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"quantityBtn"))).click();
+        driver.pressKey(new KeyEvent(AndroidKey.DPAD_DOWN));
+        driver.pressKey(new KeyEvent(AndroidKey.DPAD_DOWN));
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "okayQuantityBtn"))).click();
+        LoggerUtil.logInfo("Increased quantity of Product in cart");
     }
 
     /**

@@ -78,6 +78,8 @@ public class BrimbaryLocators {
         cartLocators.put("checkOutBtn", By.id("com.zopsmart.brimbary:id/checkout_btn_for_trendsetter"));
         cartLocators.put("increaseQuantityBtn", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.brimbary:id/ib_add'])[1]"));
         cartLocators.put("quantityItem1", By.id("com.zopsmart.brimbary:id/tv_quantity"));
+        cartLocators.put("quantityBtn", By.xpath("(//android.widget.TextView[@resource-id=\"com.zopsmart.brimbary:id/tv_quantity\"])[1]"));
+        cartLocators.put("okayQuantityBtn", By.id("com.zopsmart.brimbary:id/btn_okay"));
     }
 
     /**

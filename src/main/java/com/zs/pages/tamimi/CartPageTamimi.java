@@ -1,6 +1,7 @@
 package com.zs.pages.tamimi;
 
 import com.zs.constants.Constants;
+import com.zs.locators.TamimiLocators;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
@@ -31,5 +32,12 @@ public class CartPageTamimi {
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(Constants.TAMIMI, "substitutionDropDown"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(Constants.TAMIMI, "substitutionOption1"))).click();
         LoggerUtil.logInfo("Selected a substitution method for items in cart");
+    }
+
+    public void tapAndIncreaseQuantityOfItem(){
+        wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("quantityItem1"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("quantityTextBox"))).sendKeys("20");
+        wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("submitQuantity"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators( "continueQuantityBox"))).click();
     }
 }
