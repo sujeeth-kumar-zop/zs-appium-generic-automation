@@ -28,7 +28,7 @@ public class SearchTest extends BaseTest {
         WebDriverWait wait= BaseTest.getWait();
 
         LoggerUtil.logInfo("Starting the Search Test");
-        driver.navigate().back();
+//        driver.navigate().back();
         if(Constants.TAMIMI.equals(appName))
             driver.navigate().back();
         Flows flows=new Flows(driver,wait);
