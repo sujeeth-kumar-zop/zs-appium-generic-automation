@@ -3,6 +3,7 @@ package com.zs.pages.common;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.zs.constants.Constants;
+import com.zs.pages.brimbary.CartPageBrimbary;
 import com.zs.pages.tamimi.CartPageTamimi;
 import com.zs.pages.vijetha.LoginPageVijetha;
 import com.zs.utils.CommonUtils;
@@ -122,9 +123,13 @@ public class Flows {
      */
     public void increaseQuantityOfProduct(String appName){
         CartPage cartPage=new CartPage(driver,wait);
+        CartPageBrimbary cartPageBrimbary=new CartPageBrimbary(driver,wait);
         switch (appName){
             case Constants.TAMIMI:
                 cartPage.tapAndIncreaseQuantityOfItem(appName);
+                break;
+            case Constants.BRIMBARY:
+                cartPageBrimbary.increaseQuantity();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + appName);
@@ -184,7 +189,19 @@ public class Flows {
 
     public void checkSearch(String appName){
         HomePage homePage=new HomePage(driver,wait);
-        homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
+        switch (appName){
+            case Constants.TAMIMI:
+                driver.navigate().back();
+                driver.navigate().back();
+                homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
+                break;
+            case Constants.BRIMBARY:
+                driver.navigate().back();
+                homePage.enterTextInSearchBar(appName, Constants.TSHIRT_STRING);
+                break;
+//            case Constants.EKAM:
+//                driver.navigate().back();
+        }
     }
 
 }

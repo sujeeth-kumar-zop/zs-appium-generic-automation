@@ -1,5 +1,6 @@
 package com.zs.pages.common;
 
+import com.zs.constants.Constants;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
@@ -30,10 +31,17 @@ public class CartPage {
      * @param appName The name of the application under test.
      */
     public void tapAndIncreaseQuantityOfItem(String appName){
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityItem1"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityTextBox"))).sendKeys("20");
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "submitQuantity"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"continueQuantityBox"))).click();
+        switch (appName) {
+            case Constants.TAMIMI:
+                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityItem1"))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityTextBox"))).sendKeys("20");
+                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "submitQuantity"))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "continueQuantityBox"))).click();
+                break;
+            case Constants.BRIMBARY:
+
+
+        }
         LoggerUtil.logInfo("Increased quantity of item in cart to 20");
     }
 

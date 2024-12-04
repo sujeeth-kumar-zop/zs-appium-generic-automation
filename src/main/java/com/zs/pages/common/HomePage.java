@@ -1,6 +1,7 @@
 package com.zs.pages.common;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.zs.constants.Constants;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
@@ -67,6 +68,11 @@ public class HomePage {
         int productCount = productsList.size();
         int randomNumber= ThreadLocalRandom.current().nextInt(0, productCount);
         LoggerUtil.logInfo("The random product's index is "+randomNumber);
+        if(Constants.BRIMBARY.equals(appName)){
+            productsList.get(randomNumber).click();
+            WebElement label= wait.until(ExpectedConditions.visibilityOfElementLocated(CommonUtils.getProductPageLocator(Constants.BRIMBARY,"productLabel")));
+            return label.getText();
+        }
         return productsList.get(randomNumber).getText();
     }
 }

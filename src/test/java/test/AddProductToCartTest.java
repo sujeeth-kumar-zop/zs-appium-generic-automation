@@ -1,5 +1,6 @@
 package test;
 
+import com.zs.constants.Constants;
 import com.zs.pages.common.CartPage;
 import com.zs.pages.common.Flows;
 import com.zs.utils.CommonUtils;
@@ -66,8 +67,17 @@ public class AddProductToCartTest extends BaseTest {
         CartPage cartPage=new CartPage(driver,wait);
 
         flows.increaseQuantityOfProduct(appName);
-        LoggerUtil.logInfo("Checking if quantity increased to 20.");
-        assertEquals(cartPage.verifyQuantity(appName), "20");
+        LoggerUtil.logInfo("Checking if quantity increased.");
+
+        String expectedQuantity;
+        if (Constants.TAMIMI.equalsIgnoreCase(appName)) {
+            expectedQuantity = "20";
+        } else if (Constants.BRIMBARY.equalsIgnoreCase(appName)) {
+            expectedQuantity = "2";
+        } else {
+            expectedQuantity = "10";
+        }
+        assertEquals(cartPage.verifyQuantity(appName), expectedQuantity);
         LoggerUtil.logPass("Increase Product Quantity test passed.");
 
     }

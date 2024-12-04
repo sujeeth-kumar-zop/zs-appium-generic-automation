@@ -4,6 +4,7 @@ import com.zs.constants.Constants;
 import com.zs.locators.BrimbaryLocators;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -30,8 +31,10 @@ public class ProductsPage {
      * @param appName The name of the application under test.
      */
     public void addToCartBtn(String appName){
-        WebElement btn=wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"addToCartBtn")));
-        btn.click();
+        if(Constants.BRIMBARY.equals(appName))
+            driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Add to Cart\").instance(0))")).click();
+        else
+            wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"addToCartBtn"))).click();
         LoggerUtil.logInfo("Clicked on Add to Cart Button for "+ appName);
     }
 

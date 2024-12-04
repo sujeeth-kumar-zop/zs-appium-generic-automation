@@ -56,6 +56,10 @@ public class BrimbaryLocators {
         homePageLocators.put("headerLogo", By.id("com.zopsmart.scarlet:id/logo"));
         homePageLocators.put("drawerIcon", By.xpath("//android.widget.ImageButton[@content-desc='Open navigation drawer']"));
         homePageLocators.put("product", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.brimbary:id/iv_item'])[1]"));
+        homePageLocators.put("productsInSearch", By.xpath("//android.widget.GridView[@resource-id='com.zopsmart.brimbary:id/rv_search_items']/android.view.ViewGroup"));
+        homePageLocators.put("searchIcon", By.id("com.zopsmart.brimbary:id/search_icon_trendsetter"));
+        homePageLocators.put("searchBar", By.id("com.zopsmart.brimbary:id/et_search_gift"));
+
 
         //profile locators
         profileLocators.put("username", By.id("com.zopsmart.brimbary:id/tv_username"));
@@ -72,6 +76,8 @@ public class BrimbaryLocators {
 
         //cart locators
         cartLocators.put("checkOutBtn", By.id("com.zopsmart.brimbary:id/checkout_btn_for_trendsetter"));
+        cartLocators.put("increaseQuantityBtn", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.brimbary:id/ib_add'])[1]"));
+        cartLocators.put("quantityItem1", By.id("com.zopsmart.brimbary:id/tv_quantity"));
     }
 
     /**

@@ -7,6 +7,7 @@ import com.zs.pages.common.HomePage;
 import com.zs.utils.ExtentReport;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -28,13 +29,24 @@ public class SearchTest extends BaseTest {
 
         LoggerUtil.logInfo("Starting the Search Test");
         driver.navigate().back();
-        driver.navigate().back();
+        if(Constants.TAMIMI.equals(appName))
+            driver.navigate().back();
         Flows flows=new Flows(driver,wait);
         HomePage homePage=new HomePage(driver,wait);
         flows.checkSearch(appName);
         String randomProductText= homePage.fetchRandomProduct(appName);
+        String textToCheck;
+        if(Constants.BRIMBARY.equals(appName)){
+            textToCheck=Constants.TSHIRT_STRING;
+        }
+        else if(Constants.TAMIMI.equals(appName)){
+            textToCheck=Constants.EGGPLANT_STRING;
+        }
+        else{
+            textToCheck=Constants.EGGPLANT_STRING;
+        }
         assertTrue("The product text should contain the search keyword.",
-                randomProductText.toLowerCase().contains(Constants.EGGPLANT_STRING.toLowerCase()));
+                randomProductText.toLowerCase().contains(textToCheck.toLowerCase()));
         LoggerUtil.logPass("Search test passed.");
     }
 }
