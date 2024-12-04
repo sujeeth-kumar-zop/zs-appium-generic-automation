@@ -57,7 +57,7 @@ public class BaseTest {
      */
     @BeforeSuite
     @Parameters("appName")
-    public void setup(@Optional String appName) throws MalformedURLException {
+    public void setup(@Optional("Tamimi") String appName) throws MalformedURLException {
 
         //initialize the logger
         logger= LogManager.getLogger(this.getClass());
