@@ -30,7 +30,7 @@ jobs:
             appium &>/dev/null &
 
       - name: run appium android tests
-        uses: reactivecircus/android-emulator-runner@v3
+        uses: reactivecircus/android-emulator-runner@v2
         with:
             api-level: 30
             arch: x86_64  # Changed to x86_64
