@@ -24,7 +24,6 @@ public class HomePage {
     private final AndroidDriver driver;
     private final WebDriverWait wait;
 
-
     /**
      * Constructor to initialize the HomePage object with the driver and wait instance.
      *
