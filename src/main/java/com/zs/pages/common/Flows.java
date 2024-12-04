@@ -3,7 +3,6 @@ package com.zs.pages.common;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.zs.constants.Constants;
-import com.zs.pages.brimbary.CartPageBrimbary;
 import com.zs.pages.tamimi.CartPageTamimi;
 import com.zs.pages.vijetha.LoginPageVijetha;
 import com.zs.utils.CommonUtils;
