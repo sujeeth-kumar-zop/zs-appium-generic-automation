@@ -61,9 +61,7 @@ public class HomePage {
     public String fetchRandomProduct(String appName){
         List<WebElement> productsList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(CommonUtils.getHomePageLocator(appName,"productsInSearch")));
         int productCount = productsList.size();
-        System.out.println(productCount);
         int randomNumber= ThreadLocalRandom.current().nextInt(2, productCount);
-        System.out.println(randomNumber);
         return productsList.get(randomNumber).getText();
     }
 }
