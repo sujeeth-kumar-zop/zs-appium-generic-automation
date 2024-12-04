@@ -23,14 +23,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: setup appium
+      - name: Setup appium
         run: |
           npm install -g appium@2.12.0
+          appium driver install uiautomator2
+          appium driver list --installed
           appium -v
           appium &>/dev/null &
-          appium driver install uiautomator2
 
-      - name: run appium android tests
+      - name: Run appium android tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
