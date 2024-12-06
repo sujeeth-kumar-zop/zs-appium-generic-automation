@@ -11,11 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Node.js version
-        run: node --version
-
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Check Node.js version
+        run: node --version
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -37,14 +45,6 @@ jobs:
           api-level: 30
           arch: x86_64  # Changed to x86_64
           script: mvn clean test -Pandroid
-
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
 
       - name: Build project with Maven
         run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
