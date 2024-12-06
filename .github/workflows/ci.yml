@@ -48,3 +48,10 @@ jobs:
 
       - name: Build project with Maven
         run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
+
+      - name: Upload Extent Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Extent Report
+          path: reports/ExtentReport.html
+
