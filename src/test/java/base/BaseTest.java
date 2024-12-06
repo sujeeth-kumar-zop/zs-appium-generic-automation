@@ -89,7 +89,7 @@ public class BaseTest {
         //initialize android driver with appium url and the capabilities
         threadLocalDriver.set(new AndroidDriver(new URL(appiumServerUrl), cap));
         //initialize web driver wait with a timeout duration of 10 seconds
-        threadLocalWait.set(new WebDriverWait(threadLocalDriver.get(), Duration.ofSeconds(30)));
+        threadLocalWait.set(new WebDriverWait(threadLocalDriver.get(), Duration.ofSeconds(60)));
     }
 
     /**
