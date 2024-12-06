@@ -191,7 +191,7 @@ public class Flows {
         switch (appName){
             case Constants.TAMIMI:
                 driver.navigate().back();
-                driver.navigate().back();
+//                driver.navigate().back();
                 homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
                 break;
             case Constants.BRIMBARY:
