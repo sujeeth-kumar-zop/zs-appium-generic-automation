@@ -49,7 +49,7 @@ public class Flows {
 
         LoggerUtil.logInfo("Starting login flow for app: " + appName);
         // Switch based on the app name and execute the specific login steps.
-        switch(appName){
+        switch("Tamimi"){
             case Constants.BRIMBARY :
                 LoggerUtil.logInfo("Navigating through BRIMBARY login flow.");
                 homePage.clickOnDrawer(Constants.BRIMBARY);
