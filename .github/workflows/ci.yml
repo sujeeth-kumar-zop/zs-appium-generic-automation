@@ -37,12 +37,7 @@ jobs:
           appium driver install uiautomator2
           appium driver list --installed
           appium -v
-          appium &>/dev/null &
-
-      - name: Install Dependencies
-        run: |
-          sdkmanager --install "platform-tools" "system-images;android-30;google_apis;x86_64"
-          sdkmanager --licenses    
+          appium &>/dev/null &    
 
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
