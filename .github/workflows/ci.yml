@@ -39,12 +39,12 @@ jobs:
           appium -v
           appium &>/dev/null &
 
-      - name: Run appium android tests
+      - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
-          arch: x86_64  # Changed to x86_64
-          script: mvn clean test -Pandroid
+          arch: x86_64
+          script: adb devices
 
       - name: Build project with Maven
         run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
