@@ -49,9 +49,6 @@ jobs:
             adb wait-for-device
             adb shell getprop sys.boot_completed
 
-      - name: List AVDs
-        run: emulator -list-avds
-
       - name: Restart ADB
         run: |
           adb kill-server
