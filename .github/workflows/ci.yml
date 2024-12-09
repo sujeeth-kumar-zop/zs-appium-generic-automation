@@ -39,13 +39,21 @@ jobs:
           appium -v
           appium &>/dev/null &
 
+      - name: Install Dependencies
+        run: |
+          sdkmanager --install "platform-tools" "system-images;android-30;google_apis;x86_64"
+          sdkmanager --licenses    
+
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           arch: x86_64
-          profile: Pixel 6a
-          script: adb wait-for-device
+          profile: Nexus 5
+          script: |
+            adb wait-for-device
+            adb shell getprop sys.boot_completed
+          
 
       - name: Restart ADB
         run: |
