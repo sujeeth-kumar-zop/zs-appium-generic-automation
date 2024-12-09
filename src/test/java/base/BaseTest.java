@@ -72,7 +72,7 @@ public class BaseTest {
         cap = new DesiredCapabilities();
         cap.setCapability("platformName", "Android");
         cap.setCapability("appium:automationName", "uiautomator2");
-        cap.setCapability("uiautomator2ServerInstallTimeout", 90000);
+        cap.setCapability("uiautomator2ServerInstallTimeout", 200000);
 
         //fetch the app path from the configuration file
         String appPathKey = appName + ".apk.path";
