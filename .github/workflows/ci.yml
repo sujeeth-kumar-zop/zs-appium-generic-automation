@@ -44,7 +44,16 @@ jobs:
         with:
           api-level: 30
           arch: x86_64
-          script: adb devices
+          profile: Nexus 5
+          script: adb wait-for-device
+
+      - name: Restart ADB
+        run: |
+          adb kill-server
+          adb start-server
+
+      - name: List Connected Devices
+        run: adb devices
 
       - name: Build project with Maven
         run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
