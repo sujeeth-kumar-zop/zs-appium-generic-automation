@@ -53,6 +53,7 @@ jobs:
         run: |
           adb kill-server
           adb start-server
+          adb connect localhost:5554
           adb devices
 
       - name: List Connected Devices
