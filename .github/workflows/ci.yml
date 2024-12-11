@@ -31,36 +31,40 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup appium
-        run: |
-          npm install -g appium@2.12.0
-          appium driver install uiautomator2
-          appium driver list --installed
-          appium -v
-          appium &>/dev/null &
-
-      - name: Start Emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 30
-          arch: x86_64
-          profile: Pixel 6a
-          script: adb wait-for-device
-
-      - name: Restart ADB
-        run: |
-          adb kill-server
-          adb start-server
-
-      - name: List Connected Devices
-        run: adb devices
-
-      - name: Build project with Maven
-        run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
-
-      - name: Upload Extent Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: Extent Report
-          path: reports/ExtentReport.html
+#      - name: Setup appium
+#        run: |
+#          npm install -g appium@2.12.0
+#          appium driver install uiautomator2
+#          appium driver list --installed
+#          appium -v
+#          appium &>/dev/null &
+#
+#      - name: Start Emulator
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 30
+#          arch: x86_64
+#          profile: Nexus 5
+#          script: |
+#            adb wait-for-device
+#            adb shell getprop sys.boot_completed
+#
+#      - name: Restart ADB
+#        run: |
+#          adb kill-server
+#          adb start-server
+#          adb connect localhost:5554
+#          adb devices
+#
+#      - name: List Connected Devices
+#        run: adb devices
+#
+#      - name: Build project with Maven
+#        run: mvn test -DsuiteXmlFiles=testngTamimi.xml -DappName=Tamimi
+#
+#      - name: Upload Extent Report
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: Extent Report
+#          path: reports/ExtentReport.html
 
