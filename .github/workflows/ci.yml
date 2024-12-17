@@ -31,6 +31,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Install Android SDK
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y wget unzip
+            mkdir -p $HOME/android-sdk/cmdline-tools
+            cd $HOME/android-sdk
+            wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+            unzip commandlinetools-linux-*.zip -d cmdline-tools
+            mv cmdline-tools/cmdline-tools cmdline-tools/tools
+            export PATH=$PATH:$HOME/android-sdk/cmdline-tools/tools/bin
+            yes | sdkmanager --licenses
+            sdkmanager "platform-tools" "emulator" "platforms;android-30" "system-images;android-30;google_apis;x86_64"    
+
       - name: Setup appium
         run: |
           npm install -g appium@2.12.0
