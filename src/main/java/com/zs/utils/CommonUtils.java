@@ -194,7 +194,6 @@ public class CommonUtils{
             try {
 
                 WebElement searchBar = shortWait.until(ExpectedConditions.visibilityOfElementLocated(CommonUtils.getHomePageLocator(appName, "searchPlaceholder")));
-                System.out.println(searchBar.isDisplayed());
                 if (searchBar.isDisplayed()) {
                     break;
                 }
@@ -214,6 +213,10 @@ public class CommonUtils{
                 throw new RuntimeException("Unable to navigate back to Home page.");
             }
         }
+    }
+
+    public static By generateLocator(String text) {
+        return By.xpath(String.format("//*[@text='%s']",text));
     }
 
 
