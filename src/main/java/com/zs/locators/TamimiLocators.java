@@ -47,6 +47,14 @@ public class TamimiLocators {
 
         //profile locators
         profileLocators.put("username", By.id("com.zopsmart.stg.scarlet:id/tv_name"));
+        profileLocators.put("editBtn", By.id("com.zopsmart.stg.scarlet:id/edit_profile_btn"));
+        profileLocators.put("dob", By.id("com.zopsmart.stg.scarlet:id/dobCl"));
+        profileLocators.put("fnameTextBox", By.id("com.zopsmart.stg.scarlet:id/firstNameEt"));
+        profileLocators.put("lnameTextBox", By.id("com.zopsmart.stg.scarlet:id/lastNameEt"));
+        profileLocators.put("emailTextBox", By.id("com.zopsmart.stg.scarlet:id/emailEt"));
+        profileLocators.put("submitBtn", By.id("com.zopsmart.stg.scarlet:id/submitBtn"));
+        profileLocators.put("okBtn", By.id("android:id/button1"));
+        profileLocators.put("editProfileSuccessfulLabel", By.id("android:id/message"));
 
         //products page locators
         productPageLocators.put("product", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
