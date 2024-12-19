@@ -8,11 +8,13 @@ import com.zs.locators.VijethaLocators;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.lang.reflect.Method;
+import java.time.Duration;
 
 /**
  * Utility class containing common methods used across different test scenarios.
@@ -181,6 +183,37 @@ public class CommonUtils{
     public boolean isElementVisible(By locator){
         WebElement webElement=wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return webElement.isDisplayed();
+    }
+
+    public void navigateToHome(String appName) {
+
+        int maxRetries = 10;
+        int attempts = 0;
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        while (attempts < maxRetries) {
+            try {
+
+                WebElement searchBar = shortWait.until(ExpectedConditions.visibilityOfElementLocated(CommonUtils.getHomePageLocator(appName, "searchPlaceholder")));
+                System.out.println(searchBar.isDisplayed());
+                if (searchBar.isDisplayed()) {
+                    break;
+                }
+            } catch (NoSuchElementException | TimeoutException e) {
+                LoggerUtil.logInfo("Not at home page. Navigating back: " + attempts);
+                driver.navigate().back();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            attempts++;
+
+            if (attempts == maxRetries) {
+                LoggerUtil.logFail("Failed to navigate back to Home page after " + maxRetries + " attempts.");
+                throw new RuntimeException("Unable to navigate back to Home page.");
+            }
+        }
     }
 
 

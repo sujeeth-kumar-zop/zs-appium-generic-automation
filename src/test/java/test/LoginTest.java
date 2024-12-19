@@ -48,11 +48,11 @@ public class LoginTest extends BaseTest {
 
         LoggerUtil.logInfo("Fetching credentials for app: " + appName);
         //fetch the credentials for the given application
-//        String[] credentials = ExcelUtils.getCredentialsForApp(appName);
-//        assert credentials != null;
+        String[] credentials = ExcelUtils.getCredentialsForApp(appName);
+        assert credentials != null;
 
-        String username = "595124791";
-        String password = "12345678";
+        String username = credentials[0];
+        String password = credentials[1];
 
         LoggerUtil.logInfo("Fetched credentials - Username: " + username);
 

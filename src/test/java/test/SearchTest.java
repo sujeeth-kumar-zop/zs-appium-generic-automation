@@ -4,6 +4,7 @@ import base.BaseTest;
 import com.zs.constants.Constants;
 import com.zs.pages.common.Flows;
 import com.zs.pages.common.HomePage;
+import com.zs.utils.CommonUtils;
 import com.zs.utils.ExtentReport;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
@@ -17,7 +18,7 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class SearchTest extends BaseTest {
 
-    @Test(groups = {"regression"}, dependsOnGroups = {"addToCart"})
+    @Test(groups = {"regression"})
     @Parameters("appName")
     public void searchTest(@Optional String appName){
 
@@ -26,11 +27,11 @@ public class SearchTest extends BaseTest {
 
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
+        CommonUtils commonUtils=new CommonUtils(driver,wait);
 
         LoggerUtil.logInfo("Starting the Search Test");
-//        driver.navigate().back();
         if(Constants.TAMIMI.equals(appName))
-            driver.navigate().back();
+            commonUtils.navigateToHome(appName);
         Flows flows=new Flows(driver,wait);
         HomePage homePage=new HomePage(driver,wait);
         flows.checkSearch(appName);

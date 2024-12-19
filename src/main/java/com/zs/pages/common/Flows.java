@@ -190,16 +190,12 @@ public class Flows {
         HomePage homePage=new HomePage(driver,wait);
         switch (appName){
             case Constants.TAMIMI:
-                driver.navigate().back();
-//                driver.navigate().back();
                 homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
                 break;
             case Constants.BRIMBARY:
                 driver.navigate().back();
                 homePage.enterTextInSearchBar(appName, Constants.TSHIRT_STRING);
                 break;
-//            case Constants.EKAM:
-//                driver.navigate().back();
         }
     }
 

@@ -40,7 +40,7 @@ public class AddProductToCartTest extends BaseTest {
         CommonUtils commonUtils=new CommonUtils(driver,wait);
         Flows flows=new Flows(driver,wait);
 
-        driver.navigate().back();
+        commonUtils.navigateToHome(appName);
         flows.addSingleProductToCartFlow(appName);
         By checkOutBtn = CommonUtils.getCartLocators(appName, "checkOutBtn");
         LoggerUtil.logInfo("Checking if checkout button is visible.");
