@@ -25,6 +25,10 @@ public class SearchTest extends BaseTest {
         Flows flows=new Flows(driver,wait);
         HomePage homePage=new HomePage(driver,wait);
         flows.checkSearch(appName);
-        assertTrue(homePage.isTextVisible(Constants.TEXT_TO_SEARCH));
+        String randomProductText= homePage.fetchRandomProduct(appName);
+        System.out.println(randomProductText);
+        assertTrue("The product text should contain the search keyword.",
+                randomProductText.toLowerCase().contains(Constants.EGGPLANT_STRING.toLowerCase()));
+
     }
 }
