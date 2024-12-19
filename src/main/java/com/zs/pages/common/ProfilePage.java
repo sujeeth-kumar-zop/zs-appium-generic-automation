@@ -3,6 +3,7 @@ package com.zs.pages.common;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.commons.math3.analysis.function.Exp;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -49,5 +50,9 @@ public class ProfilePage {
         By usernameLoc = CommonUtils.getProfileLocator(appName, "username");
         WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameLoc));
         return username.isDisplayed();
+    }
+
+    public void clickEditBtn(String appName){
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProfileLocator(appName, "editBtn"))).click();
     }
 }
