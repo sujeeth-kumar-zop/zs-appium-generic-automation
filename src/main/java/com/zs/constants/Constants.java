@@ -50,6 +50,5 @@ public class Constants {
 
     //general texts
     public static final String LOGOUT="Logout";
-
 }
 
