@@ -11,7 +11,8 @@ import org.testng.ITestResult;
 public class ExtentReport implements ITestListener {
     private static ExtentReports extent;
     private static ExtentSparkReporter sparkReporter;
-    private ExtentTest test;
+
+    private static ThreadLocal<ExtentTest> threadLocalTest = new ThreadLocal<>();
 
     @Override
     public void onStart(ITestContext context) {
@@ -31,23 +32,25 @@ public class ExtentReport implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        test = extent.createTest(result.getMethod().getMethodName());
+        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
+        threadLocalTest.set(test);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.log(Status.PASS, "Test Case Passed: " + result.getName());
+        threadLocalTest.get().log(Status.PASS, "Test Case Passed: " + result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
+        ExtentTest test = threadLocalTest.get();
         test.log(Status.FAIL, "Test Case Failed: " + result.getName());
         test.log(Status.FAIL, "Failure Reason: " + result.getThrowable());
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        test.log(Status.SKIP, "Test Case Skipped: " + result.getName());
+        threadLocalTest.get().log(Status.SKIP, "Test Case Skipped: " + result.getName());
     }
 
     @Override
@@ -55,5 +58,9 @@ public class ExtentReport implements ITestListener {
         if (extent != null) {
             extent.flush();
         }
+    }
+
+    public static ExtentTest getTest() {
+        return threadLocalTest.get();
     }
 }

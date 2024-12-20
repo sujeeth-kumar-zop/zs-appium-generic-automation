@@ -1,9 +1,12 @@
 package test;
 
+import com.zs.constants.Constants;
 import com.zs.pages.common.CartPage;
 import com.zs.pages.common.Flows;
 import com.zs.utils.CommonUtils;
 import base.BaseTest;
+import com.zs.utils.ExtentReport;
+import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,6 +30,9 @@ public class AddProductToCartTest extends BaseTest {
     @Parameters("appName")
     public void addSingleProductToCart(@Optional String appName){
 
+        // Set the ExtentTest object in LoggerUtil to log to both ExtentReport and Log4j
+        LoggerUtil.setExtentTest(ExtentReport.getTest());
+
         //get the driver and wait instances
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
@@ -34,10 +40,12 @@ public class AddProductToCartTest extends BaseTest {
         CommonUtils commonUtils=new CommonUtils(driver,wait);
         Flows flows=new Flows(driver,wait);
 
-        driver.navigate().back();
+        commonUtils.navigateToHome(appName);
         flows.addSingleProductToCartFlow(appName);
         By checkOutBtn = CommonUtils.getCartLocators(appName, "checkOutBtn");
+        LoggerUtil.logInfo("Checking if checkout button is visible.");
         assertTrue(commonUtils.isElementVisible(checkOutBtn), "Checkout Button is not visible"); //assert by checking if the check out button is visible
+        LoggerUtil.logPass("Add a single product to cart test passed.");
     }
 
     /**
@@ -47,6 +55,10 @@ public class AddProductToCartTest extends BaseTest {
     @Test(groups = {"regression", "addToCart"}, dependsOnMethods = {"addSingleProductToCart"})
     @Parameters("appName")
     public void increaseProductQuantityInCart(@Optional String appName){
+
+        // Set the ExtentTest object in LoggerUtil to log to both ExtentReport and Log4j
+        LoggerUtil.setExtentTest(ExtentReport.getTest());
+
         //get the driver and wait instances
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
@@ -55,7 +67,18 @@ public class AddProductToCartTest extends BaseTest {
         CartPage cartPage=new CartPage(driver,wait);
 
         flows.increaseQuantityOfProduct(appName);
-        assertEquals(cartPage.verifyQuantity(appName), "20");
+        LoggerUtil.logInfo("Checking if quantity increased.");
+
+        String expectedQuantity;
+        if (Constants.TAMIMI.equalsIgnoreCase(appName)) {
+            expectedQuantity = "20";
+        } else if (Constants.BRIMBARY.equalsIgnoreCase(appName) || Constants.VIJETHA.equalsIgnoreCase(appName)) {
+            expectedQuantity = "2";
+        } else {
+            expectedQuantity = "10";
+        }
+        assertEquals(cartPage.verifyQuantity(appName), expectedQuantity);
+        LoggerUtil.logPass("Increase Product Quantity test passed.");
 
     }
 }

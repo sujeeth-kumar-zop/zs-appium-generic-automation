@@ -38,4 +38,7 @@ public class Constants {
     public static final String APPIUM_URL ="http://127.0.0.1:4723";
 
     public static final String EGGPLANT_STRING="Eggplant";
+
+    public static final String TSHIRT_STRING="Shirt";
+
 }

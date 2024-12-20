@@ -50,6 +50,7 @@ public class VijethaLocators {
         homePageLocators.put("headerLogo", By.id("com.zopsmart.scarlet:id/logo"));
         homePageLocators.put("allowLocationAccessBtn", By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button"));
         homePageLocators.put("productCategory1", By.xpath("(//android.widget.ImageView[@resource-id='in.vijetha.live:id/iv_item_image'])[1]"));
+        homePageLocators.put("searchBar", By.id("in.vijetha.live:id/et_search_text"));
 
         //profile locators
         profileLocators.put("username", By.id("in.vijetha.live:id/tv_username"));
@@ -64,6 +65,12 @@ public class VijethaLocators {
         //cart locators
         cartLocators.put("addedProductLabel", By.xpath("//android.widget.TextView[@resource-id='in.vijetha.live:id/tv_item_name' and @text='Tomato Local - Tamatar - 2 kg']"));
         cartLocators.put("checkOutBtn", By.xpath("//android.widget.Button[@resource-id='in.vijetha.live:id/btn_place_order']"));
+        cartLocators.put("okayQuantityBtn", By.id("in.vijetha.live:id/btn_okay"));
+        cartLocators.put("quantityItem1", By.xpath("(//android.widget.TextView[@resource-id=\"in.vijetha.live:id/tv_quantity_amount\"])[1]"));
+        cartLocators.put("quantityBtn", By.xpath("(//android.view.ViewGroup[@resource-id=\"in.vijetha.live:id/cl_quantity_amount\"])[1]"));
+
+        //menu locators
+        menuLocators.put("searchIcon", By.id("in.vijetha.live:id/search"));
     }
 
     /**

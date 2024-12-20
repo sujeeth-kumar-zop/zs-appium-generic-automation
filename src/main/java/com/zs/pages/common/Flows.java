@@ -1,5 +1,7 @@
 package com.zs.pages.common;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.zs.constants.Constants;
 import com.zs.pages.tamimi.CartPageTamimi;
 import com.zs.pages.vijetha.LoginPageVijetha;
@@ -44,24 +46,31 @@ public class Flows {
     public void loginFlow(String password, String username, String appName){
         HomePage homePage=new HomePage(driver, wait);
         LoginPage loginPage=new LoginPage(driver, wait);
+
+        LoggerUtil.logInfo("Starting login flow for app: " + appName);
         // Switch based on the app name and execute the specific login steps.
         switch(appName){
             case Constants.BRIMBARY :
+                LoggerUtil.logInfo("Navigating through BRIMBARY login flow.");
                 homePage.clickOnDrawer(Constants.BRIMBARY);
                 loginPage.clickOnProfileIcon(Constants.BRIMBARY);
                 loginPage.enterPhNo(username, Constants.BRIMBARY);
                 loginPage.enterPass(password, Constants.BRIMBARY);
                 loginPage.clickLoginBtn(Constants.BRIMBARY);
                 homePage.clickOnDrawer(Constants.BRIMBARY);
+                LoggerUtil.logInfo("Login completed for " + appName);
                 break;
             case Constants.TAMIMI:
+                LoggerUtil.logInfo("Navigating through TAMIMI login flow.");
                 loginPage.clickOnProfileIcon(Constants.TAMIMI);
                 loginPage.enterPhNo(username, Constants.TAMIMI);
                 loginPage.enterPass(password, Constants.TAMIMI);
                 loginPage.clickLoginBtn(Constants.TAMIMI);
                 loginPage.clickOnProfileIcon(Constants.TAMIMI);
+                LoggerUtil.logInfo("Login completed for " + appName);
                 break;
             case Constants.VIJETHA:
+                LoggerUtil.logInfo("Navigating through Vijetha login flow.");
                 LoginPageVijetha loginPageVijetha=new LoginPageVijetha(driver, wait);
                 loginPageVijetha.clickOnAllowAccess(Constants.VIJETHA);
                 loginPage.clickOnProfileIcon(Constants.VIJETHA);
@@ -70,21 +79,26 @@ public class Flows {
                 loginPage.enterPass(password, Constants.VIJETHA);
                 loginPage.clickLoginBtn(Constants.VIJETHA);
                 loginPage.clickOnProfileIcon(Constants.VIJETHA);
+                LoggerUtil.logInfo("Login completed for " + appName);
                 break;
             case Constants.EKAM:
+                LoggerUtil.logInfo("Navigating through EKAM login flow.");
                 loginPage.clickOnProfileIcon(Constants.EKAM);
                 loginPage.enterPhNo(username, Constants.EKAM);
                 loginPage.enterPass(password, Constants.EKAM);
                 loginPage.clickLoginBtn(Constants.EKAM);
                 loginPage.clickOnProfileIcon(Constants.EKAM);
+                LoggerUtil.logInfo("Login completed for " + appName);
                 break;
         }
+        LoggerUtil.logInfo("Completed Login Flow");
     }
 
     /**
      * @param appName The name of the app being tested, used to switch between different login flows.
      */
     public void addSingleProductToCartFlow(String appName){
+
         HomePage homePage=new HomePage(driver,wait);
         LoginPage loginPage=new LoginPage(driver,wait);
         ProductsPage productsPage=new ProductsPage(driver,wait);
@@ -108,8 +122,12 @@ public class Flows {
      */
     public void increaseQuantityOfProduct(String appName){
         CartPage cartPage=new CartPage(driver,wait);
+        CartPageTamimi cartPageTamimi=new CartPageTamimi(driver,wait);
         switch (appName){
             case Constants.TAMIMI:
+                cartPageTamimi.tapAndIncreaseQuantityOfItem();
+                break;
+            case Constants.BRIMBARY, Constants.VIJETHA:
                 cartPage.tapAndIncreaseQuantityOfItem(appName);
                 break;
             default:
@@ -170,7 +188,15 @@ public class Flows {
 
     public void checkSearch(String appName){
         HomePage homePage=new HomePage(driver,wait);
-        homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
+        switch (appName){
+            case Constants.TAMIMI:
+                homePage.enterTextInSearchBar(appName, Constants.EGGPLANT_STRING);
+                break;
+            case Constants.BRIMBARY:
+                driver.navigate().back();
+                homePage.enterTextInSearchBar(appName, Constants.TSHIRT_STRING);
+                break;
+        }
     }
 
 }

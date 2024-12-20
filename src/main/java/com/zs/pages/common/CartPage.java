@@ -1,9 +1,14 @@
 package com.zs.pages.common;
 
+import com.zs.constants.Constants;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,11 +35,11 @@ public class CartPage {
      * @param appName The name of the application under test.
      */
     public void tapAndIncreaseQuantityOfItem(String appName){
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityItem1"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "quantityTextBox"))).sendKeys("20");
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "submitQuantity"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"continueQuantityBox"))).click();
-        logger.info("Increased quantity of item in cart to 20");
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"quantityBtn"))).click();
+        driver.pressKey(new KeyEvent(AndroidKey.DPAD_DOWN));
+        driver.pressKey(new KeyEvent(AndroidKey.DPAD_DOWN));
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName, "okayQuantityBtn"))).click();
+        LoggerUtil.logInfo("Increased quantity of Product in cart");
     }
 
     /**
@@ -43,7 +48,7 @@ public class CartPage {
      * @return The quantity of an item in cart.
      */
     public String verifyQuantity(String appName){
-        logger.info("Fetching the quantity of item in cart....");
+        LoggerUtil.logInfo("Fetching the quantity of item in cart.");
         return wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"quantityItem1"))).getText();
     }
 
@@ -54,7 +59,7 @@ public class CartPage {
      */
     public void clickOnCheckoutBtn(String appName){
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getCartLocators(appName,"checkOutBtn"))).click();
-        logger.info("Clicked on checkout button");
+        LoggerUtil.logInfo("Clicked on checkout button");
     }
 
 }

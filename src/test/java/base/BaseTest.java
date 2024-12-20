@@ -57,7 +57,7 @@ public class BaseTest {
      */
     @BeforeSuite
     @Parameters("appName")
-    public void setup(@Optional String appName) throws MalformedURLException {
+    public void setup(@Optional("Tamimi") String appName) throws MalformedURLException {
 
         //initialize the logger
         logger= LogManager.getLogger(this.getClass());
@@ -72,6 +72,7 @@ public class BaseTest {
         cap = new DesiredCapabilities();
         cap.setCapability("platformName", "Android");
         cap.setCapability("appium:automationName", "uiautomator2");
+        cap.setCapability("uiautomator2ServerInstallTimeout", 90000);
 
         //fetch the app path from the configuration file
         String appPathKey = appName + ".apk.path";
@@ -88,7 +89,7 @@ public class BaseTest {
         //initialize android driver with appium url and the capabilities
         threadLocalDriver.set(new AndroidDriver(new URL(appiumServerUrl), cap));
         //initialize web driver wait with a timeout duration of 10 seconds
-        threadLocalWait.set(new WebDriverWait(threadLocalDriver.get(), Duration.ofSeconds(30)));
+        threadLocalWait.set(new WebDriverWait(threadLocalDriver.get(), Duration.ofSeconds(60)));
     }
 
     /**

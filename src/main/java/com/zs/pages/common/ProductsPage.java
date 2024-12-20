@@ -4,6 +4,7 @@ import com.zs.constants.Constants;
 import com.zs.locators.BrimbaryLocators;
 import com.zs.utils.CommonUtils;
 import com.zs.utils.LoggerUtil;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -30,9 +31,11 @@ public class ProductsPage {
      * @param appName The name of the application under test.
      */
     public void addToCartBtn(String appName){
-        WebElement btn=wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"addToCartBtn")));
-        btn.click();
-        logger.info("Clicked on Add to Cart Button for {}", appName);
+        if(Constants.BRIMBARY.equals(appName))
+            driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Add to Cart\").instance(0))")).click();
+        else
+            wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName,"addToCartBtn"))).click();
+        LoggerUtil.logInfo("Clicked on Add to Cart Button for "+ appName);
     }
 
     /**
@@ -46,7 +49,7 @@ public class ProductsPage {
             default -> throw new IllegalStateException("Unexpected value: " + appName);
         };
         cart.click();
-        logger.info("Clicked on Cart Icon for {}", appName);
+        LoggerUtil.logInfo("Clicked on Cart Icon for "+ appName);
     }
 
     /**
@@ -60,9 +63,9 @@ public class ProductsPage {
             default -> throw new IllegalStateException("Unexpected value: " + appName);
         };
         prod.click();
-        logger.info("Clicked on a Product for {}", appName);
+        LoggerUtil.logInfo("Clicked on a Product for "+appName);
         wait.until(ExpectedConditions.visibilityOfElementLocated(CommonUtils.getProductPageLocator(appName,"productLabel")));
-        logger.info("Retrieved the added product's name for {}", appName);
+        LoggerUtil.logInfo("Retrieved the added product's name for "+appName);
     }
 
     /**
@@ -72,6 +75,6 @@ public class ProductsPage {
     public void clickProductCategory(String appName){
         WebElement btn= wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName,"productCategory1")));
         btn.click();
-        logger.info("Clicked on a product category for {}", appName);
+        LoggerUtil.logInfo("Clicked on a product category for "+appName);
     }
 }
