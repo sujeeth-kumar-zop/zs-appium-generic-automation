@@ -44,6 +44,7 @@ public class TamimiLocators {
         drawerLocators.put("appUrl", By.id("com.zopsmart.scarlet:id/et_store_url"));
         drawerLocators.put("applyBtn", By.id("com.zopsmart.scarlet:id/btn_apply"));
         drawerLocators.put("okBtn", By.xpath("//android.widget.Button[@resource-id='android:id/button1']"));
+        drawerLocators.put("username", By.id("com.zopsmart.stg.scarlet:id/tv_sign_in"));
 
         //profile locators
         profileLocators.put("username", By.id("com.zopsmart.stg.scarlet:id/tv_name"));
