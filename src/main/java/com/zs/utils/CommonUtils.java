@@ -194,7 +194,6 @@ public class CommonUtils{
             try {
 
                 WebElement searchBar = shortWait.until(ExpectedConditions.visibilityOfElementLocated(CommonUtils.getHomePageLocator(appName, "searchPlaceholder")));
-                System.out.println(searchBar.isDisplayed());
                 if (searchBar.isDisplayed()) {
                     break;
                 }
