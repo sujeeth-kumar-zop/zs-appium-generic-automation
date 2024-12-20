@@ -219,6 +219,16 @@ public class CommonUtils{
         return By.xpath(String.format("//*[@text='%s']",text));
     }
 
+    public boolean isLoggedIn(String appName) {
+        navigateToHome(appName);
+        driver.findElement(CommonUtils.getHomePageLocator(appName, "drawerIcon")).click();
+        String username = driver.findElement(CommonUtils.getDrawerLocators(appName, "username")).getText();
+        if(username.equalsIgnoreCase(Constants.TAMIMI_SIGNUP)){
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
