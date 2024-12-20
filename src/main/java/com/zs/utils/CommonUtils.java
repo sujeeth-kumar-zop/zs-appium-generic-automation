@@ -215,6 +215,10 @@ public class CommonUtils{
         }
     }
 
+    public static By generateLocator(String text) {
+        return By.xpath(String.format("//*[@text='%s']",text));
+    }
+
 
 
 }

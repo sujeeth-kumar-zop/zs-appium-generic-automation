@@ -9,6 +9,7 @@ import com.zs.utils.ExtentReport;
 import com.zs.utils.LoggerUtil;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
@@ -65,7 +66,10 @@ public class AddProductToCartTest extends BaseTest {
 
         Flows flows=new Flows(driver,wait);
         CartPage cartPage=new CartPage(driver,wait);
+        CommonUtils commonUtils=new CommonUtils(driver,wait);
 
+        commonUtils.navigateToHome(appName);
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getMenuLocators(appName, "cartBtn"))).click();
         flows.increaseQuantityOfProduct(appName);
         LoggerUtil.logInfo("Checking if quantity increased.");
 

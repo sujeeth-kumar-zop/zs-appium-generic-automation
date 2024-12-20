@@ -37,8 +37,14 @@ public class Constants {
     // ****************** URLs *******************
     public static final String APPIUM_URL ="http://127.0.0.1:4723";
 
-    public static final String EGGPLANT_STRING="Eggplant";
-
     public static final String TSHIRT_STRING="Shirt";
 
+    //Tamimi Constants
+    public static final String EGGPLANT_STRING="Eggplant";
+    public static final String TAMIMI_SALUTATION="Mr";
+    public static final String TAMIMI_FNAME="Ahmed";
+    public static final String TAMIMI_LNAME="Khan";
+    public static final String TAMIMI_EMAIL="ahmed@gmail.com";
+    public static final String TAMIMI_DATE_FOR_DOB="12";
 }
+
