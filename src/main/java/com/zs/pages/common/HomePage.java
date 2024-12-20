@@ -53,7 +53,6 @@ public class HomePage {
         LoggerUtil.logInfo("Clicked on Search Icon");
         wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getHomePageLocator(appName, "searchBar"))).sendKeys(text);
         LoggerUtil.logInfo("Entered text in Search Box");
-
     }
 
     public boolean isTextVisible(String text){
