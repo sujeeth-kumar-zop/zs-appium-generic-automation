@@ -145,11 +145,11 @@ public class Flows {
         CartPage cartPage=new CartPage(driver,wait);
         CartPageTamimi cartPageTamimi=new CartPageTamimi(driver,wait);
         CheckoutPage checkoutPage=new CheckoutPage(driver,wait);
+        CommonUtils commonUtils= new CommonUtils(driver,wait);
 
         switch (appName){
             case Constants.TAMIMI:
-                driver.navigate().back();
-                driver.navigate().back();
+                commonUtils.navigateToHome(appName);
                 flows.addSingleProductToCartFlow(appName);
                 flows.increaseQuantityOfProduct(appName);
                 cartPage.clickOnCheckoutBtn(appName);
