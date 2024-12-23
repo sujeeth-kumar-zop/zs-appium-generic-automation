@@ -64,7 +64,7 @@ public class HomePage {
     public String fetchRandomProduct(String appName){
         LoggerUtil.logInfo("Fetching a random product to assert search.");
         List<WebElement> productsList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(CommonUtils.getHomePageLocator(appName,"productsInSearch")));
-
+        int productCount = productsList.size();
         int randomNumber= ThreadLocalRandom.current().nextInt(0, productCount);
         LoggerUtil.logInfo("The random product's index is "+randomNumber);
         if(Constants.BRIMBARY.equals(appName)){
