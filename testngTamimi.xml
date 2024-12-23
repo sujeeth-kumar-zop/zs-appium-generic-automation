@@ -12,6 +12,7 @@
             <class name="test.SearchTest"/>
             <class name="test.EditProfileTest"/>
             <class name="test.LogoutTest"/>
+            <class name="test.LoginNegativeTest"/>
         </classes>
     </test>
 </suite>
