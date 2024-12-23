@@ -47,9 +47,12 @@ public class Constants {
     public static final String TAMIMI_EMAIL="ahmed@gmail.com";
     public static final String TAMIMI_DATE_FOR_DOB="12";
     public static final String TAMIMI_SIGNUP = "Sign In / Sign Up";
+    public static final String TAMIMI_INVALID_PNO="1234";
+    public static final String TAMIMI_INVALID_PASS="1234";
 
     //general texts
     public static final String LOGOUT="Logout";
+    public static final String INVALID_CREDS="invalid credentials";
     public static final String ORDERS="My Orders";
     public static final String CANCEL="Cancel";
 
