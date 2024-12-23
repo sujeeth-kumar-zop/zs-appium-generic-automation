@@ -5,6 +5,7 @@ import com.zs.locators.BrimbaryLocators;
 import com.zs.locators.EkamLocators;
 import com.zs.locators.TamimiLocators;
 import com.zs.locators.VijethaLocators;
+import com.zs.pages.common.ProductsPage;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -217,6 +218,28 @@ public class CommonUtils{
 
     public static By generateLocator(String text) {
         return By.xpath(String.format("//*[@text='%s']",text));
+    }
+
+    public void emptyCart(String appName) {
+        while (!driver.findElements(CommonUtils.getCartLocators(appName, "removeProduct")).isEmpty()) {
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("quantityItem1"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("quantityTextBox"))).sendKeys("0");
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("submitQuantity"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators( "continueQuantityBox"))).click();
+        }
+        if (driver.findElements(CommonUtils.generateLocator(Constants.TAMIMI_EMPTY_CART)).isEmpty()) {
+            Throwable throwable = new RuntimeException("Cart was not emptied");
+            LoggerUtil.logError("Cart was not emptied", throwable);
+        }
+    }
+
+
+    public boolean isCartEmpty(String appName){
+        ProductsPage productsPage=new ProductsPage(driver,wait);
+
+        navigateToHome(appName);
+        productsPage.goToCart(appName);
+        return !driver.findElements(CommonUtils.generateLocator(Constants.TAMIMI_EMPTY_CART)).isEmpty();
     }
 
 
