@@ -13,6 +13,7 @@
             <class name="test.EditProfileTest"/>
             <class name="test.LogoutTest"/>
             <class name="test.CancelOrderTest"/>
+            <class name="test.LoginNegativeTest"/>
         </classes>
     </test>
 </suite>
