@@ -11,6 +11,7 @@
             <class name="test.CheckoutTest"/>
             <class name="test.SearchTest"/>
             <class name="test.EditProfileTest"/>
+            <class name="test.ValidateMaxProductQuantityTest"/>
             <class name="test.LogoutTest"/>
             <class name="test.CancelOrderTest"/>
         </classes>
