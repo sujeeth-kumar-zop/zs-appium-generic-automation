@@ -63,6 +63,8 @@ public class TamimiLocators {
         productPageLocators.put("product", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
         productPageLocators.put("productLabel", By.id("com.zopsmart.stg.scarlet:id/tv_item_name"));
         productPageLocators.put("addToCartBtn", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.stg.scarlet:id/ib_add'])[1]"));
+        productPageLocators.put("filterBtn", By.id("com.zopsmart.stg.scarlet:id/btn_filter"));
+        productPageLocators.put("applyBtn", By.id("com.zopsmart.stg.scarlet:id/btn_apply"));
 
         //bottom menu locators
         menuLocators.put("cartBtn", By.xpath("//android.widget.FrameLayout[@content-desc='Cart']/android.widget.FrameLayout[4]"));
