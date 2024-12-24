@@ -49,9 +49,11 @@ public class Constants {
     public static final String TAMIMI_SIGNUP = "Sign In / Sign Up";
     public static final String TAMIMI_INVALID_PNO="1234";
     public static final String TAMIMI_INVALID_PASS="1234";
+    public static final String TAMIMI_BRAND_KSA="KSA";
 
     //general texts
     public static final String LOGOUT="Logout";
     public static final String INVALID_CREDS="invalid credentials";
+    public static final String BRAND="Brand";
 }
 
