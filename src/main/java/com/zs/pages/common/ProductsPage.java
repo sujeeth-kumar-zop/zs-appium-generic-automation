@@ -77,4 +77,9 @@ public class ProductsPage {
         btn.click();
         LoggerUtil.logInfo("Clicked on a product category for "+appName);
     }
+
+    public void clickFilterButton(String appName){
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName, "filterBtn"))).click();
+        LoggerUtil.logInfo("Clicked on Filter Button");
+    }
 }
