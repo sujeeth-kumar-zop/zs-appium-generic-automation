@@ -54,6 +54,7 @@ public class Constants {
     //general texts
     public static final String LOGOUT="Logout";
     public static final String INVALID_CREDS="invalid credentials";
+    public static final String BRAND="Brand";
     public static final String ORDERS="My Orders";
     public static final String CANCEL="Cancel";
 
@@ -61,6 +62,5 @@ public class Constants {
     public static final String PARENT_LOC = "/./..";
     public static final String FOURTH_CHILD="/*[4]";
     public static final String EIGHTH_CHILD="/*[8]";
-    public static final String BRAND="Brand";
 }
 
