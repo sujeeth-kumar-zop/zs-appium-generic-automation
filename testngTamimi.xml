@@ -11,6 +11,8 @@
             <class name="test.CheckoutTest"/>
             <class name="test.SearchTest"/>
             <class name="test.EditProfileTest"/>
+            <class name="test.LogoutTest"/>
+
         </classes>
     </test>
 </suite>

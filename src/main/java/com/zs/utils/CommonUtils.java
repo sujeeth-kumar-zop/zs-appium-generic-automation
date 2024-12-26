@@ -189,7 +189,7 @@ public class CommonUtils{
 
         int maxRetries = 10;
         int attempts = 0;
-        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(3));
         while (attempts < maxRetries) {
             try {
 
@@ -217,6 +217,16 @@ public class CommonUtils{
 
     public static By generateLocator(String text) {
         return By.xpath(String.format("//*[@text='%s']",text));
+    }
+
+    public boolean isLoggedIn(String appName) {
+        navigateToHome(appName);
+        driver.findElement(CommonUtils.getHomePageLocator(appName, "drawerIcon")).click();
+        String username = driver.findElement(CommonUtils.getDrawerLocators(appName, "username")).getText();
+        if(username.equalsIgnoreCase(Constants.TAMIMI_SIGNUP)){
+            return false;
+        }
+        return true;
     }
 
 
