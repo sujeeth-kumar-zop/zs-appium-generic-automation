@@ -6,6 +6,7 @@ import com.zs.locators.EkamLocators;
 import com.zs.locators.TamimiLocators;
 import com.zs.locators.VijethaLocators;
 import com.zs.pages.common.ProductsPage;
+import com.zs.pages.common.ProductsPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
@@ -264,7 +265,4 @@ public class CommonUtils{
     public void scrollAndClick(String text){
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))")).click();
     }
-
-
-
 }
