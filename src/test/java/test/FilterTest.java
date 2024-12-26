@@ -39,9 +39,10 @@ public class FilterTest extends BaseTest {
         productsPage.clickProductCategory(appName);
 
         productsPage.clickFilterButton(appName);
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.generateLocator(Constants.BRAND))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.generateLocator(Constants.TAMIMI_BRAND_KSA))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getProductPageLocator(appName, "applyBtn"))).click();
+
+        commonUtils.click(CommonUtils.generateLocator(Constants.BRAND));
+        commonUtils.click(CommonUtils.generateLocator(Constants.TAMIMI_BRAND_KSA));
+        commonUtils.click(CommonUtils.getProductPageLocator(appName, "applyBtn"));
 
         Thread.sleep(3000);
 
