@@ -3,6 +3,7 @@ import base.BaseTest;
 import com.zs.pages.common.Flows;
 import com.zs.pages.common.LoginPage;
 import com.zs.pages.common.ProfilePage;
+import com.zs.utils.CommonUtils;
 import com.zs.utils.ExcelUtils;
 import com.zs.utils.ExtentReport;
 import com.zs.utils.LoggerUtil;
@@ -45,7 +46,8 @@ public class LoginTest extends BaseTest {
 
         AndroidDriver driver = BaseTest.getDriver();
         WebDriverWait wait= BaseTest.getWait();
-
+        CommonUtils commonUtils=new CommonUtils(driver,wait);
+        commonUtils.navigateToHome(appName);
         LoggerUtil.logInfo("Fetching credentials for app: " + appName);
         //fetch the credentials for the given application
         String[] credentials = ExcelUtils.getCredentialsForApp(appName);
