@@ -36,6 +36,7 @@ public class SearchTest extends BaseTest {
         HomePage homePage=new HomePage(driver,wait);
         flows.checkSearch(appName);
         String randomProductText= homePage.fetchRandomProduct(appName);
+
         String textToCheck;
         if(Constants.BRIMBARY.equals(appName)){
             textToCheck=Constants.TSHIRT_STRING;

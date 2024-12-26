@@ -14,6 +14,7 @@
             <class name="test.LogoutTest"/>
             <class name="test.LoginNegativeTest"/>
             <class name="test.FilterTest"/>
+
         </classes>
     </test>
 </suite>
