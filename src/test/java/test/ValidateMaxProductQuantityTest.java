@@ -35,16 +35,26 @@ public class ValidateMaxProductQuantityTest extends BaseTest {
 
         commonUtils.navigateToHome(appName);
         productsPage.goToCart(appName);
+
+        // If cart is not empty, empty it.
         if(!commonUtils.isCartEmpty(appName)){
             commonUtils.emptyCart(appName);
         }
+
         commonUtils.navigateToHome(appName);
         homePage.enterTextInSearchBar(appName, Constants.TAMIMI_WATER);
+
+        // Click Enter to search
         commonUtils.enterVal(CommonUtils.getHomePageLocator(appName, "searchBar"), Keys.RETURN);
+
+        //Scroll and find the required product and then click it
         commonUtils.scrollAndClick(Constants.TAMIMI_WATER_PRODUCT);
+
+        // Add a product 5 times to verify if the app displays a warning when exceeding the stock limit
         for(int i=0;i<5;i++){
             commonUtils.click(CommonUtils.getProductPageLocator(appName,"addToCartBtn"));
         }
+
         assertTrue("Warning was not displayed",commonUtils.isElementVisible(CommonUtils.generateLocator(Constants.TAMIMI_PRODUCT_LIMIT_WARNING)));
     }
 }
