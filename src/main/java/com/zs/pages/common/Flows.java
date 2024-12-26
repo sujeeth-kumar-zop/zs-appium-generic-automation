@@ -11,8 +11,10 @@ import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -197,6 +199,43 @@ public class Flows {
                 homePage.enterTextInSearchBar(appName, Constants.TSHIRT_STRING);
                 break;
         }
+    }
+
+    public List<String> cancelOrders(List<String> orderNums){
+        List<String> orderStatus= new ArrayList<>();
+        String order1Loc = CommonUtils.generateLocator("#"+orderNums.get(0)).toString();
+        String order1XpathValue = order1Loc.substring(order1Loc.indexOf(": ") + 2);
+        LoggerUtil.logInfo("Found the order number of order 1");
+
+        String order2Loc = CommonUtils.generateLocator("#"+orderNums.get(1)).toString();
+        String order2XpathValue = order2Loc.substring(order2Loc.indexOf(": ") + 2);
+        LoggerUtil.logInfo("Found the order number of order 2");
+
+        WebElement order1Parent = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(order1XpathValue+Constants.PARENT_LOC)));
+        LoggerUtil.logInfo("Found the parent element of order1");
+        WebElement order2Parent = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(order2XpathValue+Constants.PARENT_LOC)));
+        LoggerUtil.logInfo("Found the parent element of order2");
+
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(order1XpathValue+Constants.PARENT_LOC+Constants.FOURTH_CHILD)))).click();
+        LoggerUtil.logInfo("Clicked on the 4th child of parent of order 1: Kebab Menu");
+
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.generateLocator(Constants.CANCEL))).click();
+        LoggerUtil.logInfo("Clicked on Cancel for Order 1");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(order2XpathValue + Constants.PARENT_LOC + Constants.FOURTH_CHILD)));
+
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(order2XpathValue+Constants.PARENT_LOC+Constants.FOURTH_CHILD)))).click();
+        LoggerUtil.logInfo("Clicked on the 4th child of parent of order 2: Kebab Menu");
+
+        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.generateLocator(Constants.CANCEL))).click();
+        LoggerUtil.logInfo("Clicked on Cancel for Order 2");
+
+        WebElement cancelLabel1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(order1XpathValue+Constants.PARENT_LOC+Constants.EIGHTH_CHILD)));
+        WebElement cancelLabel2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(order2XpathValue+Constants.PARENT_LOC+Constants.EIGHTH_CHILD)));
+
+        orderStatus.add(cancelLabel1.getText());
+        orderStatus.add(cancelLabel2.getText());
+        return orderStatus;
     }
 
 }
