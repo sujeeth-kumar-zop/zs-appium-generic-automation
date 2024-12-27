@@ -21,6 +21,7 @@ public class TamimiLocators {
     public static final Map<String, By> deliveryTypeDrawerLocators=new HashMap<>();
     public static final Map<String, By> checkoutLocators=new HashMap<>();
 
+
     static {
 
 
@@ -64,7 +65,7 @@ public class TamimiLocators {
         productPageLocators.put("addToCartBtn", By.xpath("(//android.widget.ImageView[@resource-id='com.zopsmart.stg.scarlet:id/ib_add'])[1]"));
 
         //bottom menu locators
-        menuLocators.put("cartBtn", By.xpath("//android.widget.FrameLayout[@content-desc='Cart']/android.widget.FrameLayout[4]"));
+        menuLocators.put("cartBtn", By.xpath("//*[@content-desc=\"Cart\"]"));
         menuLocators.put("homeBtn", By.id("com.zopsmart.stg.scarlet:id/home"));
 
         //cart locators
@@ -76,6 +77,7 @@ public class TamimiLocators {
         cartLocators.put("continueQuantityBox", By.id("android:id/button1"));
         cartLocators.put("substitutionDropDown", By.id("com.zopsmart.stg.scarlet:id/select_substitution_spinner"));
         cartLocators.put("substitutionOption1", By.xpath("//*[@text='Call for substitution']"));
+        cartLocators.put("removeProduct", By.xpath("(//*[@resource-id='com.zopsmart.stg.scarlet:id/ib_remove'])[1]"));
 
         //delivery-type drawer locators
         deliveryTypeDrawerLocators.put("clickAndCollect", By.id("com.zopsmart.stg.scarlet:id/cv_click_and_collect"));
@@ -88,6 +90,7 @@ public class TamimiLocators {
         checkoutLocators.put("cashOnDeliveryRadio", By.id("com.zopsmart.stg.scarlet:id/radio_cash_on_delivery"));
         checkoutLocators.put("placeOrderBtn", By.id("com.zopsmart.stg.scarlet:id/btn_place_order"));
         checkoutLocators.put("orderPlacedLabel", By.id("com.zopsmart.stg.scarlet:id/order_placed_label"));
+        checkoutLocators.put("orderText", By.id("com.zopsmart.stg.scarlet:id/tv_display_message"));
     }
 
 
