@@ -192,7 +192,7 @@ public class CommonUtils{
 
         int maxRetries = 10;
         int attempts = 0;
-        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         while (attempts < maxRetries) {
             try {
 

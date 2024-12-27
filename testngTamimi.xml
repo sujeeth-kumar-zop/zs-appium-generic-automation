@@ -14,6 +14,8 @@
             <class name="test.ValidateMaxProductQuantityTest"/>
             <class name="test.LogoutTest"/>
             <class name="test.CancelOrderTest"/>
+            <class name="test.LoginNegativeTest"/>
+            <class name="test.FilterTest"/>
         </classes>
     </test>
 </suite>
