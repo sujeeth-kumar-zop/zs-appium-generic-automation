@@ -50,5 +50,12 @@ public class Constants {
 
     //general texts
     public static final String LOGOUT="Logout";
+    public static final String ORDERS="My Orders";
+    public static final String CANCEL="Cancel";
+
+    //general locators
+    public static final String PARENT_LOC = "/./..";
+    public static final String FOURTH_CHILD="/*[4]";
+    public static final String EIGHTH_CHILD="/*[8]";
 }
 

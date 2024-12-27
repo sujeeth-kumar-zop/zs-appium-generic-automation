@@ -21,6 +21,7 @@ public class TamimiLocators {
     public static final Map<String, By> deliveryTypeDrawerLocators=new HashMap<>();
     public static final Map<String, By> checkoutLocators=new HashMap<>();
 
+
     static {
 
 
@@ -88,6 +89,7 @@ public class TamimiLocators {
         checkoutLocators.put("cashOnDeliveryRadio", By.id("com.zopsmart.stg.scarlet:id/radio_cash_on_delivery"));
         checkoutLocators.put("placeOrderBtn", By.id("com.zopsmart.stg.scarlet:id/btn_place_order"));
         checkoutLocators.put("orderPlacedLabel", By.id("com.zopsmart.stg.scarlet:id/order_placed_label"));
+        checkoutLocators.put("orderText", By.id("com.zopsmart.stg.scarlet:id/tv_display_message"));
     }
 
 

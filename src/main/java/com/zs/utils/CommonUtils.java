@@ -229,6 +229,10 @@ public class CommonUtils{
         return true;
     }
 
+    public void click(By locator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).click();
+    }
+
 
 
 }
