@@ -67,7 +67,7 @@ public class TamimiLocators {
         productPageLocators.put("applyBtn", By.id("com.zopsmart.stg.scarlet:id/btn_apply"));
 
         //bottom menu locators
-        menuLocators.put("cartBtn", By.xpath("//android.widget.FrameLayout[@content-desc='Cart']/android.widget.FrameLayout[4]"));
+        menuLocators.put("cartBtn", By.xpath("//*[@content-desc=\"Cart\"]"));
         menuLocators.put("homeBtn", By.id("com.zopsmart.stg.scarlet:id/home"));
 
         //cart locators
@@ -79,6 +79,7 @@ public class TamimiLocators {
         cartLocators.put("continueQuantityBox", By.id("android:id/button1"));
         cartLocators.put("substitutionDropDown", By.id("com.zopsmart.stg.scarlet:id/select_substitution_spinner"));
         cartLocators.put("substitutionOption1", By.xpath("//*[@text='Call for substitution']"));
+        cartLocators.put("removeProduct", By.xpath("(//*[@resource-id='com.zopsmart.stg.scarlet:id/ib_remove'])[1]"));
 
         //delivery-type drawer locators
         deliveryTypeDrawerLocators.put("clickAndCollect", By.id("com.zopsmart.stg.scarlet:id/cv_click_and_collect"));

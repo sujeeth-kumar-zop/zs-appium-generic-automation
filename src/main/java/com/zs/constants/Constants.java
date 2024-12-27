@@ -50,6 +50,10 @@ public class Constants {
     public static final String TAMIMI_INVALID_PNO="1234";
     public static final String TAMIMI_INVALID_PASS="1234";
     public static final String TAMIMI_BRAND_KSA="KSA";
+    public static final String TAMIMI_WATER= "water";
+    public static final String TAMIMI_PRODUCT_LIMIT_WARNING="You cannot add more items of this product";
+    public static final String TAMIMI_EMPTY_CART="Your cart is empty";
+    public static final String TAMIMI_WATER_PRODUCT = "Bottled Drinking Water-40×330ML";
 
     //general texts
     public static final String LOGOUT="Logout";
