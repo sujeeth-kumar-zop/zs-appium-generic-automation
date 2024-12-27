@@ -49,6 +49,7 @@ public class Constants {
     public static final String TAMIMI_SIGNUP = "Sign In / Sign Up";
     public static final String TAMIMI_INVALID_PNO="1234";
     public static final String TAMIMI_INVALID_PASS="1234";
+    public static final String TAMIMI_BRAND_KSA="KSA";
     public static final String TAMIMI_WATER= "water";
     public static final String TAMIMI_PRODUCT_LIMIT_WARNING="You cannot add more items of this product";
     public static final String TAMIMI_EMPTY_CART="Your cart is empty";
@@ -56,6 +57,8 @@ public class Constants {
 
     //general texts
     public static final String LOGOUT="Logout";
+    public static final String INVALID_CREDS="invalid credentials";
+    public static final String BRAND="Brand";
     public static final String ORDERS="My Orders";
     public static final String CANCEL="Cancel";
     public static final String INVALID_CREDS="invalid credentials";
