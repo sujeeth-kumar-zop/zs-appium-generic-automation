@@ -100,14 +100,28 @@ zs-appium-generic-automation/
 - Android Studio
 - ExtentReports
 ### Installation and Setup
-- Clone the Repository:
+* Clone the Repository:
   ```
   git clone <repo-url>
   cd <project-directory>
   ```
-- Install Dependencies: ``` mvn install ```
-- Set up Appium and Android Emulator using Android Studio.
-- Run Tests: Run the tests using the respective ```testng.xml``` file of the application.
+* Install the following tools
+  - Brew
+  - Node
+  - Appium
+  - Android Studio with Emulator
+* Set PATHs for all tools into your system
+  - Android Studio
+  - Java
+  - Maven
+  - (might be: appium, node)
+* Install - Device Specific Appium Driver
+  - android
+  - ios
+  - etc
+* Install Dependencies: ``` mvn install ```
+* Set up Appium and Android Emulator using Android Studio.
+* Run Tests: Run the tests using the respective ```testng.xml``` file of the application.
 ## Execution Result
 The reports are generated and can be viewed in the ```/reports``` folder.
   
