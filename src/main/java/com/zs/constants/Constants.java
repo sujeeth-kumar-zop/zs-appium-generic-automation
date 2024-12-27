@@ -61,6 +61,7 @@ public class Constants {
     public static final String BRAND="Brand";
     public static final String ORDERS="My Orders";
     public static final String CANCEL="Cancel";
+    public static final String INVALID_CREDS="invalid credentials";
 
     //general locators
     public static final String PARENT_LOC = "/./..";
