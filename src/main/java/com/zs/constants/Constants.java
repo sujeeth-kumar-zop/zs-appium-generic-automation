@@ -47,6 +47,10 @@ public class Constants {
     public static final String TAMIMI_EMAIL="ahmed@gmail.com";
     public static final String TAMIMI_DATE_FOR_DOB="12";
     public static final String TAMIMI_SIGNUP = "Sign In / Sign Up";
+    public static final String TAMIMI_WATER= "water";
+    public static final String TAMIMI_PRODUCT_LIMIT_WARNING="You cannot add more items of this product";
+    public static final String TAMIMI_EMPTY_CART="Your cart is empty";
+    public static final String TAMIMI_WATER_PRODUCT = "Bottled Drinking Water-40×330ML";
 
     //general texts
     public static final String LOGOUT="Logout";

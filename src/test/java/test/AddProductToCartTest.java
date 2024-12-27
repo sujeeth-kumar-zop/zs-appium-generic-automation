@@ -3,6 +3,7 @@ package test;
 import com.zs.constants.Constants;
 import com.zs.pages.common.CartPage;
 import com.zs.pages.common.Flows;
+import com.zs.pages.common.ProductsPage;
 import com.zs.utils.CommonUtils;
 import base.BaseTest;
 import com.zs.utils.ExtentReport;
@@ -27,7 +28,7 @@ public class AddProductToCartTest extends BaseTest {
      * Test to add a single product to the cart.
      * @param appName The name of the Application Under Test.
      */
-    @Test(groups = {"regression", "addToCart"}, dependsOnGroups = {"login"})
+    @Test(groups = {"regression", "addToCart"}, dependsOnGroups = {"login"}, priority = 1)
     @Parameters("appName")
     public void addSingleProductToCart(@Optional String appName){
 
@@ -40,7 +41,12 @@ public class AddProductToCartTest extends BaseTest {
 
         CommonUtils commonUtils=new CommonUtils(driver,wait);
         Flows flows=new Flows(driver,wait);
-
+        ProductsPage productsPage=new ProductsPage(driver,wait);
+        commonUtils.navigateToHome(appName);
+        productsPage.goToCart(appName);
+        if(!commonUtils.isCartEmpty(appName)) {
+            commonUtils.emptyCart(appName);
+        }
         commonUtils.navigateToHome(appName);
         flows.addSingleProductToCartFlow(appName);
         By checkOutBtn = CommonUtils.getCartLocators(appName, "checkOutBtn");
@@ -53,7 +59,7 @@ public class AddProductToCartTest extends BaseTest {
      * Test to increase the quantity of the product in cart
      * @param appName The name of the application under test
      */
-    @Test(groups = {"regression", "addToCart"}, dependsOnMethods = {"addSingleProductToCart"})
+    @Test(groups = {"regression", "addToCart"}, dependsOnMethods = {"addSingleProductToCart"}, priority = 2)
     @Parameters("appName")
     public void increaseProductQuantityInCart(@Optional String appName){
 
@@ -67,9 +73,8 @@ public class AddProductToCartTest extends BaseTest {
         Flows flows=new Flows(driver,wait);
         CartPage cartPage=new CartPage(driver,wait);
         CommonUtils commonUtils=new CommonUtils(driver,wait);
+        ProductsPage productsPage=new ProductsPage(driver,wait);
 
-        commonUtils.navigateToHome(appName);
-        wait.until(ExpectedConditions.elementToBeClickable(CommonUtils.getMenuLocators(appName, "cartBtn"))).click();
         flows.increaseQuantityOfProduct(appName);
         LoggerUtil.logInfo("Checking if quantity increased.");
 

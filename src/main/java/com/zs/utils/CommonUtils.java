@@ -5,6 +5,9 @@ import com.zs.locators.BrimbaryLocators;
 import com.zs.locators.EkamLocators;
 import com.zs.locators.TamimiLocators;
 import com.zs.locators.VijethaLocators;
+import com.zs.pages.common.ProductsPage;
+import com.zs.pages.common.ProductsPage;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -219,6 +222,28 @@ public class CommonUtils{
         return By.xpath(String.format("//*[@text='%s']",text));
     }
 
+    public void emptyCart(String appName) {
+        while (!driver.findElements(CommonUtils.getCartLocators(appName, "removeProduct")).isEmpty()) {
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("quantityItem1"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("quantityTextBox"))).sendKeys("0");
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators("submitQuantity"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(TamimiLocators.getCartLocators( "continueQuantityBox"))).click();
+        }
+        if (driver.findElements(CommonUtils.generateLocator(Constants.TAMIMI_EMPTY_CART)).isEmpty()) {
+            Throwable throwable = new RuntimeException("Cart was not emptied");
+            LoggerUtil.logError("Cart was not emptied", throwable);
+        }
+    }
+
+
+    public boolean isCartEmpty(String appName){
+        ProductsPage productsPage=new ProductsPage(driver,wait);
+
+        navigateToHome(appName);
+        productsPage.goToCart(appName);
+        return !driver.findElements(CommonUtils.generateLocator(Constants.TAMIMI_EMPTY_CART)).isEmpty();
+    }
+
     public boolean isLoggedIn(String appName) {
         navigateToHome(appName);
         driver.findElement(CommonUtils.getHomePageLocator(appName, "drawerIcon")).click();
@@ -230,9 +255,14 @@ public class CommonUtils{
     }
 
     public void click(By locator){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
+    public void enterVal(By locator ,CharSequence... text){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).sendKeys(text);
+    }
 
-
+    public void scrollAndClick(String text){
+        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))")).click();
+    }
 }
