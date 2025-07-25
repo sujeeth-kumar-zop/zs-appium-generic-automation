@@ -26,7 +26,7 @@ public class UserSession extends Base {
 
         By radioButtonLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton");
 
-        if (driver.findElements(radioButtonLocator).size() > 0 &&
+        if (!driver.findElements(radioButtonLocator).isEmpty()  &&
                 driver.findElement(radioButtonLocator).isDisplayed()) {
 
             wait.until(ExpectedConditions.elementToBeClickable(radioButtonLocator)).click();

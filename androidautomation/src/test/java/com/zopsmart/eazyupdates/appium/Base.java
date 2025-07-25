@@ -17,25 +17,9 @@ import java.net.URL;
 public class Base {
     public AppiumDriverLocalService appiumServiceBuilder;
     public static AndroidDriver driver;
-//    @BeforeSuite
-//    public void startAppiumServer() throws InterruptedException {
-//        String pathName = "//Users//zopsmart//Desktop//projects//eazy-ios//node_modules//appium//build//lib//main.js";
-//        appiumServiceBuilder = new AppiumServiceBuilder()
-//                .withAppiumJS(new File(pathName))
-//                .withIPAddress("127.0.0.1")
-//                .usingPort(4723)
-//                .build();
-//        appiumServiceBuilder.start();
-//    }
-//    public void clearAppData(String packageName) throws IOException, InterruptedException {
-//        Process process = Runtime.getRuntime().exec("adb shell pm clear " + packageName);
-//        process.waitFor();
-//        System.out.println("App data cleared for: " + packageName);
-//    }
 
     @BeforeClass
     public void launchDevice() throws IOException, InterruptedException {
-//        clearAppData("com.eazyupdates");
         UiAutomator2Options options = new UiAutomator2Options();
         options.setApp("/Users/zopsmart/Desktop/projects/eazy-android/androidautomation/src/test/builds/Hamburger-testtag.apk");
         options.setDeviceName("Pixel 9 Pro");
@@ -45,8 +29,5 @@ public class Base {
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
     }
-//        @AfterSuite
-//        public void stopAppiumServer(){
-//        appiumServiceBuilder.stop();
-//    }
 }
+
