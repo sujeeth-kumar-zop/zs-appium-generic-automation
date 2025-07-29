@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="EazyUpdates Android Automation Suite">
+    <test name="EazyUpdates Automation">
+        <classes>
+            <class name="com.zopsmart.eazyupdates.appium.UserSession"/>
+        </classes>
+    </test>
+</suite>
