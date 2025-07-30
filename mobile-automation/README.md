@@ -54,7 +54,10 @@ This repository contains the automation scripts for testing Android application 
     - If Appium hangs or doesn’t stop with Ctrl +C, use these commands:
     - On macOS/Linux: pkill -9 -f appium
     - On Windows: taskkill /F /IM node.exe.
-
+### Chasers
+  - The Appium server start path is taken from the configuration file.
+  - If you want to manually start the Appium server, you can do so by running the following command in your terminal: appium
+  - Alternatively, the Appium server can be started programmatically—this automation code already handles starting the server when needed.
 
 ## Execution Result
 The reports are generated and can be viewed in the ```/reports``` folder.
