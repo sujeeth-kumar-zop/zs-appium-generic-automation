@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.time.Duration;
 
 import static com.zopsmart.eazyupdates.utils.PlatformUtils.isIOS;
@@ -17,6 +16,7 @@ import static com.zopsmart.eazyupdates.utils.PlatformUtils.isIOS;
 public class LoginPage {
     AppiumDriver driver;
     WebDriverWait wait;
+
     public LoginPage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -26,8 +26,8 @@ public class LoginPage {
     @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Continue\"]")
     private WebElement iOSContinueButton;
 
-    @FindBy(xpath = "//android.widget.TextView[@text='Apply']")
-    private WebElement hsrLocationButton;
+//    @FindBy(xpath = "//android.widget.TextView[@text='Apply']")
+//    private WebElement hsrLocationButton;
 
     @FindAll({
             @FindBy(xpath = "//android.widget.TextView[@text=\"Sign In with Google\"]"),
@@ -67,22 +67,26 @@ public class LoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(emailSignInButton)).click();
         try {
             Thread.sleep(1500);
-            if(isIOS()){
+            if (isIOS()) {
                 iOSContinueButton.click();
             }
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
-    public void clickLocationRadioButton(){
+
+    public void clickLocationRadioButton() {
         By radioButtonLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton");
-        if(!driver.findElements(radioButtonLocator).isEmpty() &&
-            driver.findElement(radioButtonLocator).isDisplayed()) {
+        if (!driver.findElements(radioButtonLocator).isEmpty() &&
+                driver.findElement(radioButtonLocator).isDisplayed()) {
+
             wait.until(ExpectedConditions.elementToBeClickable(radioButtonLocator)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(hsrLocationButton)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//android.widget.TextView[@text='Apply']"))).click();
         }
 
     }
+
     public void clickHamburgerMenu() {
         wait.until(ExpectedConditions.elementToBeClickable(hamburgerMenu)).click();
     }

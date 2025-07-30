@@ -1,6 +1,6 @@
 package com.zopsmart.eazyupdates.appium;
 
-import com.zopsmart.eazyupdates.utils.ReadPropertyLoader;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -10,47 +10,61 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+
+
 public class Base {
-    public static AppiumDriver driver;
-    AppiumDriverLocalService appiumServiceBuilder;
-    Properties prop = new Properties();
-    URL serverUrl;
+    public AppiumDriver driver;
+    public Properties props = new Properties();
+    public AppiumDriverLocalService appiumServiceBuilder;
+    public URL serverUrl;
+
 
     @BeforeSuite
-    public void launchDevice() throws IOException {
+    public void startAppiumServer(){
+        try (FileInputStream input = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties")) {
+            props.load(input);
+        } catch (Exception e) {
+            System.out.println("Server initiated");
+        }
         appiumServiceBuilder = new AppiumServiceBuilder()
-                .withAppiumJS(new File("/Users/zopsmart/node_modules/appium/build/lib/main.js"))
+                .withAppiumJS(new File(props.getProperty("AppiumServerPath")))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .build();
         appiumServiceBuilder.start();
+    }
 
-        ReadPropertyLoader.loadPropertiesToSystem(System.getProperty("user.dir") + "/src/test/resources/config.properties");
+    @BeforeClass
+    public void launchDevice() throws MalformedURLException {
         serverUrl = new URL("http://127.0.0.1:4723");
 
-        if ("android" .equalsIgnoreCase(System.getProperty("platform"))) {
+        if ("android".equalsIgnoreCase(props.getProperty("platform"))) {
             UiAutomator2Options options = new UiAutomator2Options()
-                    .setDeviceName(System.getProperty("AndroidDevice"))
-                    .setApp("/Users/zopsmart/Desktop/projects/eazy-android/mobile-automation/src/test/builds/Hamburger-testtag.apk")
+                    .setDeviceName(props.getProperty("AndroidDevice"))
+                    .setApp(props.getProperty("AndroidBuildPath"))
                     .setAutoGrantPermissions(true)
                     .setAppWaitDuration(Duration.ofSeconds(30));
 
             driver = new AndroidDriver(serverUrl, options);
 
-        } else if ("ios" .equalsIgnoreCase(System.getProperty("platform"))) {
+        } else if ("ios".equalsIgnoreCase(System.getProperty("platform"))) {
             XCUITestOptions options = new XCUITestOptions()
-                    .setDeviceName(System.getProperty("iOSDevice"))
-                    .setApp(System.getProperty("iOSBuildPath"))
+                    .setDeviceName(props.getProperty("iOSDevice"))
+                    .setApp(props.getProperty("iOSBuildPath"))
                     .setAutoAcceptAlerts(true);
-            options.setCapability("platformVersion", System.getProperty("iOSPlatformVersion"));
+            options.setCapability("platformVersion", props.getProperty("iOSPlatformVersion"));
             options.setWdaLaunchTimeout(Duration.ofSeconds(30));
 
 
@@ -91,5 +105,4 @@ public class Base {
             Thread.currentThread().interrupt();
         }
     }
-
 }
