@@ -1,4 +1,4 @@
-package com.zopsmart.eazyupdates.appium;
+package com.zopsmart.eazyupdates.UITesting;
 
 
 import io.appium.java_client.AppiumDriver;
@@ -12,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,8 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
-
-import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 
 public class Base {
@@ -32,7 +29,7 @@ public class Base {
 
 
     @BeforeSuite
-    public void startAppiumServer(){
+    public void startAppiumServer() {
         try (FileInputStream input = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties")) {
             props.load(input);
         } catch (Exception e) {

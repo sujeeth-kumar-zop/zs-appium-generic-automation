@@ -1,5 +1,7 @@
 package com.zopsmart.eazyupdates.pages;
 
+
+import com.zopsmart.eazyupdates.utils.PlatformUtils;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -67,7 +69,7 @@ public class LoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(emailSignInButton)).click();
         try {
             Thread.sleep(1500);
-            if (isIOS()) {
+            if (PlatformUtils.isIOS()) {
                 iOSContinueButton.click();
             }
         } catch (Exception e) {
@@ -76,6 +78,7 @@ public class LoginPage {
     }
 
     public void clickLocationRadioButton() {
+
         By radioButtonLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton");
         if (!driver.findElements(radioButtonLocator).isEmpty() &&
                 driver.findElement(radioButtonLocator).isDisplayed()) {

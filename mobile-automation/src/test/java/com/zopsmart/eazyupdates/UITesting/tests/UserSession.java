@@ -1,5 +1,6 @@
-package com.zopsmart.eazyupdates.appium;
+package com.zopsmart.eazyupdates.UITesting.tests;
 
+import com.zopsmart.eazyupdates.UITesting.Base;
 import com.zopsmart.eazyupdates.pages.LoginPage;
 import io.qameta.allure.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
