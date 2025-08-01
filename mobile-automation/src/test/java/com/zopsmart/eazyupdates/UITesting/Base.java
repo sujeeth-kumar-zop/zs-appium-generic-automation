@@ -1,6 +1,7 @@
 package com.zopsmart.eazyupdates.UITesting;
 
 
+import com.zopsmart.eazyupdates.helper.LoginToApplication;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -8,78 +9,105 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
 
 public class Base {
-    public AppiumDriver driver;
-    public Properties props = new Properties();
-    public AppiumDriverLocalService appiumServiceBuilder;
-    public URL serverUrl;
+    protected static Properties props = new Properties();
+    private AppiumDriverLocalService appiumServiceBuilder;
+    private static final ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    protected URL serverUrl;
 
-
-    @BeforeSuite
-    public void startAppiumServer() {
+    static {
         try (FileInputStream input = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties")) {
             props.load(input);
+            for (String key : props.stringPropertyNames()) {
+                System.setProperty(key, props.getProperty(key));
+            }
+
         } catch (Exception e) {
-            System.out.println("Server initiated");
+            System.out.println(" Server initiated (properties not loaded): " + e.getMessage());
         }
+    }
+
+    public static AppiumDriver getDriver() {
+        return driver.get();
+    }
+
+
+    @BeforeSuite(alwaysRun = true)
+    protected void startAppiumServer() {
+
         appiumServiceBuilder = new AppiumServiceBuilder()
-                .withAppiumJS(new File(props.getProperty("AppiumServerPath")))
+                .withAppiumJS(new File(System.getProperty("AppiumServerPath")))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .build();
         appiumServiceBuilder.start();
     }
 
-    @BeforeClass
-    public void launchDevice() throws MalformedURLException {
+    /**
+     * This method is executed once before any test methods in the class are run.
+     * It launches the appropriate mobile device session (Android or iOS) using Appium
+     * and initializes the driver with desired capabilities.
+     *
+     * @throws Exception if an unsupported platform is specified or Appium server URL is invalid
+     */
+    @BeforeClass(alwaysRun = true)
+    protected void launchDevice() throws Exception {
         serverUrl = new URL("http://127.0.0.1:4723");
+        String platform = System.getProperty("platform").toLowerCase();
 
-        if ("android".equalsIgnoreCase(props.getProperty("platform"))) {
-            UiAutomator2Options options = new UiAutomator2Options()
-                    .setDeviceName(props.getProperty("AndroidDevice"))
-                    .setApp(props.getProperty("AndroidBuildPath"))
-                    .setAutoGrantPermissions(true)
-                    .setAppWaitDuration(Duration.ofSeconds(30));
+        switch (platform) {
+            case "android":
+                UiAutomator2Options androidOptions = new UiAutomator2Options()
+                        .setDeviceName(System.getProperty("AndroidDevice"))
+                        .setApp(System.getProperty("AndroidBuildPath"))
+                        .setAutoGrantPermissions(true)
+                        .setAppWaitDuration(Duration.ofSeconds(30));
+                driver.set(new AndroidDriver(serverUrl, androidOptions));
+                break;
 
-            driver = new AndroidDriver(serverUrl, options);
+            case "ios":
+                XCUITestOptions iosOptions = new XCUITestOptions()
+                        .setDeviceName(System.getProperty("iOSDevice"))
+                        .setApp(System.getProperty("iOSBuildPath"))
+                        .setAutoAcceptAlerts(true)
+                        .setPlatformVersion(System.getProperty("iOSPlatformVersion"))
+                        .setWdaLaunchTimeout(Duration.ofSeconds(30));
+                driver.set(new IOSDriver(serverUrl, iosOptions));
+                break;
 
-        } else if ("ios".equalsIgnoreCase(System.getProperty("platform"))) {
-            XCUITestOptions options = new XCUITestOptions()
-                    .setDeviceName(props.getProperty("iOSDevice"))
-                    .setApp(props.getProperty("iOSBuildPath"))
-                    .setAutoAcceptAlerts(true);
-            options.setCapability("platformVersion", props.getProperty("iOSPlatformVersion"));
-            options.setWdaLaunchTimeout(Duration.ofSeconds(30));
+            default:
+                throw new IllegalArgumentException("Unsupported platform: " + platform);
 
-
-            driver = new IOSDriver(serverUrl, options);
-        } else {
-            throw new IllegalArgumentException("Unsupported platform: " + System.getProperty("platform"));
         }
+        loginBeforeEachTest();
     }
 
     @AfterClass(alwaysRun = true)
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+    protected void tearDown() {
+        try {
+            if (driver.get() != null) {
+                driver.get().quit();
+            }
+        } catch (Exception e) {
+            System.err.println("Error quitting driver: " + e.getMessage());
         }
     }
 
-    @AfterSuite(alwaysRun = true)
-    public void openHtmlReportAndStopAppiumServer() {
+    public void loginBeforeEachTest() {
+        LoginToApplication.login(getDriver());
+    }
+
+    @AfterSuite
+    protected void StopAppiumServer() {
         if (appiumServiceBuilder != null && appiumServiceBuilder.isRunning()) {
             appiumServiceBuilder.stop();
         }
@@ -97,9 +125,8 @@ public class Base {
             process.destroyForcibly();
             System.out.println("Allure report closed after 20 seconds.");
 
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             System.err.println("Failed to serve Allure report: " + e.getMessage());
-            Thread.currentThread().interrupt();
         }
     }
 }
