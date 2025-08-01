@@ -1,7 +1,6 @@
 package com.zopsmart.eazyupdates.pages;
 
 
-import com.zopsmart.eazyupdates.utils.PlatformUtils;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.zopsmart.eazyupdates.utils.PlatformUtils.isIOS;
 
 public class LoginPage {
     AppiumDriver driver;
@@ -28,8 +26,8 @@ public class LoginPage {
     @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Continue\"]")
     private WebElement iOSContinueButton;
 
-//    @FindBy(xpath = "//android.widget.TextView[@text='Apply']")
-//    private WebElement hsrLocationButton;
+    @FindBy(xpath = "//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton")
+    private WebElement LocationButton;
 
     @FindAll({
             @FindBy(xpath = "//android.widget.TextView[@text=\"Sign In with Google\"]"),
@@ -67,18 +65,12 @@ public class LoginPage {
 
     public void clickEmailSignInButton() {
         wait.until(ExpectedConditions.elementToBeClickable(emailSignInButton)).click();
-        try {
-            Thread.sleep(1500);
-            if (PlatformUtils.isIOS()) {
-                iOSContinueButton.click();
-            }
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+        if ("ios".equalsIgnoreCase(System.getProperty("platform"))) {
+            wait.until(ExpectedConditions.elementToBeClickable(iOSContinueButton)).click();
         }
     }
 
     public void clickLocationRadioButton() {
-
         By radioButtonLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton");
         if (!driver.findElements(radioButtonLocator).isEmpty() &&
                 driver.findElement(radioButtonLocator).isDisplayed()) {
