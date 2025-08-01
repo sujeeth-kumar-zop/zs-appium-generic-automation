@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -81,7 +82,10 @@ public class LoginPage {
         }
 
     }
-
+    public void assertUserIsLoggedIn(){
+        wait.until(ExpectedConditions.visibilityOf(hamburgerMenu));
+        Assert.assertTrue(hamburgerMenu.isDisplayed(),"User is not logged in");
+    }
     public void clickHamburgerMenu() {
         wait.until(ExpectedConditions.elementToBeClickable(hamburgerMenu)).click();
     }

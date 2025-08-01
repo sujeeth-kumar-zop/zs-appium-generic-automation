@@ -1,6 +1,7 @@
 package com.zopsmart.eazyupdates.UITesting;
 
 
+import com.zopsmart.eazyupdates.helper.LoginToApplication;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -39,8 +40,9 @@ public class Base {
         return driver.get();
     }
 
+
     @BeforeSuite(alwaysRun = true)
-    public void startAppiumServer() {
+    protected void startAppiumServer() {
 
         appiumServiceBuilder = new AppiumServiceBuilder()
                 .withAppiumJS(new File(System.getProperty("AppiumServerPath")))
@@ -50,8 +52,15 @@ public class Base {
         appiumServiceBuilder.start();
     }
 
+    /**
+     * This method is executed once before any test methods in the class are run.
+     * It launches the appropriate mobile device session (Android or iOS) using Appium
+     * and initializes the driver with desired capabilities.
+     *
+     * @throws Exception if an unsupported platform is specified or Appium server URL is invalid
+     */
     @BeforeClass(alwaysRun = true)
-    public void launchDevice() throws Exception {
+    protected void launchDevice() throws Exception {
         serverUrl = new URL("http://127.0.0.1:4723");
         String platform = System.getProperty("platform").toLowerCase();
 
@@ -77,11 +86,13 @@ public class Base {
 
             default:
                 throw new IllegalArgumentException("Unsupported platform: " + platform);
+
         }
+        loginBeforeEachTest();
     }
 
-    @AfterSuite(alwaysRun = true)
-    public void tearDown() {
+    @AfterClass(alwaysRun = true)
+    protected void tearDown() {
         try {
             if (driver.get() != null) {
                 driver.get().quit();
@@ -89,14 +100,18 @@ public class Base {
         } catch (Exception e) {
             System.err.println("Error quitting driver: " + e.getMessage());
         }
-        StopAppiumServer();
-        serveAllureReport();
     }
 
-    public void StopAppiumServer() {
+    public void loginBeforeEachTest() {
+        LoginToApplication.login(getDriver());
+    }
+
+    @AfterSuite
+    protected void StopAppiumServer() {
         if (appiumServiceBuilder != null && appiumServiceBuilder.isRunning()) {
             appiumServiceBuilder.stop();
         }
+        serveAllureReport();
     }
 
     private void serveAllureReport() {
