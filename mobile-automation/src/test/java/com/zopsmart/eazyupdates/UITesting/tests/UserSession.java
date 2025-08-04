@@ -29,7 +29,7 @@ public class UserSession extends Base {
         loginPage.assertUserIsLoggedIn();
     }
 
-    @Test(description = "User logs out")
+    @Test(description = "User logs out",dependsOnMethods = "loginAction")
     @Severity(SeverityLevel.NORMAL)
     @Story("Logout functionality")
     @Description("Verify user is able to logout successfully from the hamburger menu")

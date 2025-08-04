@@ -19,6 +19,7 @@ public class DashboardPage {
     @FindAll({
             @FindBy(xpath = "(//android.view.View[@content-desc=\"Users Project\"])[1]"),
             @FindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"DummyProject\"])[1]")
+
     })
     private WebElement projectNavigationButton;
 

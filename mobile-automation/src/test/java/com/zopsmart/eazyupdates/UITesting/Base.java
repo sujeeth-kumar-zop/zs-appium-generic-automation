@@ -2,6 +2,8 @@ package com.zopsmart.eazyupdates.UITesting;
 
 
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
+
+import com.zopsmart.eazyupdates.pages.LoginPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -10,18 +12,19 @@ import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.testng.annotations.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
+import static com.zopsmart.eazyupdates.utils.AllureScreenshotUtil.attachScreenshot;
+
 
 public class Base {
     protected static Properties props = new Properties();
     private AppiumDriverLocalService appiumServiceBuilder;
-    private static final ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    public static final ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
     protected URL serverUrl;
 
     static {
@@ -79,6 +82,7 @@ public class Base {
                         .setDeviceName(System.getProperty("iOSDevice"))
                         .setApp(System.getProperty("iOSBuildPath"))
                         .setAutoAcceptAlerts(true)
+                        .setAutoDismissAlerts(true)
                         .setPlatformVersion(System.getProperty("iOSPlatformVersion"))
                         .setWdaLaunchTimeout(Duration.ofSeconds(30));
                 driver.set(new IOSDriver(serverUrl, iosOptions));
@@ -104,6 +108,12 @@ public class Base {
 
     public void loginBeforeEachTest() {
         LoginToApplication.login(getDriver());
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        attachScreenshot(getDriver(), "Initial Login Screen");
     }
 
     @AfterSuite
