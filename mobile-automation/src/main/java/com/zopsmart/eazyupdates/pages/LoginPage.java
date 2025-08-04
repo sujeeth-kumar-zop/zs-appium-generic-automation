@@ -13,6 +13,9 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
+import static com.zopsmart.eazyupdates.utils.AllureScreenshotUtil.attachScreenshot;
+import static java.sql.DriverManager.getDriver;
+
 
 public class LoginPage {
     AppiumDriver driver;

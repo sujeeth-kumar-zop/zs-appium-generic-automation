@@ -2,7 +2,7 @@ package com.zopsmart.eazyupdates.helper;
 
 import com.zopsmart.eazyupdates.pages.LoginPage;
 import io.appium.java_client.AppiumDriver;
-import org.testng.annotations.BeforeClass;
+
 
 public class LoginToApplication {
     public static void login(AppiumDriver driver) {
@@ -10,5 +10,6 @@ public class LoginToApplication {
         loginPage.clickGoogleSignInButton();
         loginPage.clickEmailSignInButton();
         loginPage.clickLocationRadioButton();
+
     }
 }
