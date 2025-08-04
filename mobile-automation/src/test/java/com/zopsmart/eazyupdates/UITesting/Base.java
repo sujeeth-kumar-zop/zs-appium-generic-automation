@@ -24,7 +24,7 @@ import static com.zopsmart.eazyupdates.utils.AllureScreenshotUtil.attachScreensh
 public class Base {
     protected static Properties props = new Properties();
     private AppiumDriverLocalService appiumServiceBuilder;
-    public static final ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
     protected URL serverUrl;
 
     static {
@@ -108,11 +108,6 @@ public class Base {
 
     public void loginBeforeEachTest() {
         LoginToApplication.login(getDriver());
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         attachScreenshot(getDriver(), "Initial Login Screen");
     }
 
