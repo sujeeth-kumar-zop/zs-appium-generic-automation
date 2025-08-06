@@ -108,7 +108,10 @@ public class Base {
 
     public void loginBeforeEachTest() {
         LoginToApplication.login(getDriver());
-        attachScreenshot(getDriver(), "Initial Login Screen");
+    }
+    @AfterMethod
+    public void allureScreenshot(){
+        attachScreenshot(getDriver(), "Initial Screenshot");
     }
 
     @AfterSuite
