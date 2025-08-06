@@ -22,12 +22,12 @@ public class DashboardPage {
 
     })
     private WebElement projectNavigationButton;
-
     @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text='Team Members']"),
-            @FindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Team Members (7)\"]")
+            @FindBy(xpath = "//android.widget.TextView[@text=\"View All>>\"]"),
+            @FindBy(xpath = "//XCUIElementTypeButton[@name=\"View Direct Reportees Updates\"]")
+
     })
-    private WebElement teamMembersText;
+    private WebElement directReportees;
 
     public DashboardPage(AppiumDriver driver) {
         this.driver = driver;
@@ -40,8 +40,9 @@ public class DashboardPage {
         projectNavigationButton.click();
     }
 
-    public void assertTeamMembersVisible() {
-        wait.until(ExpectedConditions.visibilityOf(teamMembersText));
-        Assert.assertTrue(teamMembersText.isDisplayed(), "'Team Members' text is not visible.");
+    public void clickOnDirectReporteeButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(directReportees));
+        directReportees.click();
     }
+
 }

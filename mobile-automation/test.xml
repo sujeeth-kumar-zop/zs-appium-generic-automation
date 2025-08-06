@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Test Suite" parallel="false">
     <test name="Test">
-        <classes>
-            <class name="com.zopsmart.eazyupdates.UITesting.tests.ProjectTimeline"/>
-        </classes>
+<!--        <classes>-->
+<!--            <class name="com.zopsmart.eazyupdates.UITesting.tests.ProjectTimeline"/>-->
+<!--        </classes>-->
     </test>
+    <packages>
+        <package name="com.zopsmart.eazyupdates.UITesting.tests.*"/>
+    </packages>
 </suite>

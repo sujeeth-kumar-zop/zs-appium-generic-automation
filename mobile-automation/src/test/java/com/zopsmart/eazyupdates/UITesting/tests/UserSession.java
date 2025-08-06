@@ -1,16 +1,10 @@
 package com.zopsmart.eazyupdates.UITesting.tests;
 
-import com.zopsmart.eazyupdates.UITesting.Base;
-import com.zopsmart.eazyupdates.helper.LoginToApplication;
-import com.zopsmart.eazyupdates.pages.DashboardPage;
+import com.zopsmart.eazyupdates.base.Base;
 import com.zopsmart.eazyupdates.pages.LoginPage;
 import io.qameta.allure.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 @Epic("User Session Management")
 @Feature("Login & Logout Flow")
@@ -21,6 +15,7 @@ public class UserSession extends Base {
     public void initPageObjects() {
         loginPage = new LoginPage(getDriver());
     }
+
     @Test(description = "User logs in using Google sign-in")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Login with valid credentials")
@@ -29,7 +24,7 @@ public class UserSession extends Base {
         loginPage.assertUserIsLoggedIn();
     }
 
-    @Test(description = "User logs out",dependsOnMethods = "loginAction")
+    @Test(description = "User logs out", dependsOnMethods = "loginAction")
     @Severity(SeverityLevel.NORMAL)
     @Story("Logout functionality")
     @Description("Verify user is able to logout successfully from the hamburger menu")
