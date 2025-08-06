@@ -16,6 +16,7 @@ public class ProjectTimeline extends Base {
 
     @BeforeMethod
     public void initPageObjects() {
+
         dashboardPage = new DashboardPage(getDriver());
     }
 /**
