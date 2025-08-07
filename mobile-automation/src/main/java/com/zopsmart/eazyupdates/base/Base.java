@@ -3,7 +3,6 @@ package com.zopsmart.eazyupdates.UITesting;
 
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
 
-import com.zopsmart.eazyupdates.pages.LoginPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;

@@ -85,10 +85,12 @@ public class LoginPage {
         }
 
     }
-    public void assertUserIsLoggedIn(){
+
+    public void assertUserIsLoggedIn() {
         wait.until(ExpectedConditions.visibilityOf(hamburgerMenu));
-        Assert.assertTrue(hamburgerMenu.isDisplayed(),"User is not logged in");
+        Assert.assertTrue(hamburgerMenu.isDisplayed(), "User is not logged in");
     }
+
     public void clickHamburgerMenu() {
         wait.until(ExpectedConditions.elementToBeClickable(hamburgerMenu)).click();
     }
