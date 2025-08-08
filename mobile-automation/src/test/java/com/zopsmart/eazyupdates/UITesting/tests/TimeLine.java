@@ -1,6 +1,7 @@
 package com.zopsmart.eazyupdates.UITesting.tests;
 
-import com.zopsmart.eazyupdates.base.Base;
+
+import com.zopsmart.eazyupdates.UITesting.Base;
 import com.zopsmart.eazyupdates.pages.DashboardPage;
 import com.zopsmart.eazyupdates.pages.DirectReporteeTimeline;
 import io.qameta.allure.Description;
@@ -9,6 +10,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 
 @Feature("Direct reportee timeline Navigation")
 public class TimeLine extends Base {

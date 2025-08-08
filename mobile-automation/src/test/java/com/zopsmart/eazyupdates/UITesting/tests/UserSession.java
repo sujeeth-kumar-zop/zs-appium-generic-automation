@@ -1,6 +1,7 @@
 package com.zopsmart.eazyupdates.UITesting.tests;
 
-import com.zopsmart.eazyupdates.base.Base;
+
+import com.zopsmart.eazyupdates.UITesting.Base;
 import com.zopsmart.eazyupdates.pages.LoginPage;
 import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;

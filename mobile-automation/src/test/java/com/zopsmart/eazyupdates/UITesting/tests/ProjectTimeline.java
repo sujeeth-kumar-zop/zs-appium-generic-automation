@@ -1,6 +1,7 @@
 package com.zopsmart.eazyupdates.UITesting.tests;
 
-import com.zopsmart.eazyupdates.base.Base;
+
+import com.zopsmart.eazyupdates.UITesting.Base;
 import com.zopsmart.eazyupdates.pages.DashboardPage;
 import com.zopsmart.eazyupdates.pages.ProjectTimelinePage;
 import io.qameta.allure.*;
