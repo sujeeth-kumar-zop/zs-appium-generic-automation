@@ -10,6 +10,5 @@ public class LoginToApplication {
         loginPage.clickGoogleSignInButton();
         loginPage.clickEmailSignInButton();
         loginPage.clickLocationRadioButton();
-
     }
 }
