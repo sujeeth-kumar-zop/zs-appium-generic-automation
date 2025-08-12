@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-slim
 
-# Install dependencies including Maven and Android tools
+# Install dependencies including Maven
 RUN apt-get update && apt-get install -y \
     curl \
     unzip \
@@ -8,37 +8,32 @@ RUN apt-get update && apt-get install -y \
     libxi6 \
     libgconf-2-4 \
     maven \
-    nodejs \
-    npm \
-    adb \
     && apt-get clean
 
-# Install Appium CLI and drivers
-RUN npm install -g appium@2.5.3 appium-doctor \
+# Install Node.js & Appium
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g appium@2.5.3 appium-doctor \
     && appium driver install uiautomator2
 
-# Set Android SDK environment variables
-ENV ANDROID_HOME=/opt/android-sdk
-ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:$PATH
+# Install Android SDK
+ENV ANDROID_HOME /opt/android-sdk
+ENV PATH ${ANDROID_HOME}/emulator:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:$PATH
 
-# Download and install Android Command Line Tools
 RUN mkdir -p $ANDROID_HOME/cmdline-tools \
     && curl -o sdk-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip \
     && unzip sdk-tools.zip -d $ANDROID_HOME/cmdline-tools && rm sdk-tools.zip \
     && mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest \
     && yes | sdkmanager --licenses \
-    && sdkmanager \
-        "platform-tools" \
-        "platforms;android-34" \
-        "system-images;android-34;google_apis;x86_64" \
-        "emulator"
+    && sdkmanager "platform-tools" "platforms;android-34" "system-images;android-34;google_apis;x86_64" "emulator"
 
-# Create the AVD
+# Create Android emulator
 RUN echo "no" | avdmanager create avd -n Pixel_9_Pro -k "system-images;android-34;google_apis;x86_64" --force
 
-# Set working directory
+# Set working directory and copy project files
 WORKDIR /app
 COPY . /app
 
-# Default CMD just starts shell, override in GitHub Actions
-CMD ["bash"]
+# Start emulator and Appium when container runs
+CMD emulator -avd Pixel_9_Pro -no-snapshot -no-window -gpu swiftshader_indirect & \
+    sleep 25 && appium --base-path /wd/hub
