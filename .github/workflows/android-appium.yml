@@ -6,19 +6,18 @@ on:
   pull_request:
 
 jobs:
-  android-tests:
+  android-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Build Android Docker image
-        run: docker build -t appium-android -f Dockerfile.android .
+      - name: Build Docker image
+        run: docker build -t appium-android .
 
-      - name: Run Android Emulator + Appium + Tests
+      - name: Run Tests in Docker
         run: |
           docker run --rm \
-          -v $PWD:/app \
-          appium-android \
-          mvn clean test -Dplatform=android -DdeviceName=Pixel_9_Pro
+            -v $PWD:/app \
+            appium-android \
+            mvn clean test -Dplatform=android -DdeviceName=Pixel_9_Pro
