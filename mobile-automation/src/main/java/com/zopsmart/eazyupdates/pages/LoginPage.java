@@ -9,12 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
-
-import static com.zopsmart.eazyupdates.utils.AllureScreenshotUtil.attachScreenshot;
-import static java.sql.DriverManager.getDriver;
 
 
 public class LoginPage {
@@ -45,23 +41,6 @@ public class LoginPage {
     })
     private WebElement emailSignInButton;
 
-    @FindAll({
-            @FindBy(xpath = "//android.view.View[@content-desc=\"back-button\"]"),
-            @FindBy(xpath = "//XCUIElementTypeOther[@name=\"person.circle.fill\"]/XCUIElementTypeOther/XCUIElementTypeButton")
-    })
-    private WebElement hamburgerMenu;
-
-    @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"Logout\"]"),
-            @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Logout\"]")
-    })
-    private WebElement logoutButton;
-
-    @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"Logout\"]"),
-            @FindBy(xpath = "(//XCUIElementTypeButton[@name=\"Logout\"])[2]")
-    })
-    private WebElement logoutAlertButton;
 
     public void clickGoogleSignInButton() {
         wait.until(ExpectedConditions.elementToBeClickable(googleSignInButton)).click();
@@ -84,22 +63,5 @@ public class LoginPage {
                     By.xpath("//android.widget.TextView[@text='Apply']"))).click();
         }
 
-    }
-
-    public void assertUserIsLoggedIn() {
-        wait.until(ExpectedConditions.visibilityOf(hamburgerMenu));
-        Assert.assertTrue(hamburgerMenu.isDisplayed(), "User is not logged in");
-    }
-
-    public void clickHamburgerMenu() {
-        wait.until(ExpectedConditions.elementToBeClickable(hamburgerMenu)).click();
-    }
-
-    public void clickLogoutButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
-    }
-
-    public void clickLogoutAlertButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(logoutAlertButton)).click();
     }
 }

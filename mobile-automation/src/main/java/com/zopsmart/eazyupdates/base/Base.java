@@ -1,4 +1,4 @@
-package com.zopsmart.eazyupdates.UITesting;
+package com.zopsmart.eazyupdates.base;
 
 
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
