@@ -19,19 +19,33 @@ jobs:
       - name: Run Android Emulator, Appium, and Tests
         run: |
           docker run --rm -v $PWD:/app appium-android bash -c "\
-            emulator -avd Pixel_9_Pro -no-window -no-snapshot -no-audio -no-boot-anim -gpu swiftshader_indirect & \
+            emulator -avd Pixel_9_Pro \
+              -no-window -no-snapshot -no-audio -no-boot-anim \
+              -gpu swiftshader_indirect &
+
             echo 'Waiting for emulator to boot...' && \
-            timeout=0 && \
-            until adb shell getprop sys.boot_completed 2>/dev/null | grep -m 1 '1'; do \
+            boot_timeout=0 && \
+            until [[ \$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r') == \"1\" ]]; do \
               sleep 5; \
-              timeout=\$((timeout + 5)); \
-              echo \"Still waiting... \$timeout seconds\"; \
-              if [ \$timeout -gt 600 ]; then \
-                echo 'Emulator failed to boot in time (10 minutes)'; \
+              boot_timeout=\$((boot_timeout + 5)); \
+              echo \"⏱️ Still waiting... \$boot_timeout seconds\"; \
+              if [[ \$boot_timeout -gt 600 ]]; then \
+                echo 'Emulator failed to boot in 10 minutes'; \
                 exit 1; \
               fi; \
             done && \
-            echo 'Emulator booted!' && \
+
+            echo 'Emulator booted — restarting ADB and verifying device' && \
+            adb kill-server && \
+            adb start-server && \
+            adb devices && \
+
+            echo 'Starting Appium...' && \
             appium --base-path /wd/hub & \
             sleep 30 && \
-            mvn clean test -Dplatform=android -DdeviceName='Pixel 9 Pro' -DAppiumServerPath=/usr/local/bin/appium"
+
+            echo 'Running tests...' && \
+            mvn clean test \
+              -Dplatform=android \
+              -DdeviceName='Pixel 9 Pro' \
+              -DAppiumServerPath=/usr/local/bin/appium"
