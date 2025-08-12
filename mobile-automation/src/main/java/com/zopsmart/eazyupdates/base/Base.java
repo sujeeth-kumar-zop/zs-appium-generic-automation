@@ -45,17 +45,10 @@ public class Base {
 
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
-        String appiumPath = System.getProperty("AppiumServerPath");
-
-        AppiumServiceBuilder builder = new AppiumServiceBuilder()
+        appiumServiceBuilder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
-                .usingPort(4723);
-
-        if (appiumPath != null && !appiumPath.isEmpty()) {
-            builder = builder.withAppiumJS(new File(appiumPath));
-        }
-
-        appiumServiceBuilder = builder.build();
+                .usingPort(4723)
+                .build();
         appiumServiceBuilder.start();
     }
 
