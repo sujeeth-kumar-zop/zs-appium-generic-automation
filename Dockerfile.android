@@ -1,7 +1,13 @@
 FROM openjdk:17-jdk-slim
 
-# Install dependencies
-RUN apt-get update && apt-get install -y curl unzip libgl1-mesa-glx libxi6 libgconf-2-4 \
+# Install dependencies including Maven
+RUN apt-get update && apt-get install -y \
+    curl \
+    unzip \
+    libgl1-mesa-glx \
+    libxi6 \
+    libgconf-2-4 \
+    maven \
     && apt-get clean
 
 # Install Node.js & Appium
@@ -21,12 +27,13 @@ RUN mkdir -p $ANDROID_HOME/cmdline-tools \
     && yes | sdkmanager --licenses \
     && sdkmanager "platform-tools" "platforms;android-34" "system-images;android-34;google_apis;x86_64" "emulator"
 
-# Create emulator
+# Create Android emulator
 RUN echo "no" | avdmanager create avd -n Pixel_9_Pro -k "system-images;android-34;google_apis;x86_64" --force
 
+# Set working directory and copy project files
 WORKDIR /app
 COPY . /app
 
-# Start emulator + Appium when container runs
+# Start emulator and Appium when container runs
 CMD emulator -avd Pixel_9_Pro -no-snapshot -no-window -gpu swiftshader_indirect & \
     sleep 25 && appium --base-path /wd/hub

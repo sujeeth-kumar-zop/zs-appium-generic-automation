@@ -16,9 +16,17 @@ jobs:
       - name: Build Android Docker image
         run: docker build -t appium-android -f Dockerfile.android .
 
-      - name: Run Android Emulator + Appium + Tests
+      - name: Run Android Emulator, Appium, and Tests
         run: |
-          docker run --rm \
-          -v $PWD:/app \
-          appium-android \
-          mvn clean test -Dplatform=android -DdeviceName=Pixel_9_Pro
+          docker run --rm -v $PWD:/app appium-android bash -c "\
+            emulator -avd Pixel_9_Pro -no-snapshot -no-window -gpu swiftshader_indirect & \
+            echo 'Waiting for emulator to boot...' && \
+            timeout=0 && \
+            until adb shell getprop sys.boot_completed 2>/dev/null | grep -m 1 '1'; do \
+              sleep 5; timeout=$((timeout + 5)); \
+              if [ $timeout -gt 300 ]; then echo 'Emulator failed to boot in time' && exit 1; fi; \
+            done && \
+            echo 'Emulator booted!' && \
+            appium --base-path /wd/hub & \
+            sleep 30 && \
+            mvn clean test -Dplatform=android -DdeviceName=Pixel_9_Pro"
