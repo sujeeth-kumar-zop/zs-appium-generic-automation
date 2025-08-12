@@ -1,0 +1,32 @@
+FROM openjdk:17-jdk-slim
+
+# Install dependencies
+RUN apt-get update && apt-get install -y curl unzip libgl1-mesa-glx libxi6 libgconf-2-4 \
+    && apt-get clean
+
+# Install Node.js & Appium
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g appium@2.5.3 appium-doctor \
+    && appium driver install uiautomator2
+
+# Install Android SDK
+ENV ANDROID_HOME /opt/android-sdk
+ENV PATH ${ANDROID_HOME}/emulator:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:$PATH
+
+RUN mkdir -p $ANDROID_HOME/cmdline-tools \
+    && curl -o sdk-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip \
+    && unzip sdk-tools.zip -d $ANDROID_HOME/cmdline-tools && rm sdk-tools.zip \
+    && mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest \
+    && yes | sdkmanager --licenses \
+    && sdkmanager "platform-tools" "platforms;android-34" "system-images;android-34;google_apis;x86_64" "emulator"
+
+# Create emulator
+RUN echo "no" | avdmanager create avd -n Pixel_9_Pro -k "system-images;android-34;google_apis;x86_64" --force
+
+WORKDIR /app
+COPY . /app
+
+# Start emulator + Appium when container runs
+CMD emulator -avd Pixel_9_Pro -no-snapshot -no-window -gpu swiftshader_indirect & \
+    sleep 25 && appium --base-path /wd/hub
