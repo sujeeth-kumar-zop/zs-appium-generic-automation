@@ -22,9 +22,6 @@ jobs:
       - name: Checkout the project
         uses: actions/checkout@v3
 
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
-
       - name: Setup Appium
         run: |
           npm install -g appium@v2.19
