@@ -22,12 +22,7 @@ jobs:
       - name: Checkout the project
         uses: actions/checkout@v3
 
-      - name: Setup Appium
-        run: |
-          npm install -g appium@v2.19
-          nohup appium > appium.log 2>&1 &
-
-      - name: Run Appium Android tests
+      - name: Start Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
@@ -35,4 +30,14 @@ jobs:
           arch: x86_64
           profile: pixel_5
           emulator-options: -no-window -no-audio
-          script: mvn clean test
+          script: echo "Emulator is ready"
+
+      - name: Start Appium Server
+        run: |
+          npm install -g appium@v2.19
+          nohup appium > appium.log 2>&1 &
+          sleep 5
+          echo "Appium server started"
+
+      - name: Run Appium Android Tests
+        run: mvn clean test
