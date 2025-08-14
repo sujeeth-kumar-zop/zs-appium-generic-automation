@@ -47,7 +47,7 @@ public class Base {
     protected void startAppiumServer() {
 
         appiumServiceBuilder = new AppiumServiceBuilder()
-                .withAppiumJS(new File(System.getProperty("AppiumServerPath")))
+//                .withAppiumJS(new File(System.getProperty("AppiumServerPath")))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .build();
