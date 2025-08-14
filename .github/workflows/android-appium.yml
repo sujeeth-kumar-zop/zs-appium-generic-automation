@@ -8,16 +8,22 @@ on:
 jobs:
   android-tests:
     runs-on: macos-latest
+    env:
+      platform: android
+      AndroidDevice: Pixel_9_Pro
 
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 11
+          java-version: 17
 
       - name: Checkout the project
         uses: actions/checkout@v3
+
+      - name: Accept Android SDK licenses
+        run: yes | sdkmanager --licenses
 
       - name: Setup Appium
         run: |
@@ -25,9 +31,8 @@ jobs:
           appium -v
           nohup appium > /dev/null 2>&1 &
 
-      - name: Run appium android tests
+      - name: Run Appium Android tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 34
           script: mvn clean test
-
