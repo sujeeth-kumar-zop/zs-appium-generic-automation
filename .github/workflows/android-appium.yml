@@ -25,11 +25,14 @@ jobs:
       - name: Setup Appium
         run: |
           npm install -g appium@v2.19
-          appium -v
-          nohup appium > /dev/null 2>&1 &
+          nohup appium > appium.log 2>&1 &
 
       - name: Run Appium Android tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: Pixel_6_Pro
+          emulator-options: -no-window -no-audio
           script: mvn clean test
