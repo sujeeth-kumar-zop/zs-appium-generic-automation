@@ -46,6 +46,7 @@ public class Base {
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
         appiumServiceBuilder = new AppiumServiceBuilder()
+//              .withAppiumJS(new File(System.getProperty("AppiumServerPath")))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .build();
@@ -71,7 +72,7 @@ public class Base {
                         .setApp(System.getProperty("AndroidBuildPath"))
                         .setAutoGrantPermissions(true)
                         .setAppWaitDuration(Duration.ofSeconds(30));
-                driver.set(new AndroidDriver(serverUrl, androidOptions));
+                  driver.set(new AndroidDriver(serverUrl, androidOptions));
                 break;
 
             case "ios":

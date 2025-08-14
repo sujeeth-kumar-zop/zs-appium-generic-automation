@@ -16,8 +16,6 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenium.version>4.34.0</selenium.version>
-        <appium.version>9.5.0</appium.version>
         <testng.version>7.11.0</testng.version>
     </properties>
 
@@ -28,20 +26,19 @@
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
         </dependency>
-
-        <!-- Appium Java Client -->
-        <dependency>
-            <groupId>io.appium</groupId>
-            <artifactId>java-client</artifactId>
-            <version>${appium.version}</version>
-        </dependency>
-
-        <!-- Selenium Java -->
+        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
+            <version>4.34.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>9.5.0</version>
+        </dependency>
+
+
 
         <!-- Allure Reporting -->
         <dependency>
@@ -79,7 +76,7 @@
                 <version>3.1.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>test.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
