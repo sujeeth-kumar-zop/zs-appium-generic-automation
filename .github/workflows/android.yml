@@ -7,7 +7,7 @@ on:
 
 jobs:
   android-tests:
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
       - name: Set up JDK 17
@@ -19,27 +19,15 @@ jobs:
       - name: Checkout the project
         uses: actions/checkout@v3
 
-      - name: Run tests on emulator
+      - name: Setup Appium
+        run: |
+          npm install -g appium@v1.22
+          appium -v
+          nohup appium > /dev/null 2>&1 &
+
+      - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          target: default
-          arch: x86_64
-          profile: pixel_3
-          script: |
-            echo "Waiting for emulator to fully boot..."
-            adb wait-for-device
-            boot_completed=""
-            while [ "$boot_completed" != "1" ]; do
-              sleep 5
-              boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
-              echo "Boot status: $boot_completed"
-            done
+          script: mvn clean test
 
-            echo "Starting Appium..."
-            npm install -g appium@1.22
-            nohup appium > /dev/null 2>&1 &
-            sleep 10  # Give Appium time to start
-
-            echo "Running tests..."
-            mvn clean test
