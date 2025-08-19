@@ -22,8 +22,8 @@ public class MyTimelinePage {
     }
 
     @FindAll({
-            @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"Calender\"]"),
-            @FindBy(xpath = "//XCUIElementTypeButton[@name=\"calendar-1\"]")
+            @FindBy(xpath = "//android.widget.ImageView[@content-desc='Calender']"),
+            @FindBy(xpath = "//XCUIElementTypeButton[@name='calendar-1']")
     })
     private WebElement calendarComponent;
 

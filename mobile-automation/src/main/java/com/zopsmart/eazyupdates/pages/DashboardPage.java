@@ -23,39 +23,40 @@ public class DashboardPage {
     }
 
     @FindAll({
-            @FindBy(xpath = "(//android.view.View[@content-desc=\"Users Project\"])[1]"),
-            @FindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"DummyProject\"])[1]")
+            @FindBy(xpath = "(//android.view.View[@content-desc='Users Project'])[1]"),
+            @FindBy(xpath = "(//XCUIElementTypeStaticText[@name='DummyProject'])[1]")
 
     })
     private WebElement projectNavigationButton;
     @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"View All>>\"]"),
-            @FindBy(xpath = "//XCUIElementTypeButton[@name=\"View Direct Reportees Updates\"]")
+            @FindBy(xpath = "//android.widget.TextView[@text='View All>>']"),
+            @FindBy(xpath = "//XCUIElementTypeButton[@name='View Direct Reportees Updates']")
 
     })
     private WebElement directReportees;
 
     @FindAll({
-            @FindBy(xpath = "//android.view.View[@content-desc=\"back-button\"]"),
-            @FindBy(xpath = "//XCUIElementTypeOther[@name=\"person.circle.fill\"]/XCUIElementTypeOther/XCUIElementTypeButton")
+            @FindBy(xpath = "//android.view.View[@content-desc='back-button']"),
+            @FindBy(xpath = "//XCUIElementTypeOther[@name='person.circle.fill']//XCUIElementTypeButton")
+
     })
     private WebElement hamburgerMenu;
 
     @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"My Timeline\"]"),
-            @FindBy(xpath = "//XCUIElementTypeStaticText[@name=\"My Timeline\"]")
+            @FindBy(xpath = "//android.widget.TextView[@text='My Timeline']"),
+            @FindBy(xpath = "//XCUIElementTypeStaticText[@name='My Timeline']")
     })
     private WebElement myTimelineButton;
 
     @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"Logout\"]"),
-            @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Logout\"]")
+            @FindBy(xpath = "//android.widget.TextView[@text='Logout']"),
+            @FindBy(xpath = "//XCUIElementTypeButton[@name='Logout']")
     })
     private WebElement logoutButton;
 
     @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"Logout\"]"),
-            @FindBy(xpath = "(//XCUIElementTypeButton[@name=\"Logout\"])[2]")
+            @FindBy(xpath = "//android.widget.TextView[@text='Logout']"),
+            @FindBy(xpath = "(//XCUIElementTypeButton[@name='Logout'])[2]")
     })
     private WebElement logoutAlertButton;
 

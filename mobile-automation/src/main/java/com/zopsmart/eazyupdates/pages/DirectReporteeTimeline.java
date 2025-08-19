@@ -17,8 +17,8 @@ public class DirectReporteeTimeline {
     public AppiumDriver driver;
 
     @FindAll({
-            @FindBy(xpath = "(//android.widget.TextView[@text=\"Weekend\"])[1]"),
-            @FindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"Weekend\"])[1]")
+            @FindBy(xpath = "(//android.widget.TextView[@text='Weekend'])[1]"),
+            @FindBy(xpath = "(//XCUIElementTypeStaticText[@name='Weekend'])[1]")
     })
     private WebElement validateWeekend;
 

@@ -17,7 +17,7 @@ public class ProjectTimelinePage {
 
     @FindAll({
             @FindBy(xpath = "//android.widget.TextView[@text='Team Members']"),
-            @FindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Team Members (7)\"]")
+            @FindBy(xpath = "//XCUIElementTypeStaticText[@name='Team Members (7)']")
     })
     private WebElement teamMembersText;
 

@@ -23,21 +23,18 @@ public class LoginPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    @FindBy(xpath = "//XCUIElementTypeButton[@name=\"Continue\"]")
+    @FindBy(xpath = "//XCUIElementTypeButton[@name='Continue']")
     private WebElement iOSContinueButton;
 
-    @FindBy(xpath = "//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton")
-    private WebElement LocationButton;
-
     @FindAll({
-            @FindBy(xpath = "//android.widget.TextView[@text=\"Sign In with Google\"]"),
-            @FindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Sign in with Google\"]")
+            @FindBy(xpath = "//android.widget.TextView[@text='Sign In with Google']"),
+            @FindBy(xpath = "//XCUIElementTypeStaticText[@name='Sign in with Google']")
     })
     private WebElement googleSignInButton;
 
     @FindAll({
-            @FindBy(xpath = "(//android.widget.LinearLayout[@resource-id=\"com.google.android.gms:id/container\"])[1]/android.widget.LinearLayout"),
-            @FindBy(xpath = "//XCUIElementTypeLink[@name=\"Pritam Horo pritam.horo@zopsmart.com\"]")
+            @FindBy(xpath = "//*[@resource-id='com.google.android.gms:id/container']/*[1]"),
+            @FindBy(xpath = "//XCUIElementTypeLink[contains(@name, 'zopsmart.com')]")
     })
     private WebElement emailSignInButton;
 
@@ -54,7 +51,7 @@ public class LoginPage {
     }
 
     public void clickLocationRadioButton() {
-        By radioButtonLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.RadioButton");
+        By radioButtonLocator = By.xpath("//android.widget.RadioButton[@resource-id='your_radio_id']");
         if (!driver.findElements(radioButtonLocator).isEmpty() &&
                 driver.findElement(radioButtonLocator).isDisplayed()) {
 
