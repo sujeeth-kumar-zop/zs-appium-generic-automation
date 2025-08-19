@@ -11,7 +11,7 @@ import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.testng.annotations.*;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.Duration;
@@ -47,7 +47,6 @@ public class Base {
     protected void startAppiumServer() {
 
         appiumServiceBuilder = new AppiumServiceBuilder()
-//                .withAppiumJS(new File(System.getProperty("AppiumServerPath")))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .build();
@@ -108,8 +107,9 @@ public class Base {
     public void loginBeforeEachTest() {
         LoginToApplication.login(getDriver());
     }
+
     @AfterMethod
-    public void allureScreenshot(){
+    public void allureScreenshot() {
         attachScreenshot(getDriver(), "Initial Screenshot");
     }
 
