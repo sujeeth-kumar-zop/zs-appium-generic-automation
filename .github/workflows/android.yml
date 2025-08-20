@@ -19,14 +19,8 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      # Create the expected directory structure and copy APK
-      - name: Prepare APK for tests
-        run: |
-          mkdir -p mobile-automation/src/test/resources/builds/
-          cp app/build/outputs/apk/debug/app-debug.apk mobile-automation/src/test/resources/builds/Hamburger-testtag.apk
-
       - name: Setup Appium
-        run: |
+        run:
           npm install -g appium@next
           appium -v
           appium driver install uiautomator2
