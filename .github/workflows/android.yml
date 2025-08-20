@@ -25,7 +25,7 @@ jobs:
           appium -v
           appium driver install uiautomator2
           appium driver list --installed
-          nohup appium --base-path /wd/hub > /dev/null 2>&1 &
+          nohup appium > /dev/null 2>&1 &
     
 
       - name: Run tests
