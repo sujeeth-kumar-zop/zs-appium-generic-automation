@@ -19,23 +19,17 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Copy APK to test location
+        run: |
+          mkdir -p mobile-automation/src/test/resources/builds/
+          find . -name "app-debug.apk" -exec cp {} mobile-automation/src/test/resources/builds/Hamburger-testtag.apk \;
 
       - name: Setup Appium
         run: |
-          npm install -g appium@2.0.0
-          appium -v
+          npm install -g appium
           appium driver install uiautomator2
-          appium driver list --installed
-
-      - name: Start Appium Server
-        run: |
-          nohup appium --port 4723 --log-level info > appium.log 2>&1 &
+          appium &
           sleep 5
-          echo "Appium server started"
 
       - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2

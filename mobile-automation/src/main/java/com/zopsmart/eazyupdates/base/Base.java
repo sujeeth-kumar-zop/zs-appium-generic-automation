@@ -1,5 +1,6 @@
 package com.zopsmart.eazyupdates.base;
 
+
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
 
 import io.appium.java_client.AppiumDriver;
@@ -11,13 +12,13 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.testng.annotations.*;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
 import static com.zopsmart.eazyupdates.utils.AllureScreenshotUtil.attachScreenshot;
+
 
 public class Base {
     protected static Properties props = new Properties();
@@ -41,48 +42,15 @@ public class Base {
         return driver.get();
     }
 
+
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
-        // Only start Appium server if not running in CI (GitHub Actions starts it)
-        if (System.getenv("GITHUB_ACTIONS") == null) {
-            appiumServiceBuilder = new AppiumServiceBuilder()
-                    .withIPAddress("127.0.0.1")
-                    .usingPort(4723)
-                    .build();
-            appiumServiceBuilder.start();
-        }
-    }
 
-    /**
-     * Get the appropriate APK path based on the environment
-     */
-    private String getAppPath(String configPath) {
-        String appPath;
-
-        if (System.getenv("GITHUB_ACTIONS") != null) {
-            // CI environment - use relative path from mobile-automation directory
-            appPath = "/src/test/resources/builds/Hamburger-testtag.apk";
-        } else {
-            // Local environment - use path from config.properties
-            appPath = configPath;
-        }
-
-        // Convert relative path to absolute if needed
-        File appFile = new File(appPath);
-        if (!appFile.isAbsolute()) {
-            appPath = System.getProperty("user.dir") + "/" + appPath;
-            appFile = new File(appPath);
-        }
-
-        // Verify APK exists
-        if (!appFile.exists()) {
-            throw new RuntimeException("APK file not found at: " + appPath +
-                    "\nCurrent working directory: " + System.getProperty("user.dir") +
-                    "\nGITHUB_ACTIONS env: " + System.getenv("GITHUB_ACTIONS"));
-        }
-
-        System.out.println("Using APK path: " + appPath);
-        return appPath;
+        appiumServiceBuilder = new AppiumServiceBuilder()
+                .withIPAddress("127.0.0.1")
+                .usingPort(4723)
+                .build();
+        appiumServiceBuilder.start();
     }
 
     /**
@@ -99,22 +67,18 @@ public class Base {
 
         switch (platform) {
             case "android":
-                String androidAppPath = getAppPath(System.getProperty("AndroidBuildPath"));
-
                 UiAutomator2Options androidOptions = new UiAutomator2Options()
                         .setDeviceName(System.getProperty("AndroidDevice"))
-                        .setApp(androidAppPath)
+                        .setApp(System.getProperty("AndroidBuildPath"))
                         .setAutoGrantPermissions(true)
                         .setAppWaitDuration(Duration.ofSeconds(30));
                 driver.set(new AndroidDriver(serverUrl, androidOptions));
                 break;
 
             case "ios":
-                String iosAppPath = getAppPath(System.getProperty("iOSBuildPath"));
-
                 XCUITestOptions iosOptions = new XCUITestOptions()
                         .setDeviceName(System.getProperty("iOSDevice"))
-                        .setApp(iosAppPath)
+                        .setApp(System.getProperty("iOSBuildPath"))
                         .setAutoAcceptAlerts(true)
                         .setAutoDismissAlerts(true)
                         .setPlatformVersion(System.getProperty("iOSPlatformVersion"))
@@ -124,6 +88,7 @@ public class Base {
 
             default:
                 throw new IllegalArgumentException("Unsupported platform: " + platform);
+
         }
         loginBeforeEachTest();
     }
@@ -150,7 +115,6 @@ public class Base {
 
     @AfterSuite
     protected void StopAppiumServer() {
-        // Only stop if we started it (not in CI)
         if (appiumServiceBuilder != null && appiumServiceBuilder.isRunning()) {
             appiumServiceBuilder.stop();
         }
