@@ -7,7 +7,7 @@ on:
 
 jobs:
   android-tests:
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
       - name: Checkout the project
@@ -19,9 +19,17 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleDebug
+
       - name: Copy APK to test location
         run: |
+          mkdir -p src/test/resources/builds/
           mkdir -p mobile-automation/src/test/resources/builds/
+          find . -name "app-debug.apk" -exec cp {} src/test/resources/builds/Hamburger-testtag.apk \;
           find . -name "app-debug.apk" -exec cp {} mobile-automation/src/test/resources/builds/Hamburger-testtag.apk \;
 
       - name: Setup Appium
