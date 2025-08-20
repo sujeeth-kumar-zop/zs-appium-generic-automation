@@ -19,11 +19,6 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Copy APK to Appium test path
-        run: |
-          mkdir -p mobile-automation/src/test/resources/builds
-          cp app/build/outputs/apk/debug/app-debug.apk mobile-automation/src/test/resources/builds/Hamburger-testtag.apk
-
       - name: Setup Appium
         run: |
           npm install -g appium
