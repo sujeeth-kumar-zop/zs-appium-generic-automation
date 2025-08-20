@@ -19,13 +19,6 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      # Build the Android APK first
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Build Android APK
-        run: ./gradlew assembleDebug
-
       # Create the expected directory structure and copy APK
       - name: Prepare APK for tests
         run: |
