@@ -69,7 +69,7 @@ public class Base {
             case "android":
                 UiAutomator2Options androidOptions = new UiAutomator2Options()
                         .setDeviceName(System.getProperty("AndroidDevice"))
-                        .setApp(System.getProperty("AndroidBuildPath"))
+                        .setApp("mobile-automation/apks/Hamburger-testtag.apk")
                         .setAutoGrantPermissions(true)
                         .setAppWaitDuration(Duration.ofSeconds(30));
                 driver.set(new AndroidDriver(serverUrl, androidOptions));
