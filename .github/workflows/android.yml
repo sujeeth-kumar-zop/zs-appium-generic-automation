@@ -42,10 +42,3 @@ jobs:
         with:
           api-level: 29
           script: cd mobile-automation && mvn clean test
-
-      - name: Upload Appium logs (if tests fail)
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: appium-logs
-          path: appium.log
