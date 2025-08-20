@@ -19,16 +19,33 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Setup Appium
-        run:
-          npm install -g appium@next
+        run: |
+          npm install -g appium@2.0.0
           appium -v
           appium driver install uiautomator2
           appium driver list --installed
-          nohup appium > /dev/null 2>&1 &
+
+      - name: Start Appium Server
+        run: |
+          nohup appium --port 4723 --log-level info > appium.log 2>&1 &
+          sleep 5
+          echo "Appium server started"
 
       - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: cd mobile-automation && mvn clean test
+
+      - name: Upload Appium logs (if tests fail)
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: appium-logs
+          path: appium.log
