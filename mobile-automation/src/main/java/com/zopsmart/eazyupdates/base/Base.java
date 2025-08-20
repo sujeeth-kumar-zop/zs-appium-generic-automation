@@ -61,7 +61,7 @@ public class Base {
 
         if (System.getenv("GITHUB_ACTIONS") != null) {
             // CI environment - use relative path from mobile-automation directory
-            appPath = "./src/test/resources/builds/Hamburger-testtag.apk";
+            appPath = "/src/test/resources/builds/Hamburger-testtag.apk";
         } else {
             // Local environment - use path from config.properties
             appPath = configPath;
