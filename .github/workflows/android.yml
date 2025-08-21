@@ -1,4 +1,4 @@
-name: Android Appium Tests (Debug)
+name: Android Appium Tests
 
 on:
   push:
@@ -12,12 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug APK location
+      - name: Setup APK
         run: |
-          find . -name "*.apk" || echo "No APK found"
+          # Copy APK to expected location
+          mkdir -p mobile-automation/src/test/resources/builds/
+          cp Hamburger-testtag.apk mobile-automation/src/test/resources/builds/
           APK_PATH="$(pwd)/mobile-automation/src/test/resources/builds/Hamburger-testtag.apk"
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
-          ls -la "$APK_PATH" || echo "APK missing at $APK_PATH"
 
       - uses: actions/setup-java@v4
         with:
