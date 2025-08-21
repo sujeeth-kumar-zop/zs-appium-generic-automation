@@ -47,12 +47,11 @@ public class Base {
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
 
-        AppiumServiceBuilder builder = new AppiumServiceBuilder()
+        appiumServiceBuilder= new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
-                .withTimeout(Duration.ofSeconds(30));
-
-        appiumServiceBuilder = AppiumDriverLocalService.buildService(builder);
+                .withTimeout(Duration.ofSeconds(30))
+                .build();
         appiumServiceBuilder.start();
     }
 
@@ -65,7 +64,7 @@ public class Base {
      */
     @BeforeClass(alwaysRun = true)
     protected void launchDevice() throws Exception {
-        serverUrl = new URL("http://127.0.0.1:4723/wd/hub");
+        serverUrl = new URL("http://127.0.0.1:4723");
         String platform = System.getProperty("platform").toLowerCase();
 
         switch (platform) {
