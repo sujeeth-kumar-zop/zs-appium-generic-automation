@@ -39,12 +39,3 @@ jobs:
           script: cd mobile-automation && mvn clean test
         env:
           APK_PATH: ${{ env.APK_PATH }}
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: |
-            mobile-automation/target/surefire-reports/
-            appium.log
