@@ -1,6 +1,5 @@
 package com.zopsmart.eazyupdates.base;
 
-
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
 
 import io.appium.java_client.AppiumDriver;
@@ -20,7 +19,6 @@ import java.util.Properties;
 
 import static com.zopsmart.eazyupdates.utils.AllureScreenshotUtil.attachScreenshot;
 
-
 public class Base {
     protected static Properties props = new Properties();
     private AppiumDriverLocalService appiumServiceBuilder;
@@ -33,9 +31,8 @@ public class Base {
             for (String key : props.stringPropertyNames()) {
                 System.setProperty(key, props.getProperty(key));
             }
-
         } catch (Exception e) {
-            System.out.println(" Server initiated (properties not loaded): " + e.getMessage());
+            System.out.println("Server initiated (properties not loaded): " + e.getMessage());
         }
     }
 
@@ -43,9 +40,32 @@ public class Base {
         return driver.get();
     }
 
+    private String getApkPath() {
+        // GitHub Actions path
+        String envPath = System.getenv("APK_PATH");
+        if (envPath != null) {
+            return envPath;
+        }
+
+        // CI path
+        String workingDir = System.getProperty("user.dir");
+        String ciPath = workingDir + "/mobile-automation/src/test/resources/builds/Hamburger-testtag.apk";
+        if (new File(ciPath).exists()) {
+            return ciPath;
+        }
+
+        // Local path from config
+        return System.getProperty("AndroidBuildPath");
+    }
 
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
+        try {
+            new URL("http://127.0.0.1:4723/status").openConnection().connect();
+            return;
+        } catch (Exception e) {
+            // Start server
+        }
 
         appiumServiceBuilder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
@@ -54,33 +74,6 @@ public class Base {
         appiumServiceBuilder.start();
     }
 
-    // Simple APK path resolver
-    private String getApkPath(String configPath) {
-        // Check if environment variable is set (GitHub Actions)
-        String envPath = System.getenv("APK_PATH");
-        if (envPath != null) {
-            return envPath;
-        }
-
-        // Use relative path for CI (mobile-automation folder)
-        String workingDir = System.getProperty("user.dir");
-        String relativePath = workingDir + "/mobile-automation/src/test/resources/builds/Hamburger-testtag.apk";
-
-        if (new File(relativePath).exists()) {
-            return relativePath;
-        }
-
-        // Fallback to config path
-        return configPath;
-    }
-
-    /**
-     * This method is executed once before any test methods in the class are run.
-     * It launches the appropriate mobile device session (Android or iOS) using Appium
-     * and initializes the driver with desired capabilities.
-     *
-     * @throws Exception if an unsupported platform is specified or Appium server URL is invalid
-     */
     @BeforeClass(alwaysRun = true)
     protected void launchDevice() throws Exception {
         serverUrl = new URL("http://127.0.0.1:4723");
@@ -88,8 +81,7 @@ public class Base {
 
         switch (platform) {
             case "android":
-                String androidBuildPath = System.getProperty("AndroidBuildPath");
-                String apkPath = getApkPath(androidBuildPath);
+                String apkPath = getApkPath();
                 System.out.println("Using APK: " + apkPath);
 
                 UiAutomator2Options androidOptions = new UiAutomator2Options()
@@ -113,8 +105,8 @@ public class Base {
 
             default:
                 throw new IllegalArgumentException("Unsupported platform: " + platform);
-
         }
+
         loginBeforeEachTest();
     }
 
