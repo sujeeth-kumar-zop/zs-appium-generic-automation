@@ -12,6 +12,7 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.Duration;
@@ -52,7 +53,25 @@ public class Base {
                 .build();
         appiumServiceBuilder.start();
     }
+    // Simple APK path resolver
+    private String getApkPath(String configPath) {
+        // Check if environment variable is set (GitHub Actions)
+        String envPath = System.getenv("APK_PATH");
+        if (envPath != null) {
+            return envPath;
+        }
 
+        // Use relative path for CI
+        String workingDir = System.getProperty("user.dir");
+        String relativePath = workingDir + "/src/test/resources/builds/Hamburger-testtag.apk";
+
+        if (new File(relativePath).exists()) {
+            return relativePath;
+        }
+
+        // Fallback to config path
+        return configPath;
+    }
     /**
      * This method is executed once before any test methods in the class are run.
      * It launches the appropriate mobile device session (Android or iOS) using Appium
@@ -67,9 +86,13 @@ public class Base {
 
         switch (platform) {
             case "android":
+                String androidBuildPath = System.getProperty("AndroidBuildPath");
+                String apkPath = getApkPath(androidBuildPath);
+                System.out.println("Using APK: " + apkPath);
+
                 UiAutomator2Options androidOptions = new UiAutomator2Options()
                         .setDeviceName(System.getProperty("AndroidDevice"))
-                        .setApp(System.getProperty("AndroidBuildPath"))
+                        .setApp(apkPath)
                         .setAutoGrantPermissions(true)
                         .setAppWaitDuration(Duration.ofSeconds(30));
                 driver.set(new AndroidDriver(serverUrl, androidOptions));
