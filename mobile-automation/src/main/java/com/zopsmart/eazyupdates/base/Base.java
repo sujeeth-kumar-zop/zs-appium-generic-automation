@@ -65,7 +65,7 @@ public class Base {
      */
     @BeforeClass(alwaysRun = true)
     protected void launchDevice() throws Exception {
-        serverUrl = new URL("http://127.0.0.1:4723");
+        serverUrl = new URL("http://127.0.0.1:4723/wd/hub");
         String platform = System.getProperty("platform").toLowerCase();
 
         switch (platform) {
