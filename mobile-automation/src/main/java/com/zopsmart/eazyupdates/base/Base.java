@@ -53,6 +53,7 @@ public class Base {
                 .build();
         appiumServiceBuilder.start();
     }
+
     // Simple APK path resolver
     private String getApkPath(String configPath) {
         // Check if environment variable is set (GitHub Actions)
@@ -61,9 +62,9 @@ public class Base {
             return envPath;
         }
 
-        // Use relative path for CI
+        // Use relative path for CI (mobile-automation folder)
         String workingDir = System.getProperty("user.dir");
-        String relativePath = workingDir + "/src/test/resources/builds/Hamburger-testtag.apk";
+        String relativePath = workingDir + "/mobile-automation/src/test/resources/builds/Hamburger-testtag.apk";
 
         if (new File(relativePath).exists()) {
             return relativePath;
@@ -72,6 +73,7 @@ public class Base {
         // Fallback to config path
         return configPath;
     }
+
     /**
      * This method is executed once before any test methods in the class are run.
      * It launches the appropriate mobile device session (Android or iOS) using Appium

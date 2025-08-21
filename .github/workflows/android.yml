@@ -15,7 +15,7 @@ jobs:
 
       - name: Set APK path
         run: |
-          APK_PATH="$(pwd)/src/test/resources/builds/Hamburger-testtag.apk"
+          APK_PATH="$(pwd)/mobile-automation/src/test/resources/builds/Hamburger-testtag.apk"
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
 
       - name: Set up JDK 17
