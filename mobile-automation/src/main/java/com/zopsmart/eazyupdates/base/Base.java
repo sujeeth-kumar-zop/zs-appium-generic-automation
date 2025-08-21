@@ -47,12 +47,12 @@ public class Base {
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
 
-        appiumServiceBuilder = new AppiumServiceBuilder()
+        AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
-                .withArgument(GeneralServerFlag.BASEPATH, "/")
-                .withTimeout(Duration.ofSeconds(30))
-                .build();
+                .withTimeout(Duration.ofSeconds(30));
+
+        appiumServiceBuilder = AppiumDriverLocalService.buildService(builder);
         appiumServiceBuilder.start();
     }
 
