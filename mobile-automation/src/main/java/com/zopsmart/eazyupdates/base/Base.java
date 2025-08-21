@@ -40,33 +40,9 @@ public class Base {
         return driver.get();
     }
 
-    private String getApkPath() {
-        // GitHub Actions path
-        String envPath = System.getenv("APK_PATH");
-        if (envPath != null) {
-            return envPath;
-        }
-
-        // CI path
-        String workingDir = System.getProperty("user.dir");
-        String ciPath = workingDir + "/mobile-automation/src/test/resources/builds/Hamburger-testtag.apk";
-        if (new File(ciPath).exists()) {
-            return ciPath;
-        }
-
-        // Local path from config
-        return System.getProperty("AndroidBuildPath");
-    }
 
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
-        try {
-            new URL("http://127.0.0.1:4723/status").openConnection().connect();
-            return;
-        } catch (Exception e) {
-            // Start server
-        }
-
         appiumServiceBuilder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
@@ -81,12 +57,9 @@ public class Base {
 
         switch (platform) {
             case "android":
-                String apkPath = getApkPath();
-                System.out.println("Using APK: " + apkPath);
-
                 UiAutomator2Options androidOptions = new UiAutomator2Options()
                         .setDeviceName(System.getProperty("AndroidDevice"))
-                        .setApp(apkPath)
+                        .setApp(System.getProperty("AndroidBuildPath"))
                         .setAutoGrantPermissions(true)
                         .setAppWaitDuration(Duration.ofSeconds(30));
                 driver.set(new AndroidDriver(serverUrl, androidOptions));
