@@ -28,6 +28,7 @@ public class ProjectTimeline extends Base {
      */
     @Test(description = "Verify login via Google and access to Project Timeline section")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Project timeline")
     @Description("Ensures that a user can successfully log in using Google credentials, and navigate to the Project Timeline section from the dashboard.")
     public void projectTimeLineNavigation() {
         dashboardPage.clickOnProjectNavigationButton();

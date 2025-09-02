@@ -4,10 +4,7 @@ package com.zopsmart.eazyupdates.UITesting.tests;
 import com.zopsmart.eazyupdates.base.Base;
 import com.zopsmart.eazyupdates.pages.DashboardPage;
 import com.zopsmart.eazyupdates.pages.MyTimelinePage;
-import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -30,6 +27,7 @@ public class MyTimeline extends Base {
      */
     @Test(description = "Verify login via Google and access to My Timeline section")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("My timeline")
     @Description("Ensures that a user can successfully log in using Google credentials, and navigate to the My Timeline")
     public void myTimelineNavigation() {
         dashboardPage.clickHamburgerMenu();

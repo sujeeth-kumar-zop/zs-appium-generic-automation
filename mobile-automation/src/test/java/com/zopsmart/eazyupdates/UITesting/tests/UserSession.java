@@ -27,7 +27,7 @@ public class UserSession extends Base {
     @Story("Login with valid credentials")
     @Description("Verify user is able to login using Google sign-in and select a profile if radio button is present")
     public void loginAction() {
-        dashboardPage.assertUserIsLoggedIn();
+        dashboardPage.verifyUserIsLoggedIn();
     }
 
     @Test(description = "User logs out", dependsOnMethods = "loginAction")

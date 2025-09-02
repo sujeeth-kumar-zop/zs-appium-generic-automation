@@ -3,10 +3,8 @@ package com.zopsmart.eazyupdates.UITesting.tests;
 
 import com.zopsmart.eazyupdates.base.Base;
 import com.zopsmart.eazyupdates.pages.DashboardPage;
-import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import com.zopsmart.eazyupdates.pages.DirectReporteeTimelinePage;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,12 +12,12 @@ import org.testng.annotations.Test;
 @Feature("Direct reportee timeline Navigation")
 public class DirectReporteeTimeline extends Base {
     DashboardPage dashboardPage;
-    com.zopsmart.eazyupdates.pages.DirectReporteeTimeline directReporteeTimeline;
+    DirectReporteeTimelinePage directReporteeTimelinePage;
 
     @BeforeMethod
     public void initPageObjects() {
         dashboardPage = new DashboardPage(getDriver());
-        directReporteeTimeline = new com.zopsmart.eazyupdates.pages.DirectReporteeTimeline(getDriver());
+        directReporteeTimelinePage = new DirectReporteeTimelinePage(getDriver());
     }
 
     /**
@@ -30,10 +28,11 @@ public class DirectReporteeTimeline extends Base {
      */
     @Test(description = "Verify login via Google and access to Direct reportee Timeline section")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Subordinate timeline")
     @Description("Ensures that a user can successfully log in using Google credentials, and navigate to the Direct reportee Timeline")
     public void directReporteesTimeLineNavigation() {
         dashboardPage.clickOnDirectReporteeButton();
-        directReporteeTimeline.validateWeekendText();
+        directReporteeTimelinePage.validateWeekendText();
 
     }
 }
