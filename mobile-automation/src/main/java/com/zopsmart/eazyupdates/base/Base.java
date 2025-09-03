@@ -1,6 +1,5 @@
 package com.zopsmart.eazyupdates.base;
 
-
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
 
 import io.appium.java_client.AppiumDriver;
@@ -98,6 +97,7 @@ public class Base {
         try {
             if (driver.get() != null) {
                 driver.get().quit();
+                driver.remove();
             }
         } catch (Exception e) {
             System.err.println("Error quitting driver: " + e.getMessage());
