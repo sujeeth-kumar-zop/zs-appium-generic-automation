@@ -1,6 +1,7 @@
 package com.zopsmart.eazyupdates.pages;
 
 
+import com.zopsmart.eazyupdates.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,7 @@ public class LoginPage {
     public LoginPage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.DEFAULT_WAIT_TIMEOUT));
     }
 
     @FindBy(xpath = "//XCUIElementTypeButton[@name='Continue']")

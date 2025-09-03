@@ -1,6 +1,5 @@
 package com.zopsmart.eazyupdates.base;
 
-
 import com.zopsmart.eazyupdates.helper.LoginToApplication;
 
 import io.appium.java_client.AppiumDriver;
@@ -60,7 +59,7 @@ public class Base {
      *
      * @throws Exception if an unsupported platform is specified or Appium server URL is invalid
      */
-    @BeforeClass(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     protected void launchDevice() throws Exception {
         serverUrl = new URL("http://127.0.0.1:4723");
         String platform = System.getProperty("platform").toLowerCase();
@@ -93,11 +92,12 @@ public class Base {
         loginBeforeEachTest();
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     protected void tearDown() {
         try {
             if (driver.get() != null) {
                 driver.get().quit();
+                driver.remove();
             }
         } catch (Exception e) {
             System.err.println("Error quitting driver: " + e.getMessage());

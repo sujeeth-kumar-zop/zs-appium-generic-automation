@@ -1,5 +1,6 @@
 package com.zopsmart.eazyupdates.pages;
 
+import com.zopsmart.eazyupdates.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -17,14 +18,14 @@ public class ProjectTimelinePage {
 
     @FindAll({
             @FindBy(xpath = "//android.widget.TextView[@text='Team Members']"),
-            @FindBy(xpath = "//XCUIElementTypeStaticText[@name='Team Members (7)']")
+            @FindBy(xpath = "//XCUIElementTypeButton[@name='calendar-1']")
     })
     private WebElement teamMembersText;
 
     public ProjectTimelinePage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.DEFAULT_WAIT_TIMEOUT));
     }
 
     public void assertTeamMembersVisible() {

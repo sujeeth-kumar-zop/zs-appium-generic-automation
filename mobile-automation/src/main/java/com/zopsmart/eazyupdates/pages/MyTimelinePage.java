@@ -1,5 +1,6 @@
 package com.zopsmart.eazyupdates.pages;
 
+import com.zopsmart.eazyupdates.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -18,7 +19,7 @@ public class MyTimelinePage {
     public MyTimelinePage(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.DEFAULT_WAIT_TIMEOUT));
     }
 
     @FindAll({
