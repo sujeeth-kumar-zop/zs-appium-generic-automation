@@ -9,6 +9,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.testng.annotations.*;
 
 import java.io.FileInputStream;
@@ -45,9 +46,10 @@ public class Base {
     @BeforeSuite(alwaysRun = true)
     protected void startAppiumServer() {
 
-        appiumServiceBuilder = new AppiumServiceBuilder()
+        appiumServiceBuilder= new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
+                .withTimeout(Duration.ofSeconds(30))
                 .build();
         appiumServiceBuilder.start();
     }
